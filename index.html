@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="JAVA程序猿 | 摄影爱好者 | 旅游爱好者 | 热爱生活">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/fly.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Immer | Try
+        
+    </title>
+
+    <link rel="canonical" href="http://immertry.top/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('http://image.immertry.top/bg20181008tag.jpg') 
+            /*config*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>Immer Try</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">Made to be counted on.无处不担当。</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Immer Try</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2018/10/30/浅析数据结构之二叉树/">
+        <h2 class="post-title">
+            浅析数据结构之二叉树
+        </h2>
+        <h3 class="post-subtitle">
+            在计算机科学中，二叉树是每个结点最多有两个子树的树结构。通常子树被称作“左子树”（left subtree）和“右子树”（right subtree）。二叉树常被用于实现二叉查找树和二叉堆。
+        </h3>
+        <div class="post-content-preview">
+            二叉树简介
+二叉树是由n（n&gt;=0）个结点组成的有序集合，集合或者为空，或者是由一个根节点加上两棵分别称为左子树和右子树的、互不相交的二叉树组成。
+二叉树的五种形态
+
+二叉树的存储结构模型
+树的另一种表示法：孩子兄弟表示法
+A、......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-30
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#数据结构与算法" title="数据结构与算法">数据结构与算法</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/29/java中值传递和引用传递/">
+        <h2 class="post-title">
+            java中值传递和引用传递
+        </h2>
+        <h3 class="post-subtitle">
+            按值传递是什么?按引用传递是什么?
+        </h3>
+        <div class="post-content-preview">
+            按值传递是什么
+指的是在方法调用时，传递的参数是按值的拷贝传递。
+123456789101112public class TempTest &#123;    private void test1(int a) &#123;     ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-29
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JAVA" title="JAVA">JAVA</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/28/JAVA字符串去重/">
+        <h2 class="post-title">
+            JAVA字符串去重
+        </h2>
+        <h3 class="post-subtitle">
+            字符串如何用最简单的方式查出重复字母？以及去除重复的字母。
+        </h3>
+        <div class="post-content-preview">
+            字符串如何用最简单的方式查出重复字母？以及去除重复的字母
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JAVA" title="JAVA">JAVA</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/24/1024程序员节日快乐/">
+        <h2 class="post-title">
+            1024程序员节日快乐
+        </h2>
+        <h3 class="post-subtitle">
+            今天是程序员的日子，有幸报名参加了科大讯飞1024开发者节的活动，今天很累，但很充实
+        </h3>
+        <div class="post-content-preview">
+            出发
+早晨，天还没亮，就起床出发了。由于离得较远，所以不得不提前准备。
+到达
+在找了一圈共享汽车的还车点后，骑着电单车，就往奥体中心跑，到达时间在8点左右。
+这时，已经用参展商陆陆续续前来了。
+
+大会开始
+首先，各位领导，依次致辞（讯......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-24
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#1024" title="1024">1024</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/23/Mybaits之动态SQL/">
+        <h2 class="post-title">
+            Mybaits之动态SQL
+        </h2>
+        <h3 class="post-subtitle">
+            使用 mybatis 动态SQL，通过 if, choose, when, otherwise, trim, where, set, foreach等标签，可组合成非常灵活的SQL语句，从而在提高 SQL 语句的准确性的同时，也大大提高了开发人员的效率。
+        </h3>
+        <div class="post-content-preview">
+            我们以 User 表为例来说明：
+
+动态SQL:if 语句
+根据 username 和 sex 来查询数据。如果username为空，那么将只根据sex来查询；反之只根据username来查询
+首先不使用 动态SQL 来书写
+1234......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Mybatis" title="Mybatis">Mybatis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/22/Struts2的运行流程及其工作原理/">
+        <h2 class="post-title">
+            Struts2的运行流程及其工作原理
+        </h2>
+        <h3 class="post-subtitle">
+            Struts2是一套非常优秀的Web应用框架，实现优雅、功能强大、使用简洁。可以说是Struts2是一款非常成熟的MVC架构。在我们学习Struts2时，最好是先学习它的运行流程、核心概念，从中得到启发，提升自己，而不仅仅是学习怎么怎么使用它。
+        </h3>
+        <div class="post-content-preview">
+            系统架构
+Struts2的官方文档附带了Struts2的架构图。从这张图可以很好的去理解Struts2
+
+关于图中的Key：
+
+
+Servlet Filters：过滤器链，客户端的所有请求都要经过Filter链的处理。
+
+
+Strut......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Struts2" title="Struts2">Struts2</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/21/Restful-应用分析/">
+        <h2 class="post-title">
+            Restful 应用分析
+        </h2>
+        <h3 class="post-subtitle">
+            写在前文：内容干货满满，参考文章也可以看一下
+        </h3>
+        <div class="post-content-preview">
+            Restful API 近年来应用越来越广泛，各大互联网公司纷纷推出了自己的 Restful API 服务。
+本文将从实际应用出发，从 REST 到 Restful 再到 Restful API ，逐一进行介绍和分析。
+
+REST 风......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Restful" title="Restful">Restful</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/20/CORS-跨域资源共享/">
+        <h2 class="post-title">
+            CORS(跨域资源共享)
+        </h2>
+        <h3 class="post-subtitle">
+            什么是跨域？浏览器从一个域名的网页去请求另一个域名的资源时，域名、端口、协议任一不同，都是跨域。跨域的常用的几种方式？Jsonp跨域、nginx反向代理、CORS
+        </h3>
+        <div class="post-content-preview">
+            简介
+CORS是一个W3C标准，全称是&quot;跨域资源共享&quot;（Cross-origin resource sharing）。它允许浏览器向跨源(协议 + 域名 + 端口)服务器，发出XMLHttpRequest请求，从而......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#跨域" title="跨域">跨域</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/17/【题】MySQL数据库的一个例题（下）/">
+        <h2 class="post-title">
+            【题】MySQL数据库的一个例题（下）
+        </h2>
+        <h3 class="post-subtitle">
+            写在前文：这篇文章下sql语句为ORACLE数据库下，笔者还没尝试
+        </h3>
+        <div class="post-content-preview">
+            
+查询每门课程被选修的学生数
+
+123456SELECT t2.cname,       COUNT(t1.sid) AS sum_stuFROM sc t1INNER JOIN course t2  ON t1.cid = t2.c......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-17
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#MySQL" title="MySQL">MySQL</a>
+            
+              <a href="/tags/#例题" title="例题">例题</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/13/【题】MySQL数据库的一个例题（上）/">
+        <h2 class="post-title">
+            【题】MySQL数据库的一个例题（上）
+        </h2>
+        <h3 class="post-subtitle">
+            写在前文：这道题用的知识点有很多，属于比较经典的那种。SQL语句如有更好的，欢迎留言
+        </h3>
+        <div class="post-content-preview">
+            创建数据库及其对应的表
+表架构
+学生表：（sid,sname,sage,ssex）
+课程表：（cid,cname,tid）
+分数表：（sid,cid,score）
+教师表：（tid,tname）
+学生表：
+123456CREATE T......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#MySQL" title="MySQL">MySQL</a>
+            
+              <a href="/tags/#例题" title="例题">例题</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    
+        <li class="next">
+            <a href="/archives/2/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags featured-tags-->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+             <a href="/tags/#SpringBoot" title="SpringBoot" rel="2">SpringBoot</a>
+            
+        
+            
+        
+            
+        
+            
+             <a href="/tags/#JAVA" title="JAVA" rel="4">JAVA</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+             <a href="/tags/#MySQL" title="MySQL" rel="3">MySQL</a>
+            
+        
+            
+             <a href="/tags/#例题" title="例题" rel="2">例题</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+</section>
+
+        <!--<hr>-->
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id = "avatar_pic" src="/img/my.jpg" />
+        
+
+        
+            <p>Made to be counted on.</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+                <li>
+                    <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa  fa-stack-1x fa-inverse">知</i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank" href="http://weibo.com/5092233560">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/100010009245988">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/DoyoudoLove">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+<hr>
+        <!--<hr>-->
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2018/10/30/浅析数据结构之二叉树/">浅析数据结构之二叉树</a>
+        </li>
+      
+        <li>
+          <a href="/2018/10/29/java中值传递和引用传递/">java中值传递和引用传递</a>
+        </li>
+      
+        <li>
+          <a href="/2018/10/28/JAVA字符串去重/">JAVA字符串去重</a>
+        </li>
+      
+        <li>
+          <a href="/2018/10/24/1024程序员节日快乐/">1024程序员节日快乐</a>
+        </li>
+      
+        <li>
+          <a href="/2018/10/23/Mybaits之动态SQL/">Mybaits之动态SQL</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        <!--<hr>-->
+    
+        <!-- Friends Blog -->
+
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+    
+        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+    
+</ul>
+
+        <!--<hr>-->
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/5092233560">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/100010009245988">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/DoyoudoLove">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; L_UO 2018
+                    <br>
+                    本站由：<a href="https://pages.github.com/">GitHubPages提供构建部署服务</a>
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe> |
+                    revise by <a href="https://github.com/DoyoudoLove">DoyoudoLove</a>
+                    <br>
+                    备案号：<a  target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#939393;">皖ICP备18020375号</a>
+                    <br>
+				<img src="http://image.immertry.top/20181031%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png"/>
+		 		<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34019002600246"
+		 		style="height:20px;line-height:20px;color:#939393;"
+		 		>皖公网安备 34019002600246号</a>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://immertry.top/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-126141885-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4341db92f1273dd231ba9e6c168daa0a';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<!-- <img src="http://immertry.top/img/icon_wechat.png" width="0" height="0" />-->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

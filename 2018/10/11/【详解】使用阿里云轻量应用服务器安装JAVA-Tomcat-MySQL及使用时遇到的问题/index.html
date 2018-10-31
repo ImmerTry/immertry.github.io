@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="JAVA程序猿 | 摄影爱好者 | 旅游爱好者 | 热爱生活">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/fly.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          【详解】使用阿里云轻量应用服务器安装JAVA+Tomcat+MySQL及使用时遇到的问题 - Immer | Try
+        
+    </title>
+
+    <link rel="canonical" href="http://immertry.top/2018/10/11/【详解】使用阿里云轻量应用服务器安装JAVA-Tomcat-MySQL及使用时遇到的问题/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('http://image.immertry.top/ar20181011alliyun.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#JAVA" title="JAVA">JAVA</a>
+                            
+                              <a class="tag" href="/tags/#阿里云" title="阿里云">阿里云</a>
+                            
+                              <a class="tag" href="/tags/#Tomcat" title="Tomcat">Tomcat</a>
+                            
+                              <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
+                            
+                        </div>
+                        <h1>【详解】使用阿里云轻量应用服务器安装JAVA+Tomcat+MySQL及使用时遇到的问题</h1>
+                        <h2 class="subheading">写在前文：基于苹果MacOS系统安装操作</h2>
+                        <span class="meta">
+                            Posted by L_UO on
+                            2018-10-11
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Immer Try</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="一-购买服务器">一、 购买服务器</h3>
+<h3 id="二-下载">二、下载</h3>
+<p>下载<a href="https://cyberduck.io/" target="_blank" rel="noopener">Cyberduck</a>.app</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.1 新建链接</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011Cyberduck.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.2 这里我选择的FTP(文件传输)将自己服务器的公网IP地址添加上去</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011ftp.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2.3 添加链接收成功后 就可以往系统/root目录下添加上传的文件了</span><br><span class="line">    将本地文件拖拽到到窗口下，即可上传。</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011chuanshu.png" alt="这里写图片描述"></p>
+<p><img src="http://image.immertry.top/ar20181011chuanshu1.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2.4 打开终端Terminal.app。输入 ssh root@公网ip 输入密码成功后 </span><br><span class="line">    Welcome to Alibaba Cloud Elastic Compute Service !</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011terminal.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.5 输入命令：pwd 当前所处/root目录下，ls 看到我们上传的文件</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011terminal2.png" alt="这里写图片描述"></p>
+<h3 id="三-java">三、JAVA</h3>
+<h4 id="官网下载jdk">官网下载JDK</h4>
+<p><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">jdk8</a></p>
+<p><img src="http://image.immertry.top/ar20181011jdk.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.1 下载并添加上传到/root目录下。新建配置目录 jdk</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr     #进到 usr 目录下</span><br><span class="line">mkdir java  #新建 java 文件夹</span><br><span class="line">cd java     #进到 java 文件夹下</span><br><span class="line">mkdir jdk   #新建 jdk 文件夹</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.2 在jdk文件夹下解压 jdk-8u181-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3.2.1 移动jdk到指定文件夹下</span><br><span class="line">cd ~ #回到/root目录下</span><br><span class="line">ls  #查看目录下的文件</span><br><span class="line">mv -i jdk-8u181-linux-x64.tar.gz /usr/java/jdk #移动到jdk文件夹下</span><br><span class="line">cd /usr/java/jdk #回到jdk文件夹下</span><br><span class="line">ls #查看目录下的文件</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.2.2 解压</span><br><span class="line">tar -zxvf jdk-8u181-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line">3.3 配置环境变量</span><br><span class="line">    vim /etc/profile</span><br><span class="line">    </span><br><span class="line">3.3.1 在末尾添加如下代码：</span><br><span class="line">    #set java environment</span><br><span class="line">    export JAVA_HOME=/usr/java/jdk/jdk1.8.0_181</span><br><span class="line">    export JRE_HOME=/usr/java/jdk/jdk1.8.0_181/jre</span><br><span class="line">    export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line">    export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$JAVA_HOME:$PATH</span><br><span class="line">    </span><br><span class="line">3.3.2 保存退出后执行</span><br><span class="line">    source /etc/profile</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011terminaljdk.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.3.3 验证安装 java -version 如图配置成功</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011terminaljdk1.png" alt="这里写图片描述"></p>
+<h3 id="四-tomcat">四、Tomcat</h3>
+<h4 id="官网下载tomcat">官网下载Tomcat</h4>
+<p><a href="https://tomcat.apache.org/download-80.cgi" target="_blank" rel="noopener">tomcat8</a><br>
+<img src="http://image.immertry.top/ar20181011tomcat.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.1 下载并上传到/root目录下 新建 tomcat 文件夹</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4.1.1 创建tomcat文件夹</span><br><span class="line">    cd /usr/java #这里文件夹创建的路径可根据自己的习惯创建</span><br><span class="line">    mkdir tomcat #我默认把jdk文件夹和tomcat文件夹放在Java目录下</span><br><span class="line"></span><br><span class="line">4.1.2 移动tomcat到指定文件夹下并解压</span><br><span class="line">    cd ~ #回到/root目录下</span><br><span class="line">    ls   #找到上传的tomcat</span><br><span class="line">    mv -i apache-tomcat-8.5.34.tar.gz /usr/java/tomcat #移动至指定位置</span><br><span class="line">    cd /usr/java/tomcat #进到tomcat文件夹下</span><br><span class="line">    ls   #查看目录下文件</span><br><span class="line">    tar -zxvf apache-tomcat-8.5.34.tar.gz #解压文件</span><br><span class="line"></span><br><span class="line">4.1.3 写入配置</span><br><span class="line">    ls #解压成功后，当前目录下出现apache-tomcat-8.5.34文件夹</span><br><span class="line">    cd apache-tomcat-8.5.34 #进入到文件夹bin目录下</span><br><span class="line">    cd bin #</span><br><span class="line">    vim setclasspath.sh #编辑 setclasspath.sh 添加如下代码：</span><br><span class="line">    export JAVA_HOME=/usr/java/jdk/jdk1.8.0_181</span><br><span class="line">    export JRE_HOME=/usr/java/jdk/jdk1.8.0_181/jre</span><br><span class="line"></span><br><span class="line">4.1.4 启动tomcat</span><br><span class="line">    ./startup.sh</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011tomcatTerminal.png" alt="这里写图片描述"><br>
+<code>Tomcat启动成功后，通过外网IP访问Tomcat主页是不行的。原因是控制台防火墙未设置8080端口。添加如图：</code><br>
+<img src="http://image.immertry.top/ar20181011aliyun.png" alt="这里写图片描述"><br>
+<code>弹出窗口添加 自定义 端口范围 8080</code><br>
+<img src="http://image.immertry.top/ar20181011aliyunconsloe.png" alt="这里写图片描述"><br>
+<code>再次访问 公网ip:8080 即可显示Tomcat主页</code></p>
+<h3 id="五-mysqlyum在线安装">五、MySQL(yum在线安装)</h3>
+<h4 id="官网下载mysql-yum仓库的rpm安装包">官网下载MySQL Yum仓库的RPM安装包</h4>
+<p><a href="https://dev.mysql.com/downloads/repo/yum/" target="_blank" rel="noopener">MySQL Yum仓库的RPM安装包</a><br>
+<img src="http://image.immertry.top/ar20181011mysql.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5.1 通过wget方式获取yum包</span><br><span class="line">wget http://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011mysqlTerminal.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5.2 安装MySQL RPM安装包</span><br><span class="line">yum localinstall mysql80-community-release-el7-1.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011mysqlTerminal1.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">5.2.1 查看MySQL Yum仓库是否添加成功</span><br><span class="line">    ##进到目录下</span><br><span class="line">    cd /etc/yum.repos.d/</span><br><span class="line">    ##查看目录下文件</span><br><span class="line">    ll</span><br><span class="line">-rw-r--r-- 1 root root 1864 2月  22 2018 mysql-community.repo</span><br><span class="line">-rw-r--r-- 1 root root 1885 2月  22 2018 mysql-community-source.repo</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011mysqlTerminal2.png" alt="这里写图片描述"></p>
+<h4 id="如上所示则添加成功">如上所示，则添加成功。</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5.3 安装MySQL</span><br><span class="line">    yum install mysql-community-server</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011mysqlTerminal3.png" alt="这里写图片描述"><br>
+<img src="http://image.immertry.top/ar20181011mysqlTerminal4.png" alt="这里写图片描述"><br>
+<img src="http://image.immertry.top/ar20181011mysqlTerminal5.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">5.4 启动MySQL、修改初始密码 </span><br><span class="line">    #启动服务</span><br><span class="line">    sudo service mysqld start</span><br><span class="line">    #查看初始密码</span><br><span class="line">    sudo grep &apos;temporary password&apos; /var/log/mysqld.log</span><br><span class="line">    #密码登录</span><br><span class="line">    mysql -u root -p</span><br><span class="line">    #修改密码：密码长度至少8位，且包含大小写字母、数字、特殊字符组合</span><br><span class="line">    ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;你的密码&apos;;</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011mysqlTerminal6.png" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">5.5 #默认情况下密码策略要求密码至少包含一个大写字母、一个小写字母、一个数字和一个特殊字符，并且总密码长度至少为8个字符。</span><br><span class="line">否则回报出：ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</span><br><span class="line"></span><br><span class="line">validate_password is installed by default. The default password policy implemented by validate_password requires that passwords contain at least one upper case letter, one lower case letter, one digit, and one special character, and that the total password length is at least 8 characters.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5.6 外网/客户端访问问题</span><br><span class="line">--------------</span><br><span class="line"></span><br><span class="line">客户访问报错:ERROR 1130: Host &apos;192.168.1.3&apos; is not allowed to connect to this MySQL</span><br><span class="line"></span><br><span class="line">解决方案：</span><br><span class="line">    服务端登陆MySQL，修改user表登陆用户的host。</span><br><span class="line">shell&gt;</span><br><span class="line">mysql&gt; use mysql</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; show tables;</span><br><span class="line">+---------------------------+</span><br><span class="line">| Tables_in_mysql           |</span><br><span class="line">+---------------------------+</span><br><span class="line">| columns_priv              |</span><br><span class="line">此处省略n个表</span><br><span class="line">| time_zone_transition      |</span><br><span class="line">| time_zone_transition_type |</span><br><span class="line">| user                      |</span><br><span class="line">+---------------------------+</span><br><span class="line">33 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; update user set host=&apos;%&apos; where user=&apos;root&apos;;</span><br><span class="line">Query OK, 1 row affected (0.07 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.immertry.top/ar20181011mysqlTerminal7.png" alt="这里写图片描述"><br>
+<img src="http://image.immertry.top/ar20181011mysqlTerminal8.png" alt="这里写图片描述"></p>
+<h3 id="navicat-premium连接服务器mysql">Navicat Premium连接服务器MySQL</h3>
+<h4 id="新建mysql连接">新建mysql连接</h4>
+<p><img src="http://image.immertry.top/ar20181011mysqlConnection.png" alt="这里写图片描述"></p>
+<h4 id="添加连接名-服务器数据库密码">添加连接名、服务器数据库密码</h4>
+<p><img src="http://image.immertry.top/ar20181011userpass.png" alt="这里写图片描述"><br>
+<img src="http://image.immertry.top/ar20181011connection.png" alt="这里写图片描述"></p>
+<h4 id="连接成功">连接成功</h4>
+<p><img src="http://image.immertry.top/ar20181011success.png" alt="这里写图片描述"></p>
+<blockquote>
+<p>参考链接–mysql<br>
+<a href="https://blog.csdn.net/qq_32672633/article/details/80325470#2%E5%A4%96%E7%BD%91%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">https://blog.csdn.net/qq_32672633/article/details/80325470#2外网客户端访问问题</a><br>
+参考链接–jdk、tomcat<br>
+<a href="https://blog.csdn.net/m0_37975886/article/details/78797070" target="_blank" rel="noopener">https://blog.csdn.net/m0_37975886/article/details/78797070</a></p>
+</blockquote>
+<h3 id="写在最后">写在最后。</h3>
+<p>敲黑板：这里是阿里云轻量应用服务器安装。控制台–&gt;安全–&gt;防火墙 端口设置访问3306访问数据库。见上图Tomcat</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/10/12/JDBC详解/" data-toggle="tooltip" data-placement="top" title="JDBC详解">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/10/10/JSP-四大作用域与九大内置对象的其作用详解/" data-toggle="tooltip" data-placement="top" title="JSP 四大作用域与九大内置对象的其作用详解">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#一-购买服务器"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001; &#x8D2D;&#x4E70;&#x670D;&#x52A1;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#二-下载"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x4E0B;&#x8F7D;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#三-java"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;JAVA</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#官网下载jdk"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x5B98;&#x7F51;&#x4E0B;&#x8F7D;JDK</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#四-tomcat"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;Tomcat</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#官网下载tomcat"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">&#x5B98;&#x7F51;&#x4E0B;&#x8F7D;Tomcat</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#五-mysqlyum在线安装"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x4E94;&#x3001;MySQL(yum&#x5728;&#x7EBF;&#x5B89;&#x88C5;)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#官网下载mysql-yum仓库的rpm安装包"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">&#x5B98;&#x7F51;&#x4E0B;&#x8F7D;MySQL Yum&#x4ED3;&#x5E93;&#x7684;RPM&#x5B89;&#x88C5;&#x5305;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#如上所示则添加成功"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">&#x5982;&#x4E0A;&#x6240;&#x793A;&#xFF0C;&#x5219;&#x6DFB;&#x52A0;&#x6210;&#x529F;&#x3002;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#navicat-premium连接服务器mysql"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Navicat Premium&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x5668;MySQL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#新建mysql连接"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">&#x65B0;&#x5EFA;mysql&#x8FDE;&#x63A5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#添加连接名-服务器数据库密码"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">&#x6DFB;&#x52A0;&#x8FDE;&#x63A5;&#x540D;&#x3001;&#x670D;&#x52A1;&#x5668;&#x6570;&#x636E;&#x5E93;&#x5BC6;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#连接成功"><span class="toc-nav-number">6.3.</span> <span class="toc-nav-text">&#x8FDE;&#x63A5;&#x6210;&#x529F;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#写在最后"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">&#x5199;&#x5728;&#x6700;&#x540E;&#x3002;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#JAVA" title="JAVA">JAVA</a>
+                        
+                          <a class="tag" href="/tags/#阿里云" title="阿里云">阿里云</a>
+                        
+                          <a class="tag" href="/tags/#Tomcat" title="Tomcat">Tomcat</a>
+                        
+                          <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/5092233560">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/100010009245988">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/DoyoudoLove">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; L_UO 2018
+                    <br>
+                    本站由：<a href="https://pages.github.com/">GitHubPages提供构建部署服务</a>
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe> |
+                    revise by <a href="https://github.com/DoyoudoLove">DoyoudoLove</a>
+                    <br>
+                    备案号：<a  target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#939393;">皖ICP备18020375号</a>
+                    <br>
+				<img src="http://image.immertry.top/20181031%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png"/>
+		 		<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34019002600246"
+		 		style="height:20px;line-height:20px;color:#939393;"
+		 		>皖公网安备 34019002600246号</a>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://immertry.top/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-126141885-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4341db92f1273dd231ba9e6c168daa0a';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<!-- <img src="http://immertry.top/img/icon_wechat.png" width="0" height="0" />-->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

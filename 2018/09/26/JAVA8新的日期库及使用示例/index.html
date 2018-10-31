@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="JAVA程序猿 | 摄影爱好者 | 旅游爱好者 | 热爱生活">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/fly.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          JAVA8新的日期库及使用示例 - Immer | Try
+        
+    </title>
+
+    <link rel="canonical" href="http://immertry.top/2018/09/26/JAVA8新的日期库及使用示例/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('http://image.immertry.top/justin-kauffman.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#JAVA" title="JAVA">JAVA</a>
+                            
+                        </div>
+                        <h1>JAVA8新的日期库及使用示例</h1>
+                        <h2 class="subheading">java8引入了一套全新的时间日期API，本篇随笔将说明学习java8的这套API</h2>
+                        <span class="meta">
+                            Posted by L_UO on
+                            2018-09-26
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Immer Try</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="javatime下的关键类">java.time下的关键类</h3>
+<p>java.time包中的是类是不可变且线程安全的。新的时间及日期API位于java.time中，下面是一些关键类</p>
+<ul>
+<li>
+<p>Instant——它代表的是时间戳</p>
+</li>
+<li>
+<p>LocalDate——不包含具体时间的日期，比如2014-01-14。它可以用来存储生日，周年纪念日，入职日期等。</p>
+</li>
+<li>
+<p>LocalTime——它代表的是不含日期的时间</p>
+</li>
+<li>
+<p>LocalDateTime——它包含了日期及时间，不过还是没有偏移信息或者说时区。</p>
+</li>
+<li>
+<p>ZonedDateTime——这是一个包含时区的完整的日期时间，偏移量是以UTC/格林威治时间为基准的。</p>
+</li>
+</ul>
+<hr>
+<h3 id="java8是如何处理时间及日期的">java8是如何处理时间及日期的</h3>
+<ol>
+<li>如何获取当天的日期</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();  </span><br><span class="line">System.out.println(<span class="string">"今天的日期是："</span> + today);</span><br><span class="line"><span class="comment">// 今天的日期是：2018-09-26</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>如何获取当前的年月日</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();</span><br><span class="line"><span class="keyword">int</span> year = today.getYear();</span><br><span class="line"><span class="keyword">int</span> month = today.getMonthValue();</span><br><span class="line"><span class="keyword">int</span> day = today.getDayOfMonth();</span><br><span class="line">System.out.println(year + <span class="string">"年："</span> + month + <span class="string">"月："</span> + day + <span class="string">"日："</span>);</span><br><span class="line"><span class="comment">// 2018年9月26日</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>如何获取某个特定的日期</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LocalDate dateOfBirth = LocalDate.of(<span class="number">2018</span>,<span class="number">10</span>,<span class="number">1</span>);</span><br><span class="line">System.out.println(<span class="string">"您输入的日期是："</span> + dateOfBirth);</span><br><span class="line"><span class="comment">// 您输入的日期是：2018-10-01</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>检查两个日期是否相等</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LocalDate date = LocalDate.of(<span class="number">2018</span>,<span class="number">9</span>,<span class="number">26</span>);</span><br><span class="line">LocalDate day = LocalDate.now();</span><br><span class="line">System.out.println(<span class="string">"今天是2018-09-26吗？"</span> + day.equals(date));</span><br><span class="line"><span class="comment">// 今天是2018-09-26吗？true</span></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>检查重复事件，比如生日</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LocalDate dateOfBirth = LocalDate.of(<span class="number">1996</span>,<span class="number">6</span>,<span class="number">6</span>);</span><br><span class="line">LocalDate day = LocalDate.now();</span><br><span class="line">MonthDay birthday = MonthDay.of(dateOfBirth.getMonthValue(), dateOfBirth.getDayOfMonth());</span><br><span class="line">MonthDay currMonthDay = MonthDay.from(date);</span><br><span class="line"><span class="keyword">if</span> (currMonthDay.equals(birthday)) &#123;</span><br><span class="line">    System.out.println(<span class="string">"今天是您生日。"</span>);</span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"对不起，今天不是您生日。"</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 对不起，今天不是您生日。</span></span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>如何增加时间里面的小时数</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LocalTime localTime = LocalTime.now();</span><br><span class="line">System.out.println(<span class="string">"现在时间是："</span> + localTime);</span><br><span class="line">LocalTime add = localTime.plusHours(<span class="number">2</span>);</span><br><span class="line">System.out.println(<span class="string">"增加俩小时后的时间是："</span> + add);</span><br><span class="line"><span class="comment">// 现在时间是：22:50:43.730</span></span><br><span class="line"><span class="comment">// 增加俩小时后的时间是：00:50:43.730</span></span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>如何获取1周后的日期</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();  </span><br><span class="line">System.out.println(<span class="string">"今天的日期是："</span> + today);</span><br><span class="line">LocalDate oneWeek = today.plus(<span class="number">1</span>, ChronoUnit.WEEKS);</span><br><span class="line">System.out.println(<span class="string">"一周后的日期是："</span> + oneWeek);</span><br><span class="line"><span class="comment">// 今天的日期是：2018-09-26</span></span><br><span class="line"><span class="comment">// 一周后的日期是：2018-10-03</span></span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>一年前后的日期</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();  </span><br><span class="line">System.out.println(<span class="string">"今天的日期是："</span> + today);</span><br><span class="line">LocalDate previousYear = date.minus(<span class="number">1</span>,ChronoUnit.YEARS);</span><br><span class="line">System.out.println(<span class="string">"一年前的日期是："</span> + previousYear);</span><br><span class="line">LocalDate nextYear = date.plus(<span class="number">1</span>,ChronoUnit.YEARS);</span><br><span class="line">System.out.println(<span class="string">"一年后的日期是："</span> + nextYear);</span><br><span class="line"><span class="comment">// 今天的日期是：2018-09-26</span></span><br><span class="line"><span class="comment">// 一年前的日期是：2017-09-26</span></span><br><span class="line"><span class="comment">// 一年后的日期是：2019-09-26</span></span><br></pre></td></tr></table></figure>
+<ol start="9">
+<li>使用时钟</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回当前时间根据系统时钟和UTC</span></span><br><span class="line">Clock clock = Clock.systemUTC();</span><br><span class="line">System.out.println(<span class="string">"Clock："</span> + clock);</span><br><span class="line"><span class="comment">// Clock：SystemClock[Z]</span></span><br></pre></td></tr></table></figure>
+<ol start="10">
+<li>如何判断某个日期在另一个日期的前面还是后面</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();</span><br><span class="line">System.out.println(<span class="string">"今天的日期是："</span> + today);</span><br><span class="line">LocalDate tommorrow = today.plus(<span class="number">1</span>, ChronoUnit.DAYS);</span><br><span class="line">System.out.println(<span class="string">"明天的日期是："</span> + tommorrow);</span><br><span class="line">System.out.println(<span class="string">"日期："</span> + tommorrow + <span class="string">"是否在日期："</span> + today + <span class="string">"之前？"</span> + tommorrow.isBefore(today));</span><br><span class="line">System.out.println(<span class="string">"日期："</span> + tommorrow + <span class="string">"是否在日期："</span> + today + <span class="string">"之后？"</span> + tommorrow.isAfter(today));</span><br><span class="line"><span class="comment">// 今天的日期是：2018-09-26</span></span><br><span class="line"><span class="comment">// 明天的日期是：2018-09-27</span></span><br><span class="line"><span class="comment">// 日期：2018-09-27是否在日期：2018-09-26之前？false</span></span><br><span class="line"><span class="comment">// 日期：2018-09-27是否在日期：2018-09-26之后？true</span></span><br></pre></td></tr></table></figure>
+<ol start="11">
+<li>处理不同的时区</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime = LocalDateTime.now();</span><br><span class="line">ZoneId zoneId = ZoneId.of(ZoneId.SHORT_IDS.get(<span class="string">"ACT"</span>));</span><br><span class="line">ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime,zoneId);</span><br><span class="line">System.out.println(<span class="string">"现在时区的时间和在特定时区时间："</span> + zonedDateTime);</span><br><span class="line"><span class="comment">// 现在时区的时间和在特定时区时间：2018-09-26T23:15:52.325+09:30[Australia/Darwin]</span></span><br></pre></td></tr></table></figure>
+<ol start="12">
+<li>如何表示固定的日期，比如信用卡过期时间</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">YearMonth currentYearMoth = YearMonth.now();</span><br><span class="line">System.out.printf(<span class="string">"这个月的年月 %s 有 %d 天%n"</span>, currentYearMoth,currentYearMoth.lengthOfMonth());</span><br><span class="line">YearMonth creditCardExpiry = YearMonth.of(<span class="number">2018</span>,Month.OCTOBER);</span><br><span class="line">System.out.printf(<span class="string">"您输入的年月日期是 %s %n"</span>,creditCardExpiry);</span><br><span class="line"><span class="comment">// 这个月的年月 2018-09 有 30 天</span></span><br><span class="line"><span class="comment">// 您输入的年月日期是 2018-10</span></span><br></pre></td></tr></table></figure>
+<ol start="13">
+<li>如何在java8中检查闰年</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();</span><br><span class="line">System.out.printf(<span class="string">"%s 年是不是闰年：%s"</span>, today, today.isLeapYear());</span><br><span class="line"><span class="comment">// 2018-09-26 年是不是闰年：false</span></span><br></pre></td></tr></table></figure>
+<ol start="14">
+<li>两个日期之间包含多少天，多少月</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LocalDate dates = LocalDate.of(<span class="number">2018</span>, Month.OCTOBER, <span class="number">15</span>);</span><br><span class="line">Period period = Period.between(today, dates);</span><br><span class="line">System.out.printf(<span class="string">"日期 %s 和日期 %s相差 %s天"</span>, today, dates, period.getDays());</span><br><span class="line"><span class="comment">// 日期 2018-09-26 和日期 2018-10-15相差 19天</span></span><br></pre></td></tr></table></figure>
+<ol start="15">
+<li>带时区的日期与时间</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime dateTime = LocalDateTime.of(<span class="number">2018</span>,Month.SEPTEMBER,<span class="number">26</span>,<span class="number">23</span>,<span class="number">51</span>);</span><br><span class="line">ZoneOffset offset = ZoneOffset.of(<span class="string">"+05:30"</span>);</span><br><span class="line">OffsetDateTime offsetDateTime = OffsetDateTime.of(dateTime,offset);</span><br><span class="line">System.out.println(<span class="string">"日期和时间在时区上的偏移时间："</span> + offsetDateTime);</span><br><span class="line"><span class="comment">// 日期和时间在时区上的偏移时间：2018-09-26T23:51+05:30</span></span><br></pre></td></tr></table></figure>
+<ol start="16">
+<li>获取当前时间戳</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Instant timeStamp = Instant.now();</span><br><span class="line">System.out.println(<span class="string">"当前的时间戳是："</span> + timeStamp);</span><br><span class="line"><span class="comment">// 当前的时间戳是：2018-09-26T16:01:12.053Z</span></span><br></pre></td></tr></table></figure>
+<ol start="17">
+<li>使用预定义的格式器来对日期进行解析/格式化</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String dayAfterTomorrow = <span class="string">"20180927"</span>;</span><br><span class="line">LocalDate formatted = LocalDate.parse(dayAfterTomorrow, DateTimeFormatter.BASIC_ISO_DATE);</span><br><span class="line">System.out.printf(<span class="string">"字符 %s 格式化后的日期格式是 %s %n"</span>, dayAfterTomorrow, formatted);</span><br><span class="line"><span class="comment">// 字符 20180927 格式化后的日期格式是 2018-09-27</span></span><br></pre></td></tr></table></figure>
+<ol start="18">
+<li>使用自定义的格式器来解析日期</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String day = <span class="string">"09 27 2018"</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   DateTimeFormatter formatter = DateTimeFormatter.ofPattern(<span class="string">"MM dd yyyy"</span>);</span><br><span class="line">   LocalDate date = LocalDate.parse(day, formatter);</span><br><span class="line">   System.out.printf(<span class="string">"字符 %s 转换成功后的日期是 %s %n"</span>, day, date);</span><br><span class="line">   <span class="comment">// 字符 09 27 2018 转换成功后的日期是 2018-09-27</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (DateTimeException ex) &#123;</span><br><span class="line">   System.out.printf(<span class="string">"%s 不能被转换; %n"</span>, day);</span><br><span class="line">   ex.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="19">
+<li>对日期进行格式化，转换成字符串</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime arrivalDate = LocalDateTime.now();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   DateTimeFormatter formatter = DateTimeFormatter.ofPattern(<span class="string">"MM dd yyyy HH:mm s"</span>);</span><br><span class="line">   String landing = arrivalDate.format(formatter);</span><br><span class="line">   System.out.printf(<span class="string">"时间日期 %s 转换后的字符串为 %s %n"</span>, arrivalDate, landing);</span><br><span class="line">   <span class="comment">// 时间日期 2018-09-27T00:19:22.974 转换后的字符串为 09 27 2018 00:19 22 </span></span><br><span class="line">&#125; <span class="keyword">catch</span> (DateTimeException ex) &#123;</span><br><span class="line">   System.out.printf(<span class="string">"%s 格式转换错误 %n"</span>,arrivalDate);</span><br><span class="line">   ex.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="20">
+<li>如何取得某月的最后一天</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LocalDate date = LocalDate.now();</span><br><span class="line">LocalDate firstDay = LocalDate.of(date.getYear(),date.getMonth(),<span class="number">1</span>);</span><br><span class="line">LocalDate lastDay = date.with(TemporalAdjusters.lastDayOfMonth());</span><br><span class="line">System.out.println(<span class="string">"本月第一天是："</span> + firstDay);</span><br><span class="line">System.out.println(<span class="string">"本月最后一天是："</span> + lastDay);</span><br><span class="line"><span class="comment">// 本月第一天是：2018-09-01</span></span><br><span class="line"><span class="comment">// 本月最后一天是：2018-09-30</span></span><br></pre></td></tr></table></figure>
+<h3 id="java-8-日期特性">Java 8 日期特性</h3>
+<h4 id="java-8-日期时间api的几个关键点">Java 8 日期/时间API的几个关键点</h4>
+<p>经过上面的例子，我们已经对java8的时间日期有了一定的了解，现在回顾一下</p>
+<ul>
+<li>
+<p>它提供了javax.time.ZoneId用来处理时区。</p>
+</li>
+<li>
+<p>它提供了LocalDate与LocalTime类</p>
+</li>
+<li>
+<p>Java 8中新的时间与日期API中的所有类都是不可变且线程安全的，这与之前的Date与Calendar API中的恰好相反，那里面像java.util.Date以及SimpleDateFormat这些关键的类都不是线程安全的。</p>
+</li>
+<li>
+<p>新的时间与日期API中很重要的一点是它定义清楚了基本的时间与日期的概念，比方说，瞬时时间，持续时间，日期，时间，时区以及时间段。它们都是基于ISO日历体系的。</p>
+</li>
+</ul>
+<h4 id="java-8-日期时间特性">Java 8 日期/时间特性</h4>
+<p>Java 8 日期/时间 API 是 JSR-310 的实现，它的实现目标是克服旧的日期时间实现中所有的缺陷，新的日期/时间API 的一些设计原则是：</p>
+<ul>
+<li>
+<p><code>不变性</code>：新的日期/时间 API 中，所有的类都是不可变的，这对多线程环境有好处。</p>
+</li>
+<li>
+<p><code>关注点分离</code>：新的 API 将人可读的日期时间和机器时间（unix timestamp）明确分离，它为日期（Date）、时间（Time）、日期时间（DateTime）、时间戳（unix timestamp）以及时区定义了不同的类。</p>
+</li>
+<li>
+<p><code>清晰</code>：在所有的类中，方法都被明确定义用以完成相同的行为。举个例子，要拿到当前实例我们可以使用 now()方法，在所有的类中都定义了 format()和 parse()方法，而不是像以前那样专门有一个独立的类。为了更好的处理问题，所有的类都使用了工厂模式和策略模式，一旦你使用了其中某个类的方法，与其他类协同工作并不困难。</p>
+</li>
+<li>
+<p><code>实用操作</code>：所有新的日期/时间 API 类都实现了一系列方法用以完成通用的任务，如：加、减、格式化、解析、从日期/时间中提取单独部分，等等。</p>
+</li>
+<li>
+<p><code>可扩展性</code>：新的日期/时间 API 是工作在 ISO-8601 日历系统上的，但我们也可以将其应用在非 ISO 的日历上。</p>
+</li>
+</ul>
+<h4 id="java-8-日期时间-api-包解释">Java 8 日期/时间 API 包解释</h4>
+<ul>
+<li>
+<p><code>java.time 包</code>：这是新的 Java 日期/时间 API 的基础包，所有的主要基础类都是这个包的一部分，如：LocalDate, LocalTime, LocalDateTime, Instant, Period, Duration 等等。所有这些类都是不可变的和线程安全的，在绝大多数情况下，这些类能够有效地处理一些公共的需求。</p>
+</li>
+<li>
+<p><code>java.time.chrono 包</code>：这个包为非 ISO 的日历系统定义了一些泛化的 API，我们可以扩展 AbstractChronology类来创建自己的日历系统。</p>
+</li>
+<li>
+<p><code>java.time.format 包</code>：这个包包含能够格式化和解析日期时间对象的类，在绝大多数情况下，我们不应该直接使用它们，因为 java.time 包中相应的类已经提供了格式化和解析的方法。</p>
+</li>
+<li>
+<p><code>java.time.temporal 包</code>：这个包包含一些时态对象，我们可以用其找出关于日期/时间对象的某个特定日期或时间，比如说，可以找到某月的第一天或最后一天。你可以非常容易地认出这些方法，因为它们都具有“withXXX”的格式。</p>
+</li>
+<li>
+<p><code>java.time.zone 包</code>：这个包包含支持不同时区以及相关规则的类。</p>
+</li>
+</ul>
+<h4 id="每个java开发人员都应该至少了解这套新的api中的这五个类">每个Java开发人员都应该至少了解这套新的API中的这五个类</h4>
+<ul>
+<li>
+<p>Instant 它代表的是时间戳，比如2016-04-14T14:20:13.592Z，这可以从java.time.Clock类中获取，像这样： Instant current = Clock.system(ZoneId.of(“Asia/Tokyo”)).instant();</p>
+</li>
+<li>
+<p>LocalDate 它表示的是不带时间的日期，比如2016-04-14。它可以用来存储生日，周年纪念日，入职日期等。</p>
+</li>
+<li>
+<p>LocalTime - 它表示的是不带日期的时间</p>
+</li>
+<li>
+<p>LocalDateTime - 它包含了时间与日期，不过没有带时区的偏移量</p>
+</li>
+<li>
+<p>ZonedDateTime - 这是一个带时区的完整时间，它根据UTC/格林威治时间来进行时区调整</p>
+</li>
+<li>
+<p>这个库的主包是java.time，里面包含了代表日期，时间，瞬时以及持续时间的类。它有两个子package，一个是java.time.foramt，这个是什么用途就很明显了，还有一个是java.time.temporal，它能从更低层面对各个字段进行访问。</p>
+</li>
+<li>
+<p>时区指的是地球上共享同一标准时间的地区。每个时区都有一个唯一标识符，同时还有一个地区/城市(Asia/Tokyo)的格式以及从格林威治时间开始的一个偏移时间。比如说，东京的偏移时间就是+09:00。</p>
+</li>
+<li>
+<p>OffsetDateTime类实际上包含了LocalDateTime与ZoneOffset。它用来表示一个包含格林威治时间偏移量（+/-小时：分，比如+06:00或者 -08：00）的完整的日期（年月日）及时间（时分秒，纳秒）。</p>
+</li>
+<li>
+<p>DateTimeFormatter类用于在Java中进行日期的格式化与解析。与SimpleDateFormat不同，它是不可变且线程安全的，如果需要的话，可以赋值给一个静态变量。DateTimeFormatter类提供了许多预定义的格式器，你也可以自定义自己想要的格式。当然了，根据约定，它还有一个parse()方法是用于将字符串转换成日期的，如果转换期间出现任何错误，它会抛出DateTimeParseException异常。类似的，DateFormatter类也有一个用于格式化日期的format()方法，它出错的话则会抛出DateTimeException异常。</p>
+</li>
+<li>
+<p>再说一句，“MMM d yyyy”与“MMm dd yyyy”这两个日期格式也略有不同，前者能识别出&quot;Jan 2 2014&quot;与&quot;Jan 14 2014&quot;这两个串，而后者如果传进来的是&quot;Jan 2 2014&quot;则会报错，因为它期望月份处传进来的是两个字符。为了解决这个问题，在天为个位数的情况下，你得在前面补0，比如&quot;Jan 2 2014&quot;应该改为&quot;Jan 02 2014&quot;。</p>
+</li>
+</ul>
+<h4 id="javatime-包下的方法概览">java.time 包下的方法概览</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法名</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Of</td>
+<td style="text-align:center">静态工厂方法</td>
+</tr>
+<tr>
+<td style="text-align:center">parse</td>
+<td style="text-align:center">静态工厂方法，关注于解析</td>
+</tr>
+<tr>
+<td style="text-align:center">get</td>
+<td style="text-align:center">获取某些东西的值</td>
+</tr>
+<tr>
+<td style="text-align:center">is</td>
+<td style="text-align:center">检查某些东西的是否是 true</td>
+</tr>
+<tr>
+<td style="text-align:center">with</td>
+<td style="text-align:center">不可变的 setter 等价物</td>
+</tr>
+<tr>
+<td style="text-align:center">plus</td>
+<td style="text-align:center">加一些量到某个对象</td>
+</tr>
+<tr>
+<td style="text-align:center">minus</td>
+<td style="text-align:center">从某个对象减去一些量</td>
+</tr>
+<tr>
+<td style="text-align:center">to</td>
+<td style="text-align:center">转换到另一个类型</td>
+</tr>
+<tr>
+<td style="text-align:center">at</td>
+<td style="text-align:center">把这个对象与另一个对象组合起来</td>
+</tr>
+</tbody>
+</table>
+<h3 id="总结">总结</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Java.time</th>
+<th style="text-align:center">java.util.Calendar 以及 Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">流畅的 API</td>
+<td style="text-align:center">不流畅的 API</td>
+</tr>
+<tr>
+<td style="text-align:center">实例不可变</td>
+<td style="text-align:center">实例可变</td>
+</tr>
+<tr>
+<td style="text-align:center">线程安全</td>
+<td style="text-align:center">非线程安全</td>
+</tr>
+</tbody>
+</table>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/09/27/UML类图总结/" data-toggle="tooltip" data-placement="top" title="UML类图总结">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/09/25/为什么说JAVA程序员到了必须掌握Spring-Boot的时候？/" data-toggle="tooltip" data-placement="top" title="为什么说 Java 程序员到了必须掌握 Spring Boot 的时候？">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#javatime下的关键类"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">java.time&#x4E0B;&#x7684;&#x5173;&#x952E;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java8是如何处理时间及日期的"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">java8&#x662F;&#x5982;&#x4F55;&#x5904;&#x7406;&#x65F6;&#x95F4;&#x53CA;&#x65E5;&#x671F;&#x7684;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java-8-日期特性"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;&#x7279;&#x6027;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#java-8-日期时间api的几个关键点"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;/&#x65F6;&#x95F4;API&#x7684;&#x51E0;&#x4E2A;&#x5173;&#x952E;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#java-8-日期时间特性"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;/&#x65F6;&#x95F4;&#x7279;&#x6027;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#java-8-日期时间-api-包解释"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;/&#x65F6;&#x95F4; API &#x5305;&#x89E3;&#x91CA;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#每个java开发人员都应该至少了解这套新的api中的这五个类"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">&#x6BCF;&#x4E2A;Java&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x90FD;&#x5E94;&#x8BE5;&#x81F3;&#x5C11;&#x4E86;&#x89E3;&#x8FD9;&#x5957;&#x65B0;&#x7684;API&#x4E2D;&#x7684;&#x8FD9;&#x4E94;&#x4E2A;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#javatime-包下的方法概览"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">java.time &#x5305;&#x4E0B;&#x7684;&#x65B9;&#x6CD5;&#x6982;&#x89C8;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x603B;&#x7ED3;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#JAVA" title="JAVA">JAVA</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/5092233560">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/100010009245988">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/DoyoudoLove">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; L_UO 2018
+                    <br>
+                    本站由：<a href="https://pages.github.com/">GitHubPages提供构建部署服务</a>
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe> |
+                    revise by <a href="https://github.com/DoyoudoLove">DoyoudoLove</a>
+                    <br>
+                    备案号：<a  target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#939393;">皖ICP备18020375号</a>
+                    <br>
+				<img src="http://image.immertry.top/20181031%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png"/>
+		 		<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34019002600246"
+		 		style="height:20px;line-height:20px;color:#939393;"
+		 		>皖公网安备 34019002600246号</a>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://immertry.top/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-126141885-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4341db92f1273dd231ba9e6c168daa0a';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<!-- <img src="http://immertry.top/img/icon_wechat.png" width="0" height="0" />-->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
