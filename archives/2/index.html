@@ -219,7 +219,9 @@
         <div class="post-content-preview">
             一、相关概念
 1.什么是JDBC
-JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口......
+JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。JDBC提供了一种基准，据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序。
+2.数据库驱动
+我们安装好数据库之后，我们的应用程序也是......
         </div>
     </a>
     
@@ -254,7 +256,10 @@ JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQ
 
 12.2 这里我选择的FTP(文件传输)将自己服务器的公网IP地址添加上去
 
-122.3 添加链接收成功后 就可以往系统/root目录下添加上传的文件了......
+122.3 添加链接收成功后 就可以往系统/root目录下添加上传的文件了    将本地文件拖拽到到窗口下，即可上传。
+
+
+122.4 打开终端Terminal.app。输入 ssh root@公网ip 输入密码成功后     Wel......
         </div>
     </a>
     
@@ -289,7 +294,7 @@ JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQ
         </h3>
         <div class="post-content-preview">
             首先  jsp  本质上就是一个 Servlet，它是 Servlet 的一种特殊形式（由 SUN 公司推出），每个 jsp 页面都是一个 servlet实例。
-        Servlet 是由 Java 提供用于开发 web 服......
+        Servlet 是由 Java 提供用于开发 web 服务器应用程序的一个组件，运行在服务端，由 servlet 容器管理，用来生成动态内容。一个 servlet 实例是实现了特殊接口 Servlet 的 Java ......
         </div>
     </a>
     
@@ -319,7 +324,7 @@ JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQ
         <div class="post-content-preview">
             通过 10 个示例来初步认识 Java8 中的 lambda 表达式
 例 1、用 lambda 表达式实现 Runnable
-12345678910111213// Java 8之前：new Thread(new Runnable()......
+12345678910111213// Java 8之前：new Thread(new Runnable() &#123;      @Override       public void run() &#123;         System.out.println......
         </div>
     </a>
     
@@ -351,7 +356,9 @@ JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQ
 文章引用来自
 https://www.cnblogs.com/garryfu/p/7976546.html
 
-相信每位开发同事都用到过。我们总是沿着前辈的足迹去做设定好的思路，往往没去探究为何这么做，所以这篇文章对单例模式做了详解。......
+相信每位开发同事都用到过。我们总是沿着前辈的足迹去做设定好的思路，往往没去探究为何这么做，所以这篇文章对单例模式做了详解。
+单例模式定义
+单例模式确保某个类只有一个实例，而且自行实例化并向整个系统提供这个实例。在计算机系统中，线程池、缓存、日志对象、对话框、打印机、显卡的驱动程序对......
         </div>
     </a>
     
@@ -384,7 +391,7 @@ https://www.cnblogs.com/garryfu/p/7976546.html
             1、打开Idea 点击 + Create New Project创建新工程
 2、点击 Spring Initializr，选择JDK版本，默认Default。如图2-1所示：
 
-3、Group：组织ID，一般分为多个段，这里我只说两段......
+3、Group：组织ID，一般分为多个段，这里我只说两段，第一段为域，第二段为公司名称。域又分为 org、com、cn等等，其中 org为非营利组织，com为商业组织。如阿里、淘宝（com.alibaba/com.t......
         </div>
     </a>
     
@@ -414,7 +421,7 @@ https://www.cnblogs.com/garryfu/p/7976546.html
         <div class="post-content-preview">
             UML（Unified Modeling Language）是一种统一建模语言，为面向对象开发系统的产品进行说明、可视化、和编制文档的一种标准语言。下面将对UML的九种图+包图的基本概念进行介绍以及各个图的使用场景。
 基本概念
-   ......
+    如下图所示，UML图分为用例视图、设计视图、进程视图、实现视图和拓扑视图，又可以静动分为静态视图和动态视图。静态图分为：用例图，类图，对象图，包图，构件图，部......
         </div>
     </a>
     
@@ -449,7 +456,13 @@ java.time包中的是类是不可变且线程安全的。新的时间及日期AP
 Instant——它代表的是时间戳
 
 
-LocalDate——不包含具体时间的日期，比......
+LocalDate——不包含具体时间的日期，比如2014-01-14。它可以用来存储生日，周年纪念日，入职日期等。
+
+
+LocalTime——它代表的是不含日期的时间
+
+
+LocalDateTime——它包......
         </div>
     </a>
     
@@ -477,7 +490,7 @@ LocalDate——不包含具体时间的日期，比......
             Spring Boot 诞生的背景是什么？Spring 企业又是基于什么样的考虑创建 Spring Boot? 传统企业使用 Spring Boot 会给我们带来什么样变革?
         </h3>
         <div class="post-content-preview">
-            Spring Boot 2.0 的推出又激起了一阵学习 Spring Boot 热，就单从我个人的博客的访问量大幅增加就可以感受到大家对学习 Spring Boot 的热情，那么在这么多人热衷于学习 Spring Boot 之时，我自......
+            Spring Boot 2.0 的推出又激起了一阵学习 Spring Boot 热，就单从我个人的博客的访问量大幅增加就可以感受到大家对学习 Spring Boot 的热情，那么在这么多人热衷于学习 Spring Boot 之时，我自己也在思考： Spring Boot 诞生的背景是什么？Spring 企业又是基于什么样的考虑创建 Spring Boot? 传统企业使用 Spring Boo......
         </div>
     </a>
     
@@ -506,7 +519,8 @@ LocalDate——不包含具体时间的日期，比......
         </h3>
         <div class="post-content-preview">
             中秋节来历
-      中秋节，又称月夕、秋节、仲秋节、八月节、八月会、追月节、玩月节、拜月节、女儿节或团圆节，是流行于中国众多民族与汉字文化圈诸国的传统文化节日，时在农历八月十五；因其恰值三秋之半，故名，也有些地方将中秋节定在八月十......
+      中秋节，又称月夕、秋节、仲秋节、八月节、八月会、追月节、玩月节、拜月节、女儿节或团圆节，是流行于中国众多民族与汉字文化圈诸国的传统文化节日，时在农历八月十五；因其恰值三秋之半，故名，也有些地方将中秋节定在八月十六。
+      中秋节始于唐朝初年，盛行于宋朝，至明清时，已成为与春节齐名的中国传统节日之一。受中华文化的影响，中秋节也是东亚和东南亚一些国家尤其是当地的华人......
         </div>
     </a>
     
