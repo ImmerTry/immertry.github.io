@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Immer | Try
+          【问题日志】全局安装webpack，终端运行webpack指令出现错误 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/404.html">
+    <link rel="canonical" href="http://immertry.top/2018/11/05/【问题日志】全局安装webpack，终端运行webpack指令出现错误……/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('img/404-bg.jpg')
-            /*page*/
+            background-image: url('http://image.immertry.top/20181105wolfgang.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>Immer Try</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">你来到了没有知识的荒原 :(</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#问题日志" title="问题日志">问题日志</a>
+                            
+                        </div>
+                        <h1>【问题日志】全局安装webpack，终端运行webpack指令出现错误</h1>
+                        <h2 class="subheading">错误代码如下</h2>
+                        <span class="meta">
+                            Posted by L_UO on
+                            2018-11-05
+                        </span>
                     </div>
                 
 
@@ -189,25 +197,226 @@
 
 
     <!-- Main Content -->
-    
-<!-- Page Header -->
-<header class="intro-header" style="background-image: url('img/404-bg.jpg')">
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>404</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">你来到了没有知识的荒原 :(</span>
-                </div>
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="webpack指令">webpack指令</h3>
+<pre style="background-color: #F5F5F5;color: black">
+$ <b style="color: #f30213">webpack</b>
+/Users/Super/node_modules/webpack-cli/bin/cli.js:244
+                throw err;
+                ^
+<b style="color: #f30213">Error: Cannot find module 'webpack'</b>
+    at Function.Module._resolveFilename (module.js:555:15)
+    at Function.Module._load (module.js:482:25)
+    at Module.require (module.js:604:17)
+    at require (/Users/Super/node_modules/v8-compile-cache/v8-compile-cache.js:159:20)
+    at Object.<anonymous> (/Users/Super/node_modules/webpack-cli/bin/convert-argv.js:7:24)
+    at Module._compile (/Users/Super/node_modules/v8-compile-cache/v8-compile-cache.js:178:30)
+    at Object.Module._extensions..js (module.js:671:10)
+    at Module.load (module.js:573:32)
+    at tryModuleLoad (module.js:513:12)
+    at Function.Module._load (module.js:505:3)
+    at Module.require (module.js:604:17)
+    at require (internal/module.js:11:18)
+    at yargs.parse (/Users/Super/node_modules/webpack-cli/bin/cli.js:241:14)
+    at Object.parse (/Users/Super/node_modules/yargs/yargs.js:563:18)
+    at /Users/Super/node_modules/webpack-cli/bin/cli.js:219:8
+    at Object.<anonymous> (/Users/Super/node_modules/webpack-cli/bin/cli.js:538:3)
+    at Module._compile (module.js:660:30)
+    at Object.Module._extensions..js (module.js:671:10)
+    at Module.load (module.js:573:32)
+    at tryModuleLoad (module.js:513:12)
+    at Function.Module._load (module.js:505:3)
+    at Module.require (module.js:604:17)
+    at require (internal/module.js:11:18)
+    at module.exports.filename (/usr/local/lib/node_modules/webpack-cli/node_modules/import-local/index.js:16:66)
+    at /usr/local/lib/node_modules/webpack-cli/bin/cli.js:13:6
+    at Object.<anonymous> (/usr/local/lib/node_modules/webpack-cli/bin/cli.js:538:3)
+    at Module._compile (module.js:660:30)
+    at Object.Module._extensions..js (module.js:671:10)
+    at Module.load (module.js:573:32)
+    at tryModuleLoad (module.js:513:12)
+</anonymous></anonymous></anonymous></pre>
+<p><strong>解决方法</strong></p>
+<p><code>npm link webpack</code></p>
+<hr>
+<h3 id="原因分析">原因分析</h3>
+<p>在我运行这条指令之后，终端出现如下</p>
+<p><code>/Users/Super/node_modules/webpack -&gt; /usr/local/lib/node_modules/webpack</code></p>
+<p>猜想由于全局安装。本地运行的webpack，指向全局安装路径所在webpack目录。这时我的 <b>/Users/Super/node_modules/</b>下多了个<code>webpack</code>文件夹替身</p>
+<hr>
+<h3 id="参考文章">参考文章</h3>
+<p><a href="https://stackoverflow.com/questions/29492240/error-cannot-find-module-webpack" target="_blank" rel="noopener">Error: Cannot find module ‘webpack’<br>
+</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/11/05/【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误……/" data-toggle="tooltip" data-placement="top" title="【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#webpack指令"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">webpack&#x6307;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#原因分析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x539F;&#x56E0;&#x5206;&#x6790;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#参考文章"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x53C2;&#x8003;&#x6587;&#x7AE0;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#问题日志" title="问题日志">问题日志</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
+                
             </div>
         </div>
     </div>
-</header>
+</article>
 
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
+
+
+
+<!-- async load function -->
 <script>
-    document.body.classList.add('page-fullscreen');
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
 </script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

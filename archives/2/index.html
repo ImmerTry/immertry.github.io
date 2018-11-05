@@ -132,6 +132,13 @@
 
                         
                         <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -140,13 +147,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -206,6 +206,73 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2018/10/20/CORS-跨域资源共享/">
+        <h2 class="post-title">
+            CORS(跨域资源共享)
+        </h2>
+        <h3 class="post-subtitle">
+            什么是跨域？浏览器从一个域名的网页去请求另一个域名的资源时，域名、端口、协议任一不同，都是跨域。跨域的常用的几种方式？Jsonp跨域、nginx反向代理、CORS
+        </h3>
+        <div class="post-content-preview">
+            简介
+CORS是一个W3C标准，全称是&quot;跨域资源共享&quot;（Cross-origin resource sharing）。它允许浏览器向跨源(协议 + 域名 + 端口)服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。
+CORS需要浏览器和服务器同时支持。它的通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的A......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#跨域" title="跨域">跨域</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/17/【题】MySQL数据库的一个例题（下）/">
+        <h2 class="post-title">
+            【题】MySQL数据库的一个例题（下）
+        </h2>
+        <h3 class="post-subtitle">
+            写在前文：这篇文章下sql语句为ORACLE数据库下，笔者还没尝试
+        </h3>
+        <div class="post-content-preview">
+            
+查询每门课程被选修的学生数
+
+123456SELECT t2.cname,       COUNT(t1.sid) AS sum_stuFROM sc t1INNER JOIN course t2  ON t1.cid = t2.cidGROUP BY t2.cname
+
+查询出只选修了一门课程的全部学生的学号和姓名
+
+12345678/* GROUP BY 语句中选择出来的只有备份组的字......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-17
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#MySQL" title="MySQL">MySQL</a>
+            
+              <a href="/tags/#例题" title="例题">例题</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -476,75 +543,6 @@ https://www.cnblogs.com/garryfu/p/7976546.html
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/09/26/JAVA8新的日期库及使用示例/">
-        <h2 class="post-title">
-            JAVA8新的日期库及使用示例
-        </h2>
-        <h3 class="post-subtitle">
-            java8引入了一套全新的时间日期API，本篇随笔将说明学习java8的这套API
-        </h3>
-        <div class="post-content-preview">
-            java.time下的关键类
-java.time包中的是类是不可变且线程安全的。新的时间及日期API位于java.time中，下面是一些关键类
-
-
-Instant——它代表的是时间戳
-
-
-LocalDate——不包含具体时间的日期，比如2014-01-14。它可以用来存储生日，周年纪念日，入职日期等。
-
-
-LocalTime——它代表的是不含日期的时间
-
-
-LocalDateTime——它包......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by L_UO on
-            2018-09-26
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JAVA" title="JAVA">JAVA</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/09/25/为什么说JAVA程序员到了必须掌握Spring-Boot的时候？/">
-        <h2 class="post-title">
-            为什么说 Java 程序员到了必须掌握 Spring Boot 的时候？
-        </h2>
-        <h3 class="post-subtitle">
-            Spring Boot 诞生的背景是什么？Spring 企业又是基于什么样的考虑创建 Spring Boot? 传统企业使用 Spring Boot 会给我们带来什么样变革?
-        </h3>
-        <div class="post-content-preview">
-            Spring Boot 2.0 的推出又激起了一阵学习 Spring Boot 热，就单从我个人的博客的访问量大幅增加就可以感受到大家对学习 Spring Boot 的热情，那么在这么多人热衷于学习 Spring Boot 之时，我自己也在思考： Spring Boot 诞生的背景是什么？Spring 企业又是基于什么样的考虑创建 Spring Boot? 传统企业使用 Spring Boo......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by L_UO on
-            2018-09-25
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -589,15 +587,13 @@ LocalDateTime——它包......
             
         
             
-        
-            
              <a href="/tags/#SpringBoot" title="SpringBoot" rel="2">SpringBoot</a>
             
         
             
-             <a href="/tags/#JAVA" title="JAVA" rel="4">JAVA</a>
-            
         
+            
+             <a href="/tags/#JAVA" title="JAVA" rel="4">JAVA</a>
             
         
             
@@ -634,6 +630,12 @@ LocalDateTime——它包......
         
             
         
+            
+        
+            
+        
+            
+             <a href="/tags/#问题日志" title="问题日志" rel="2">问题日志</a>
             
         
     </div>
@@ -716,6 +718,14 @@ LocalDateTime——它包......
     <ul>
       
         <li>
+          <a href="/2018/11/05/【问题日志】全局安装webpack，终端运行webpack指令出现错误……/">【问题日志】全局安装webpack，终端运行webpack指令出现错误</a>
+        </li>
+      
+        <li>
+          <a href="/2018/11/05/【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误……/">【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误</a>
+        </li>
+      
+        <li>
           <a href="/2018/11/02/使用Sublime-Text3编写html页面/">使用Sublime Text3 快速新建一个 html 页面</a>
         </li>
       
@@ -725,14 +735,6 @@ LocalDateTime——它包......
       
         <li>
           <a href="/2018/10/29/java中值传递和引用传递/">java中值传递和引用传递</a>
-        </li>
-      
-        <li>
-          <a href="/2018/10/28/JAVA字符串去重/">JAVA字符串去重</a>
-        </li>
-      
-        <li>
-          <a href="/2018/10/24/1024程序员节日快乐/">1024程序员节日快乐</a>
         </li>
       
     </ul>
