@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          About - Immer | Try
+          项目中使用的ECMAScript 6 语法总结 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/about/">
+    <link rel="canonical" href="http://immertry.top/2018/11/06/项目中使用的ECMAScript-6-语法总结/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('http://image.immertry.top/bg20181009about-bg.jpg')
-            /*page*/
+            background-image: url('http://image.immertry.top/20181106ariel.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Wish for the Best, Prepare for the Worst</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#ECMAScript 6" title="ECMAScript 6">ECMAScript 6</a>
+                            
+                        </div>
+                        <h1>项目中使用的ECMAScript 6 语法总结</h1>
+                        <h2 class="subheading">ECMAScript 6（简称ES6）是JavaScript语言的下一代标准，于2015年6月正式发布，也称ECMAScript 2015。</h2>
+                        <span class="meta">
+                            Posted by L_UO on
+                            2018-11-06
+                        </span>
                     </div>
                 
 
@@ -189,278 +197,228 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3 id="about-me">About Me</h3>
-<p>正如你所见，我是一名<code>程序员</code>;<br>
-在IT行业里，是一位新人。<code>初级程序员</code>这个称谓，至少目前来说适合我。</p>
-<h4 id="开博客原因">开博客原因</h4>
-<p>我的一个朋友，给我发了他<code>带IP地址的博客</code>。<br>
-当时的我比较<code>好奇</code>，也想搞个玩一玩。<br>
-他来了句<code>你又不会Linux</code>。话语间透露出绝对的<code>嘲讽</code>。<br>
-于是各种百度，查资料。<br>
-第一天：选择搭建方式：<br>
-<code>Jekyll + Github Pages</code> |<code>Hexo + Github Pages</code> |<code>VuePress + Github Pages</code><br>
-第二天：确定好搭建方式与主题。<br>
-喏~~就是你现在看到的这个样子。它并不是很完美。</p>
-<h4 id="学习态度">学习态度</h4>
-<p>就像这段话所讲：</p>
-<blockquote>
-<p>勤学如春起之苗，不见其增，日有所长；<br>
-辍学如磨刀之石，不见其损，日有所亏。</p>
-</blockquote>
-<p>勤于学习就像春天的禾苗一样，看不到它增高，实际上它每天在长高。<br>
-放下学习好比磨刀的石头，看不到它变薄，其实石头每天都在变薄。<br>
-激励我们学习不能松懈，只要坚持，知识就会增长。</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <h3 id="对象写法">对象写法</h3>
+<pre style="background-color: #F5F5F5;color: black">
+es5中对象：{add:add,substrict:substrict}  
+es6中对象：{add,substrict}注意这种写法的属性名称和值变量是同一个名称才可以简写，否则要像es5那种写法
+</pre>
+<h3 id="在对象中的方法的写法">在对象中的方法的写法</h3>
+<pre style="background-color: #F5F5F5;color: black">
+es5中对象：{add:function(){},substrict:function(){}}  
+es6中对象：{add(){},substrict(){}}
+</pre>
+<h3 id="对象的导出写法">对象的导出写法</h3>
+<pre style="background-color: #F5F5F5;color: black">
+es5两种形式：  
+1. moduel.exprots = function() {};   
+2. exprots.add = function() {};  
 
-                <!-- 如果开启评论功能 -->
+es6中写法：  
+1. export default {  
+    add  
+}  
+2. export function add() {} 相当于将add方法当做一个属性挂载到exports对象
+</pre>
+<h3 id="对象的导入">对象的导入</h3>
+<pre style="background-color: #F5F5F5;color: black">
+es5：var add = require('./calc.js');  
+es6：  
+如果导出的是：export default {add() {}}   
+那么可以通过 import addObj from './calc.js'  
+
+如果导出的是：  
+export function add() {}  
+export function substrict() {}  
+export const PI = 3.14  
+
+那么可以通过按需加载 import [add,substrict,PI] from './calc.js'
+</pre>
+<h3 id="es6中箭头函数的写法">es6中箭头函数的写法</h3>
+<pre style="background-color: #F5F5F5;color: black">
+箭头的演变过程：  
+//需求：利用函数实现倒序排列  
+[2,1,3].sort(function(x,y) {return y - x;});
+
+//用箭头函数实现 => 读 goes to  
+[2,1,3].sort((x,y) =>{return y - x;});  
+[2,1,3].sort((x,y) =>{x++;y++; y - x;});  
+[2,1,3].forEach(x =>{console.log(x);});
+</pre>
+<hr>
+<h3 id="ecmascript-6-入门">ECMAScript 6 入门</h3>
+<p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">《ECMAScript 6 入门》是一本开源的 JavaScript 语言教程，全面介绍 ECMAScript 6 新引入的语法特性<br>
+</a></p>
+
                 
-                    <hr>
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
                     
-
-                    <!-- 来必力City版安装代码 -->
                     
-                        <div class="comment">
-                            <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
-                        </div>
+                        <li class="next">
+                            <a href="/2018/11/05/【问题日志】全局安装webpack，终端运行webpack指令出现错误……/" data-toggle="tooltip" data-placement="top" title="【问题日志】全局安装webpack，终端运行webpack指令出现错误">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象写法"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在对象中的方法的写法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5728;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象的导出写法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x7684;&#x5BFC;&#x51FA;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象的导入"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x7684;&#x5BFC;&#x5165;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#es6中箭头函数的写法"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">es6&#x4E2D;&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x7684;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ecmascript-6-入门"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">ECMAScript 6 &#x5165;&#x95E8;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ECMAScript 6" title="ECMAScript 6">ECMAScript 6</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
 
                     
-
-
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
                     
-                    <script type="text/javascript">
-                       (function(d, s) {
-                           var j, e = d.getElementsByTagName(s)[0];
-
-                           if (typeof LivereTower === 'function') { return; }
-
-                           j = d.createElement(s);
-                           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                           j.async = true;
-
-                           e.parentNode.insertBefore(j, e);
-                       })(document, 'script');
-                    </script>
-
-                    <!-- City版安装代码已完成 -->
-                     
-
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags featured-tags-->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-             <a href="/tags/#SpringBoot" title="SpringBoot" rel="2">SpringBoot</a>
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#JAVA" title="JAVA" rel="4">JAVA</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#MySQL" title="MySQL" rel="3">MySQL</a>
-            
-        
-            
-             <a href="/tags/#问题日志" title="问题日志" rel="2">问题日志</a>
-            
-        
-            
-             <a href="/tags/#例题" title="例题" rel="2">例题</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <!--<hr>-->
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
-
-        
-            <img id = "avatar_pic" src="/img/my.jpg" />
-        
-
-        
-            <p>Made to be counted on.</p>
-        
-
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
-                <li>
-                    <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank" href="http://weibo.com/5092233560">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank" href="https://www.facebook.com/100010009245988">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/DoyoudoLove">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-<hr>
-        <!--<hr>-->
+           if (typeof LivereTower === 'function') { return; }
     
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2018/11/06/项目中使用的ECMAScript-6-语法总结/">项目中使用的ECMAScript 6 语法总结</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/05/【问题日志】全局安装webpack，终端运行webpack指令出现错误……/">【问题日志】全局安装webpack，终端运行webpack指令出现错误</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/05/【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误……/">【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/02/使用Sublime-Text3编写html页面/">使用Sublime Text3 快速新建一个 html 页面</a>
-        </li>
-      
-        <li>
-          <a href="/2018/10/30/浅析数据结构之二叉树/">浅析数据结构之二叉树</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <!--<hr>-->
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-        <!-- Friends Blog -->
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
 
-<hr>
-<h5>FRIENDS</h5>
-<ul class="list-inline">
 
-    
-        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
-    
-        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
-    
-</ul>
 
-        <!--<hr>-->
-    
-</div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
