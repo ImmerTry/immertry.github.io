@@ -7,8 +7,16 @@
     </url>
 
     <url>
-        <loc>http://immertry.top/2018/11/08/SpringBoot%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2018-11-08T15:39:24.797Z</lastmod>
+        <loc>http://immertry.top/2018/11/08/SpringBoot%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%85%A5%E9%97%A8%E4%B8%8E%E9%85%8D%E7%BD%AE/</loc>
+        <lastmod>2018-11-09T14:09:55.404Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://immertry.top/2018/11/09/SpringBoot%E7%AC%94%E8%AE%B0%E4%B9%8B%E6%97%A5%E5%BF%97%E4%B8%8EWeb%E5%BC%80%E5%8F%91/</loc>
+        <lastmod>2018-11-09T14:09:13.221Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

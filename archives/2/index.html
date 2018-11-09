@@ -209,6 +209,39 @@
 
 <div class="post-preview">
 
+    <a href="/2018/10/23/Mybaits之动态SQL/">
+        <h2 class="post-title">
+            Mybaits之动态SQL
+        </h2>
+        <h3 class="post-subtitle">
+            使用 mybatis 动态SQL，通过 if, choose, when, otherwise, trim, where, set, foreach等标签，可组合成非常灵活的SQL语句，从而在提高 SQL 语句的准确性的同时，也大大提高了开发人员的效率。
+        </h3>
+        <div class="post-content-preview">
+            我们以 User 表为例来说明：
+
+动态SQL:if 语句
+根据 username 和 sex 来查询数据。如果username为空，那么将只根据sex来查询；反之只根据username来查询
+首先不使用 动态SQL 来书写
+123456&lt;select id="selectUserByUsernameAndSex"        resultType="user" parameterT......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-10-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Mybatis" title="Mybatis">Mybatis</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/10/22/Struts2的运行流程及其工作原理/">
         <h2 class="post-title">
             Struts2的运行流程及其工作原理
@@ -518,42 +551,6 @@ JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQ
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/10/05/Java设计模式之单例模式详解/">
-        <h2 class="post-title">
-            Java设计模式之单例模式详解
-        </h2>
-        <h3 class="post-subtitle">
-            在Java开发过程中，很多场景下都会碰到或要用到单例模式，在设计模式里也是经常作为指导学习的热门模式之一
-        </h3>
-        <div class="post-content-preview">
-            
-文章引用来自
-https://www.cnblogs.com/garryfu/p/7976546.html
-
-相信每位开发同事都用到过。我们总是沿着前辈的足迹去做设定好的思路，往往没去探究为何这么做，所以这篇文章对单例模式做了详解。
-单例模式定义
-单例模式确保某个类只有一个实例，而且自行实例化并向整个系统提供这个实例。在计算机系统中，线程池、缓存、日志对象、对话框、打印机、显卡的驱动程序对......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by L_UO on
-            2018-10-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#单例模式" title="单例模式">单例模式</a>
-            
-              <a href="/tags/#JAVA设计模式" title="JAVA设计模式">JAVA设计模式</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -598,7 +595,7 @@ https://www.cnblogs.com/garryfu/p/7976546.html
             
         
             
-             <a href="/tags/#SpringBoot" title="SpringBoot" rel="2">SpringBoot</a>
+             <a href="/tags/#SpringBoot" title="SpringBoot" rel="4">SpringBoot</a>
             
         
             
@@ -624,15 +621,15 @@ https://www.cnblogs.com/garryfu/p/7976546.html
             
         
             
+             <a href="/tags/#问题日志" title="问题日志" rel="2">问题日志</a>
+            
+        
+            
         
             
         
             
              <a href="/tags/#MySQL" title="MySQL" rel="3">MySQL</a>
-            
-        
-            
-             <a href="/tags/#问题日志" title="问题日志" rel="2">问题日志</a>
             
         
             
@@ -649,6 +646,10 @@ https://www.cnblogs.com/garryfu/p/7976546.html
         
             
         
+            
+        
+            
+             <a href="/tags/#笔记" title="笔记" rel="2">笔记</a>
             
         
     </div>
@@ -731,7 +732,11 @@ https://www.cnblogs.com/garryfu/p/7976546.html
     <ul>
       
         <li>
-          <a href="/2018/11/08/SpringBoot笔记/">SpringBoot笔记</a>
+          <a href="/2018/11/09/SpringBoot笔记之日志与Web开发/">SpringBoot笔记【日志与Web开发】</a>
+        </li>
+      
+        <li>
+          <a href="/2018/11/08/SpringBoot笔记之入门与配置/">SpringBoot笔记【入门与配置】</a>
         </li>
       
         <li>
@@ -744,10 +749,6 @@ https://www.cnblogs.com/garryfu/p/7976546.html
       
         <li>
           <a href="/2018/11/05/【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误……/">【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/02/使用Sublime-Text3编写html页面/">使用Sublime Text3 快速新建一个 html 页面</a>
         </li>
       
     </ul>

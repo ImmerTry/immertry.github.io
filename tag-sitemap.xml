@@ -72,13 +72,6 @@
     </url>
 
     <url>
-        <loc>http://immertry.top/tags/SpringBoot/</loc>
-        <lastmod>2018-10-12T14:35:00.660Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://immertry.top/tags/JDBC/</loc>
         <lastmod>2018-10-12T14:47:39.267Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -165,6 +158,20 @@
     <url>
         <loc>http://immertry.top/tags/ECMAScript-6/</loc>
         <lastmod>2018-11-06T06:33:23.569Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://immertry.top/tags/SpringBoot/</loc>
+        <lastmod>2018-11-09T14:09:55.404Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://immertry.top/tags/%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2018-11-09T14:09:55.404Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
