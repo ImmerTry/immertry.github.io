@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="JAVA程序猿 | 摄影爱好者 | 旅游爱好者 | 热爱生活">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/fly.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          SpringBoot与Swagger整合 - Immer | Try
+        
+    </title>
+
+    <link rel="canonical" href="http://immertry.top/2018/11/11/SpringBoot与Swagger整合/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('http://image.immertry.top/20181109lucas.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
+                            
+                              <a class="tag" href="/tags/#Swagger" title="Swagger">Swagger</a>
+                            
+                        </div>
+                        <h1>SpringBoot与Swagger整合</h1>
+                        <h2 class="subheading">swagger是一个流行的API开发框架，这个框架以“开放API声明”（OpenAPI Specification，OAS）为基础， 对整个API的开发周期都提供了相应的解决方案，是一个非常庞大的项目（包括设计、编码和测试，几乎支持所有语言）。</h2>
+                        <span class="meta">
+                            Posted by L_UO on
+                            2018-11-11
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Immer Try</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="swagger使用">Swagger使用</h1>
+<h2 id="swagger有什么用">Swagger有什么用?</h2>
+<p>swagger是一个流行的API开发框架，这个框架以“开放API声明”（OpenAPI Specification，OAS）为基础，<br>
+对整个API的开发周期都提供了相应的解决方案，是一个非常庞大的项目（包括设计、编码和测试，几乎支持所有语言）。</p>
+<p>Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。<br>
+总体目标是使客户端和文件系统作为服务器以同样的速度来更新。<br>
+文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。Swagger 让部署管理和使用功能强大的API从未如此简单。</p>
+<p><strong>springfox大致原理:</strong></p>
+<p>springfox的大致原理就是，在项目启动的过种中，spring上下文在初始化的过程，<br>
+框架自动跟据配置加载一些swagger相关的bean到当前的上下文中，并自动扫描系统中可能需要生成api文档那些类，<br>
+并生成相应的信息缓存起来。如果项目MVC控制层用的是springMvc那么会自动扫描所有Controller类，并生成对应的文档描述数据.</p>
+<p>该数据是json格式，通过路径：项目地址/ v2/api-docs可以访问到该数据，然后swaggerUI根据这份数据生成相应的文档描述界面。<br>
+因为我们能拿到这份数据，所以我们也可以生成自己的页面.</p>
+<h2 id="springboot-与-swagger2">SpringBoot 与 Swagger2</h2>
+<p>由于java的强大的注解功能,我们使用SpringBoot来结合Swagger2,在使用起来非常简单.<br>
+由于Spring的流行，Marty Pitt编写了一个基于Spring的组件swagger-springmvc，用于将swagger集成到springmvc中来。</p>
+<h3 id="第一步-新建springboot项目引入依赖">第一步: 新建SpringBoot项目,引入依赖.</h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>上面两个依赖的作用:</strong></p>
+<p>springfox-swagger2依然是依赖OSA规范文档，也就是一个描述API的json文件，而这个组件的功能就是帮助我们自动生成这个json文件，<br>
+springfox-swagger-ui就是将这个json文件解析出来，用一种更友好的方式呈现出来。</p>
+<h3 id="第二步创建api">第二步:创建api</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> itguang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-01-05 8:23</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配置swagger2">配置Swagger2</h3>
+<p>现在Swagger2还不能为我们生成API文档,因为我们还没有对它进行配置.</p>
+<p>我们需要创建一个配置类,进行如下配置:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> itguang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-01-04 13:36</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">"com.itguang.springbootswaggerdemo1.web"</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                .title(<span class="string">"Spring Boot中使用Swagger2构建RESTful API"</span>)</span><br><span class="line">                .description(<span class="string">"rest api 文档构建利器"</span>)</span><br><span class="line">                .termsOfServiceUrl(<span class="string">"http://blog.csdn.net/itguangit"</span>)</span><br><span class="line">                .contact(<span class="string">"itguang"</span>)</span><br><span class="line">                .version(<span class="string">"1.0"</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>springfox为我们提供了一个Docket（摘要的意思）类，我们需要把它做成一个Bean注入到spring中，<br>
+显然，我们需要一个配置文件，并通过一种方式（显然它会是一个注解）告诉程序，这是一个Swagger配置文件。</p>
+<p>springfox允许我们将信息组合成一个ApiInfo的类，作为构造参数传给Docket（当然也可以不构造这个类，而直接使用null，但是你的这个API就太low了）。</p>
+<h3 id="搞定">搞定</h3>
+<p>现在我们要做的配置已经能满足一个生成API文档的基本要求了,让我们启动项目,访问:<a href="http://localhost/swagger-ui.html" target="_blank" rel="noopener">http://localhost/swagger-ui.html</a></p>
+<p>会看到如下界面:</p>
+<p><img src="1.png" alt=""></p>
+<p>这是Swagger-ui 为我们生成的界面.</p>
+<h2 id="swagger2-注解使用">Swagger2 注解使用</h2>
+<p>接下来我们就要好好研究下 springfox-swagger2 给我们提供的注解了.</p>
+<p>我们新建一个Controller,用来对 User 类进行增删改查常用操作,</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> itguang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2018-01-04 13:31</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/user"</span>, produces = APPLICATION_JSON_VALUE) <span class="comment">//配置返回值 application/json</span></span><br><span class="line"><span class="meta">@Api</span>(description = <span class="string">"用户管理"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    ArrayList&lt;User&gt; users = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"获取用户列表"</span>, notes = <span class="string">"获取所有用户信息"</span>)</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = &#123;<span class="string">""</span>&#125;, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        users.add(<span class="keyword">new</span> User(<span class="string">"逻辑"</span>, <span class="string">"luoji"</span>));</span><br><span class="line">        users.add(<span class="keyword">new</span> User(<span class="string">"叶文杰"</span>, <span class="string">"yewenjie"</span>));</span><br><span class="line">        <span class="keyword">return</span> users;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到我们在Controller上使用了 @Api(description = “用户管理”) 注解,在方法上使用了 @ApiOperation(value = “获取用户列表”, notes = “获取所有用户信息”) 注解,</p>
+<p>这会产生什么养的效果呢? 我们可以再次访问下试试看啊:</p>
+<p><img src="2.png" alt=""></p>
+<p>可以看到我们红框裱起来的地方发生了改变,并且神奇的是它还自动判断出了我们的返回类型:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"age"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"email"</span>: <span class="string">"string"</span>,</span><br><span class="line">    <span class="attr">"enabled"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"string"</span>,</span><br><span class="line">    <span class="attr">"password"</span>: <span class="string">"string"</span>,</span><br><span class="line">    <span class="attr">"username"</span>: <span class="string">"string"</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>但是我们如果想选择性的忽略某个字段,而不是把User类中的所有字段暴露出去呢?别着急,我们可以使用另一个注解:  <code>@ApiModelProperty(hidden = true)</code></p>
+<p>此注解可以作用在字段或者方法上,只要 hidden 属性为 true ,该字段或者方法就不会被生成api文档.</p>
+<p>如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> itguang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2017-12-30 14:39</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@ApiModelProperty</span>(hidden = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Boolean enabled;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们有意忽略了 password 字段,再次刷新浏览器,会看到:</p>
+<p><img src="3.png" alt=""></p>
+<p>确实 password 字段不见了.</p>
+<p>接下来我们在模拟一个创建用户的api:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation</span>(value = <span class="string">"创建用户"</span>, notes = <span class="string">"根据User对象创建用户"</span>)</span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/create"</span>, method = RequestMethod.POST)</span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">postUser</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到我们需要客户端传给我们一个User对象,用来创建和该用户,这里我们什么也不做,只是把接受到的User对象返回给客户端,来表示创建成功.</p>
+<p>我们刷新浏览器看下:</p>
+<p><img src="4.png" alt=""></p>
+<p>可以看到请求参数并不是让我们很满意啊,第一没有字段说明,第一有些字段在创建用户时我们并不需要啊,还是不要着急,我们也有办法解决:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiModelProperty</span>(hidden = <span class="keyword">true</span>)</span><br><span class="line"> <span class="keyword">private</span> String id;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@ApiModelProperty</span>(value = <span class="string">"用户名"</span>)</span><br><span class="line"> <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@ApiModelProperty</span>(value = <span class="string">"密码"</span>)</span><br><span class="line"> <span class="keyword">private</span> String password;</span><br><span class="line"> <span class="meta">@ApiModelProperty</span>(value = <span class="string">"邮箱"</span>)</span><br><span class="line"> <span class="keyword">private</span> String email;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@ApiModelProperty</span>(hidden = <span class="keyword">true</span>)</span><br><span class="line"> <span class="keyword">private</span> Integer age;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@ApiModelProperty</span>(hidden = <span class="keyword">true</span>)</span><br><span class="line"> <span class="keyword">private</span> Boolean enabled;</span><br></pre></td></tr></table></figure>
+<p>我们在User对象的字段上添加 上面的注解: <code>@ApiModelProperty(hidden = true)</code>和<code>@ApiModelProperty(value = &quot;用户名&quot;)</code><br>
+value属性指明了该字段的含义(描述 Description),再次刷新浏览器试试:</p>
+<p><img src="5.png" alt=""></p>
+<p>怎么样,是不是很简单.</p>
+<p>下面我们看看 如何传递参数:添加一个方法,根据id获取用户信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation</span>(value = <span class="string">"获取用户详细信息"</span>, notes = <span class="string">"根据url的id来获取用户详细信息"</span>)</span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"getUser/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">                    @PathVariable(value = <span class="string">"id"</span>)</span> String id) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> User(id, <span class="string">"itguang"</span>, <span class="string">"123456"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>刷新浏览器,看到</p>
+<p><img src="6.png" alt=""></p>
+<p>我们需要客户端传入一个参数 id ,现在我们要给 id 这个参数一个说明(Description),该咋办呢? 还是不要着急,很简单像下面这样即可:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation</span>(value = <span class="string">"获取用户详细信息"</span>, notes = <span class="string">"根据url的id来获取用户详细信息"</span>)</span><br><span class="line">  <span class="meta">@RequestMapping</span>(value = <span class="string">"getUser/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(@ApiParam(value = <span class="string">"用户id"</span>, required = <span class="keyword">true</span>)</span> <span class="comment">//[注意] @ApiParam与 Controller中方法并列使用,也可以省略的</span></span></span><br><span class="line"><span class="function">                      @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"id"</span>)</span> String id) </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> User(id, <span class="string">"itguang"</span>, <span class="string">"123456"</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>我们添加了 <code>@ApiParam(value = &quot;用户id&quot;, required = true)</code> 这个注解,需要注意的是,这个注解方法的参数前面,不能直接用在方法上面.<br>
+再次刷新浏览器:</p>
+<p><img src="7.png" alt=""></p>
+<h2 id="常用注解说明">常用注解说明:</h2>
+<p>通过上面的了解,我们大概已经会使用Swagger2 了,但我们只介绍了一些简单常用的注解,下面我们系统的总结一下:</p>
+<h3 id="swagger2-基本使用重点加粗显示">Swagger2 基本使用(重点加粗显示)：</h3>
+<ul>
+<li>
+<p><strong>@Api: 描述类/接口的主要用途</strong></p>
+</li>
+<li>
+<p><strong>@ApiOperation: 描述方法用途</strong></p>
+</li>
+<li>
+<p><strong>@ApiImplicitParam: 描述方法的参数</strong></p>
+</li>
+<li>
+<p><strong>@ApiImplicitParams: 描述方法的参数(Multi-Params)</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>可以在上面 创建用户的方法上添加 <code>@ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</code>试试看.</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>@ApiParam:请求属性</strong></p>
+</li>
+<li>
+<p><strong>@ApiIgnore: 忽略某类/方法/参数的文档</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>注意与 <code>@ApiModelProperty(hidden = true)</code>不同, <code>@ApiIgnore</code> 不能用在模型数据上</p>
+</blockquote>
+<ul>
+<li>@ApiResponse：响应配置</li>
+</ul>
+<blockquote>
+<p>如: <code>@ApiResponse(code = 400, message = &quot;无效的用户信息&quot;)</code> ,注意这只是在 生成的Swagger文档上有效,不要和实际的客户端调用搞混了.<br>
+通常我们都是统一JSON返回,用不到这个注解</p>
+</blockquote>
+<ul>
+<li>
+<p>@ApiResponses：响应集配置</p>
+</li>
+<li>
+<p>@ResponseHeader: 响应头设置</p>
+</li>
+</ul>
+<blockquote>
+<p>例如: @ResponseHeader(name=“head1”,description=“response head conf”)</p>
+</blockquote>
+<ul>
+<li>@ApiModelProperty:添加和操作模型属性的数据</li>
+</ul>
+<h2 id="我想看中文的">我想看中文的</h2>
+<p>经过上面的介绍,你已经会使用 Swagger2 了,但是对于有些人来说,看上面的英文表示很难受,有没有中文的?</p>
+<p>有!</p>
+<p>根据官方文档上的提示,在springboot下更换界面和语言还是很简单的,首先我们需要对 SpringBoot 的资源目录有个了解:</p>
+<p><strong>Spring Boot 默认“约定”从资源目录的这些子目录读取静态资源：</strong></p>
+<pre><code>    src/main/resources/META-INF/resources
+    src/main/resources/static （推荐）
+    src/main/resources/public
+</code></pre>
+<p>举个栗子：现在static目录下有一张图片，kumamon.jpg</p>
+<p>访问地址： <a href="http://localhost:8080/img/kumamon.jpg" target="_blank" rel="noopener">http://localhost:8080/img/kumamon.jpg</a></p>
+<p>注：若不同静态目录含有相同路径图片，则按上述优先级，即META-INF/resources目录优先级最高。</p>
+<p>了解了 SpringBoot 的资源目录 的优先级,我们来看看之前引入的 springfox-swagger-ui 这个包,打开maven依赖找到它:</p>
+<p>展开如下所示:</p>
+<p><img src="8.png" alt=""></p>
+<p>还记得我们之前为什么浏览器输入 <a href="http://localhost/swagger-ui.html" target="_blank" rel="noopener">http://localhost/swagger-ui.html</a> 就会看到一个Swagger 的页面吗,没错就是这里啦,</p>
+<p>其中 swagger-ui.html就是首页,</p>
+<p>打开看下:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Swagger UI<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">type</span>=<span class="string">"image/png"</span> <span class="attr">href</span>=<span class="string">"webjars/springfox-swagger-ui/images/favicon-32x32.png"</span> <span class="attr">sizes</span>=<span class="string">"32x32"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">type</span>=<span class="string">"image/png"</span> <span class="attr">href</span>=<span class="string">"webjars/springfox-swagger-ui/images/favicon-16x16.png"</span> <span class="attr">sizes</span>=<span class="string">"16x16"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/typography.css'</span> <span class="attr">media</span>=<span class="string">'screen'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/reset.css'</span> <span class="attr">media</span>=<span class="string">'screen'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/screen.css'</span> <span class="attr">media</span>=<span class="string">'screen'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/reset.css'</span> <span class="attr">media</span>=<span class="string">'print'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/print.css'</span> <span class="attr">media</span>=<span class="string">'print'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/object-assign-pollyfill.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jquery-1.8.0.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jquery.slideto.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jquery.wiggle.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jquery.ba-bbq.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/handlebars-4.0.5.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/lodash.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/backbone-min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/swagger-ui.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/highlight.9.1.0.pack.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/highlight.9.1.0.pack_extended.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jsoneditor.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/marked.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/swagger-oauth.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/springfox.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">class</span>=<span class="string">"swagger-section"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'header'</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"swagger-ui-wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">"logo"</span> <span class="attr">href</span>=<span class="string">"http://swagger.io"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"logo__img"</span> <span class="attr">alt</span>=<span class="string">"swagger"</span> <span class="attr">height</span>=<span class="string">"30"</span> <span class="attr">width</span>=<span class="string">"30"</span> <span class="attr">src</span>=<span class="string">"webjars/springfox-swagger-ui/images/logo_small.png"</span> /&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"logo__title"</span>&gt;</span>swagger<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">'api_selector'</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'input'</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"select_baseUrl"</span> <span class="attr">name</span>=<span class="string">"select_baseUrl"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'input'</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">placeholder</span>=<span class="string">"http://example.com/api"</span> <span class="attr">id</span>=<span class="string">"input_baseUrl"</span> <span class="attr">name</span>=<span class="string">"baseUrl"</span> <span class="attr">type</span>=<span class="string">"text"</span>/&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'auth_container'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'input'</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">"explore"</span> <span class="attr">class</span>=<span class="string">"header__btn"</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">data-sw-translate</span>&gt;</span>Explore<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"message-bar"</span> <span class="attr">class</span>=<span class="string">"swagger-ui-wrap"</span> <span class="attr">data-sw-translate</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"swagger-ui-container"</span> <span class="attr">class</span>=<span class="string">"swagger-ui-wrap"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看不懂? 好吧,看不懂也没关系,我们想要汉化该咋办呢?</p>
+<p>我们也不能直接在这里修改源码啊,还记得我们前面提到的 Spring boot 资源目录的优先级吗? 没错,我们只需要在记得项目下创建 META-INF 这个资源目录就行啊,</p>
+<p>Spring boot 默认会把我们项目的 src/main/resources/META-INF/resources 覆盖其它的依赖下的文件.</p>
+<h3 id="开始汉化">开始汉化</h3>
+<p>创建 资源目录 src/main/resources/META-INF/resources,如下:</p>
+<p><img src="9.png" alt=""></p>
+<p><strong>swagger-ui.html 的内容如下:</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>itguang<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">type</span>=<span class="string">"image/png"</span> <span class="attr">href</span>=<span class="string">"webjars/springfox-swagger-ui/images/favicon-32x32.png"</span> <span class="attr">sizes</span>=<span class="string">"32x32"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">type</span>=<span class="string">"image/png"</span> <span class="attr">href</span>=<span class="string">"webjars/springfox-swagger-ui/images/favicon-16x16.png"</span> <span class="attr">sizes</span>=<span class="string">"16x16"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/typography.css'</span> <span class="attr">media</span>=<span class="string">'screen'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/reset.css'</span> <span class="attr">media</span>=<span class="string">'screen'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/screen.css'</span> <span class="attr">media</span>=<span class="string">'screen'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/reset.css'</span> <span class="attr">media</span>=<span class="string">'print'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">'webjars/springfox-swagger-ui/css/print.css'</span> <span class="attr">media</span>=<span class="string">'print'</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">type</span>=<span class="string">'text/css'</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/object-assign-pollyfill.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jquery-1.8.0.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jquery.slideto.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jquery.wiggle.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jquery.ba-bbq.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/handlebars-4.0.5.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/lodash.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/backbone-min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/swagger-ui.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/highlight.9.1.0.pack.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/highlight.9.1.0.pack_extended.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/jsoneditor.min.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/marked.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lib/swagger-oauth.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/springfox.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--国际化操作：选择中文版 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lang/translator.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'webjars/springfox-swagger-ui/lang/zh-cn.js'</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">class</span>=<span class="string">"swagger-section"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'header'</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"swagger-ui-wrap"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">"logo"</span> <span class="attr">href</span>=<span class="string">"http://swagger.io"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"logo__img"</span> <span class="attr">alt</span>=<span class="string">"swagger"</span> <span class="attr">height</span>=<span class="string">"30"</span> <span class="attr">width</span>=<span class="string">"30"</span> <span class="attr">src</span>=<span class="string">"webjars/springfox-swagger-ui/images/logo_small.png"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"logo__title"</span>&gt;</span>swagger<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">'api_selector'</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'input'</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"select_baseUrl"</span> <span class="attr">name</span>=<span class="string">"select_baseUrl"</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'input'</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">placeholder</span>=<span class="string">"http://example.com/api"</span> <span class="attr">id</span>=<span class="string">"input_baseUrl"</span> <span class="attr">name</span>=<span class="string">"baseUrl"</span> <span class="attr">type</span>=<span class="string">"text"</span>/&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'auth_container'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'input'</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">"explore"</span> <span class="attr">class</span>=<span class="string">"header__btn"</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">data-sw-translate</span>&gt;</span>Explore<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"message-bar"</span> <span class="attr">class</span>=<span class="string">"swagger-ui-wrap"</span> <span class="attr">data-sw-translate</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"swagger-ui-container"</span> <span class="attr">class</span>=<span class="string">"swagger-ui-wrap"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其实我们只添加了两行代码:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--国际化操作：选择中文版 --&gt;</span><br><span class="line">   &lt;script src=<span class="string">'webjars/springfox-swagger-ui/lang/translator.js'</span> type=<span class="string">'text/javascript'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">   &lt;script src=<span class="string">'webjars/springfox-swagger-ui/lang/zh-cn.js'</span> type=<span class="string">'text/javascript'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>zh-cn.js 文件内容如下:</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* jshint quotmark: double */</span></span><br><span class="line"><span class="built_in">window</span>.SwaggerTranslator.learn(&#123;</span><br><span class="line">    <span class="string">"Warning: Deprecated"</span>:<span class="string">"警告：已过时"</span>,</span><br><span class="line">    <span class="string">"Implementation Notes"</span>:<span class="string">"实现备注"</span>,</span><br><span class="line">    <span class="string">"Response Class"</span>:<span class="string">"响应类"</span>,</span><br><span class="line">    <span class="string">"Status"</span>:<span class="string">"状态"</span>,</span><br><span class="line">    <span class="string">"Parameters"</span>:<span class="string">"参数"</span>,</span><br><span class="line">    <span class="string">"Parameter"</span>:<span class="string">"参数"</span>,</span><br><span class="line">    <span class="string">"Value"</span>:<span class="string">"值"</span>,</span><br><span class="line">    <span class="string">"Description"</span>:<span class="string">"描述"</span>,</span><br><span class="line">    <span class="string">"Parameter Type"</span>:<span class="string">"参数类型"</span>,</span><br><span class="line">    <span class="string">"Data Type"</span>:<span class="string">"数据类型"</span>,</span><br><span class="line">    <span class="string">"Response Messages"</span>:<span class="string">"响应消息"</span>,</span><br><span class="line">    <span class="string">"HTTP Status Code"</span>:<span class="string">"HTTP状态码"</span>,</span><br><span class="line">    <span class="string">"Reason"</span>:<span class="string">"原因"</span>,</span><br><span class="line">    <span class="string">"Response Model"</span>:<span class="string">"响应模型"</span>,</span><br><span class="line">    <span class="string">"Request URL"</span>:<span class="string">"请求URL"</span>,</span><br><span class="line">    <span class="string">"Request Headers"</span>:<span class="string">"请求头"</span>,</span><br><span class="line">    <span class="string">"Response Body"</span>:<span class="string">"响应体"</span>,</span><br><span class="line">    <span class="string">"Response Code"</span>:<span class="string">"响应码"</span>,</span><br><span class="line">    <span class="string">"Response Headers"</span>:<span class="string">"响应头"</span>,</span><br><span class="line">    <span class="string">"Hide Response"</span>:<span class="string">"隐藏响应"</span>,</span><br><span class="line">    <span class="string">"Headers"</span>:<span class="string">"头"</span>,</span><br><span class="line">    <span class="string">"Try it out!"</span>:<span class="string">"试一下！"</span>,</span><br><span class="line">    <span class="string">"Show/Hide"</span>:<span class="string">"显示/隐藏"</span>,</span><br><span class="line">    <span class="string">"List Operations"</span>:<span class="string">"显示操作"</span>,</span><br><span class="line">    <span class="string">"Expand Operations"</span>:<span class="string">"展开操作"</span>,</span><br><span class="line">    <span class="string">"Raw"</span>:<span class="string">"原始"</span>,</span><br><span class="line">    <span class="string">"can't parse JSON.  Raw result"</span>:<span class="string">"无法解析JSON. 原始结果"</span>,</span><br><span class="line">    <span class="string">"Example Value"</span>:<span class="string">"示例"</span>,</span><br><span class="line">    <span class="string">"Click to set as parameter value"</span>:<span class="string">"点击设置参数"</span>,</span><br><span class="line">    <span class="string">"Model Schema"</span>:<span class="string">"模型架构"</span>,</span><br><span class="line">    <span class="string">"Model"</span>:<span class="string">"模型"</span>,</span><br><span class="line">    <span class="string">"apply"</span>:<span class="string">"应用"</span>,</span><br><span class="line">    <span class="string">"Username"</span>:<span class="string">"用户名"</span>,</span><br><span class="line">    <span class="string">"Password"</span>:<span class="string">"密码"</span>,</span><br><span class="line">    <span class="string">"Terms of service"</span>:<span class="string">"服务条款"</span>,</span><br><span class="line">    <span class="string">"Created by"</span>:<span class="string">"创建者"</span>,</span><br><span class="line">    <span class="string">"See more at"</span>:<span class="string">"查看更多："</span>,</span><br><span class="line">    <span class="string">"Contact the developer"</span>:<span class="string">"联系开发者"</span>,</span><br><span class="line">    <span class="string">"api version"</span>:<span class="string">"api版本"</span>,</span><br><span class="line">    <span class="string">"Response Content Type"</span>:<span class="string">"响应Content Type"</span>,</span><br><span class="line">    <span class="string">"Parameter content type:"</span>:<span class="string">"参数类型:"</span>,</span><br><span class="line">    <span class="string">"fetching resource"</span>:<span class="string">"正在获取资源"</span>,</span><br><span class="line">    <span class="string">"fetching resource list"</span>:<span class="string">"正在获取资源列表"</span>,</span><br><span class="line">    <span class="string">"Explore"</span>:<span class="string">"浏览"</span>,</span><br><span class="line">    <span class="string">"Show Swagger Petstore Example Apis"</span>:<span class="string">"显示 Swagger Petstore 示例 Apis"</span>,</span><br><span class="line">    <span class="string">"Can't read from server.  It may not have the appropriate access-control-origin settings."</span>:<span class="string">"无法从服务器读取。可能没有正确设置access-control-origin。"</span>,</span><br><span class="line">    <span class="string">"Please specify the protocol for"</span>:<span class="string">"请指定协议："</span>,</span><br><span class="line">    <span class="string">"Can't read swagger JSON from"</span>:<span class="string">"无法读取swagger JSON于"</span>,</span><br><span class="line">    <span class="string">"Finished Loading Resource Information. Rendering Swagger UI"</span>:<span class="string">"已加载资源信息。正在渲染Swagger UI"</span>,</span><br><span class="line">    <span class="string">"Unable to read api"</span>:<span class="string">"无法读取api"</span>,</span><br><span class="line">    <span class="string">"from path"</span>:<span class="string">"从路径"</span>,</span><br><span class="line">    <span class="string">"server returned"</span>:<span class="string">"服务器返回"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>你也可以自己定义中文名称啦.</p>
+<h3 id="汉化搞定">汉化搞定.</h3>
+<p>到此,swagger的汉化工作已经做完,是不是很简单,重新启动项目,访问 <a href="http://localhost/swagger-ui.html" target="_blank" rel="noopener">http://localhost/swagger-ui.html</a> 就可以看到文档已经完全汉化啦:</p>
+<p><img src="10.png" alt=""></p>
+<h2 id="小结">小结:</h2>
+<p>好了，关于Swagger2在项目中的使用教程就到这里。</p>
+<blockquote>
+<p>源码下载: <a href="https://github.com/itguang/swagger/tree/master/springboot-swagger-demo1" target="_blank" rel="noopener">https://github.com/itguang/swagger/tree/master/springboot-swagger-demo1</a></p>
+</blockquote>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/11/10/SpringBoot笔记之数据访问与启动配置/" data-toggle="tooltip" data-placement="top" title="SpringBoot笔记【数据访问与启动配置】">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#swagger使用"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Swagger&#x4F7F;&#x7528;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#swagger有什么用"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Swagger&#x6709;&#x4EC0;&#x4E48;&#x7528;?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#springboot-与-swagger2"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">SpringBoot &#x4E0E; Swagger2</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#第一步-新建springboot项目引入依赖"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">&#x7B2C;&#x4E00;&#x6B65;: &#x65B0;&#x5EFA;SpringBoot&#x9879;&#x76EE;,&#x5F15;&#x5165;&#x4F9D;&#x8D56;.</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#第二步创建api"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">&#x7B2C;&#x4E8C;&#x6B65;:&#x521B;&#x5EFA;api</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#配置swagger2"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;Swagger2</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#搞定"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">&#x641E;&#x5B9A;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#swagger2-注解使用"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Swagger2 &#x6CE8;&#x89E3;&#x4F7F;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#常用注解说明"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x5E38;&#x7528;&#x6CE8;&#x89E3;&#x8BF4;&#x660E;:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#swagger2-基本使用重点加粗显示"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">Swagger2 &#x57FA;&#x672C;&#x4F7F;&#x7528;(&#x91CD;&#x70B9;&#x52A0;&#x7C97;&#x663E;&#x793A;)&#xFF1A;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#我想看中文的"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">&#x6211;&#x60F3;&#x770B;&#x4E2D;&#x6587;&#x7684;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#开始汉化"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">&#x5F00;&#x59CB;&#x6C49;&#x5316;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#汉化搞定"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">&#x6C49;&#x5316;&#x641E;&#x5B9A;.</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#小结"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">&#x5C0F;&#x7ED3;:</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
+                        
+                          <a class="tag" href="/tags/#Swagger" title="Swagger">Swagger</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/5092233560">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/100010009245988">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/DoyoudoLove">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; L_UO 2018
+                    <br>
+                    本站由：<a href="https://pages.github.com/">GitHubPages提供构建部署服务</a>
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe> |
+                    revise by <a href="https://github.com/DoyoudoLove">DoyoudoLove</a>
+                    <br>
+                    备案号：<a  target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#939393;">皖ICP备18020375号</a>
+                    <br>
+				<img src="http://image.immertry.top/20181031%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png"/>
+		 		<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34019002600246"
+		 		style="height:20px;line-height:20px;color:#939393;"
+		 		>皖公网安备 34019002600246号</a>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-126141885-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4341db92f1273dd231ba9e6c168daa0a';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<!-- <img src="http://immertry.top/img/icon_wechat.png" width="0" height="0" />-->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
