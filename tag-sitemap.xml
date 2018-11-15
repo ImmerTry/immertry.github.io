@@ -170,15 +170,22 @@
     </url>
 
     <url>
-        <loc>http://immertry.top/tags/SpringBoot/</loc>
+        <loc>http://immertry.top/tags/Swagger/</loc>
         <lastmod>2018-11-12T15:03:02.180Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://immertry.top/tags/Swagger/</loc>
-        <lastmod>2018-11-12T15:03:02.180Z</lastmod>
+        <loc>http://immertry.top/tags/SpringBoot/</loc>
+        <lastmod>2018-11-15T14:04:10.234Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://immertry.top/tags/Druid/</loc>
+        <lastmod>2018-11-15T14:04:10.234Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

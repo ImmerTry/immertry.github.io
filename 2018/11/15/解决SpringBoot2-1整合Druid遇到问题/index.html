@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          项目中使用的ECMAScript 6 语法总结 - Immer | Try
+          解决SpringBoot2.1整合Druid遇到问题 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/2018/11/06/项目中使用的ECMAScript-6-语法总结/">
+    <link rel="canonical" href="http://immertry.top/2018/11/15/解决SpringBoot2-1整合Druid遇到问题/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,7 +69,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('http://image.immertry.top/20181106ariel.jpg')
+            background-image: url('http://image.immertry.top/20181109lucas.jpg')
             /*post*/
         
     }
@@ -86,14 +86,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#ECMAScript 6" title="ECMAScript 6">ECMAScript 6</a>
+                              <a class="tag" href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
+                            
+                              <a class="tag" href="/tags/#Druid" title="Druid">Druid</a>
                             
                         </div>
-                        <h1>项目中使用的ECMAScript 6 语法总结</h1>
-                        <h2 class="subheading">ECMAScript 6（简称ES6）是JavaScript语言的下一代标准，于2015年6月正式发布，也称ECMAScript 2015。</h2>
+                        <h1>解决SpringBoot2.1整合Druid遇到问题</h1>
+                        <h2 class="subheading">Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。</h2>
                         <span class="meta">
                             Posted by L_UO on
-                            2018-11-06
+                            2018-11-15
                         </span>
                     </div>
                 
@@ -210,57 +212,158 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="对象写法">对象写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5中对象：{add:add,substrict:substrict}  
-es6中对象：{add,substrict}注意这种写法的属性名称和值变量是同一个名称才可以简写，否则要像es5那种写法
-</pre>
-<h3 id="在对象中的方法的写法">在对象中的方法的写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5中对象：{add:function(){},substrict:function(){}}  
-es6中对象：{add(){},substrict(){}}
-</pre>
-<h3 id="对象的导出写法">对象的导出写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5两种形式：  
-1. moduel.exprots = function() {};   
-2. exprots.add = function() {};  
-
-es6中写法：  
-1. export default {  
-    add  
-}  
-2. export function add() {} 相当于将add方法当做一个属性挂载到exports对象
-</pre>
-<h3 id="对象的导入">对象的导入</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5：var add = require('./calc.js');  
-es6：  
-如果导出的是：export default {add() {}}   
-那么可以通过 import addObj from './calc.js'  
-
-如果导出的是：  
-export function add() {}  
-export function substrict() {}  
-export const PI = 3.14  
-
-那么可以通过按需加载 import [add,substrict,PI] from './calc.js'
-</pre>
-<h3 id="es6中箭头函数的写法">es6中箭头函数的写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-箭头的演变过程：  
-//需求：利用函数实现倒序排列  
-[2,1,3].sort(function(x,y) {return y - x;});
-
-//用箭头函数实现 => 读 goes to  
-[2,1,3].sort((x,y) =>{return y - x;});  
-[2,1,3].sort((x,y) =>{x++;y++; y - x;});  
-[2,1,3].forEach(x =>{console.log(x);});
-</pre>
-<hr>
-<h3 id="ecmascript-6-入门">ECMAScript 6 入门</h3>
-<p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">《ECMAScript 6 入门》是一本开源的 JavaScript 语言教程，全面介绍 ECMAScript 6 新引入的语法特性<br>
-</a></p>
+                <h1 id="druid可以做什么">Druid可以做什么</h1>
+<ol>
+<li>可以监控数据库访问性能，Druid内置提供了一个功能强大的StatFilter插件，能够详细统计SQL的执行性能，这对于线上分析数据库访问性能有帮助。</li>
+<li>替换DBCP和C3P0。Druid提供了一个高效、功能强大、可扩展性好的数据库连接池。</li>
+<li>数据库密码加密。直接把数据库密码写在配置文件中，这是不好的行为，容易导致安全问题。DruidDruiver和DruidDataSource都支持PasswordCallback。</li>
+<li>SQL执行日志，Druid提供了不同的LogFilter，能够支持Common-Logging、Log4j和JdkLog，你可以按需要选择相应的LogFilter，监控你应用的数据库访问情况。<br>
+扩展JDBC，如果你要对JDBC层有编程的需求，可以通过Druid提供的Filter-Chain机制，很方便编写JDBC层的扩展插件。</li>
+</ol>
+<h1 id="引入依赖">引入依赖</h1>
+<p>在Maven工程下添加引入<br>
+jdbc依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>Druid依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="配置applicationyml">配置application.yml</h1>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  datasource:</span></span><br><span class="line">    <span class="comment">#数据源基本配置</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    password:</span> <span class="number">123456</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://192.168.2.129:3306/sjlw?useUnicode=true&amp;characterEncoding=UTF-8</span></span><br><span class="line"><span class="attr">    driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line"><span class="attr">    initialization-mode:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    schema:</span></span><br><span class="line"><span class="comment">#      - classpath:sql/employee.sql</span></span><br><span class="line"><span class="comment">#      - classpath:schema-all.sql</span></span><br><span class="line">    <span class="comment">#数据源其他配置</span></span><br><span class="line"><span class="attr">    druid:</span></span><br><span class="line"><span class="attr">      filters:</span> <span class="string">stat</span></span><br><span class="line"><span class="attr">      initial-size:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">      max-active:</span> <span class="number">21</span></span><br><span class="line"><span class="attr">      min-idle:</span> <span class="number">6</span></span><br><span class="line"><span class="attr">      max-wait:</span> <span class="number">100</span></span><br><span class="line">      <span class="comment">#配置监控拦截</span></span><br><span class="line"><span class="attr">      web-stat-filter:</span></span><br><span class="line">        <span class="comment"># 是否启用StatFilter默认值true</span></span><br><span class="line"><span class="attr">        enabled:</span> <span class="literal">true</span></span><br><span class="line">        <span class="comment">#自定义监控页面路径</span></span><br><span class="line"><span class="attr">        url-pattern:</span> <span class="string">/*</span></span><br><span class="line"><span class="attr">        exclusions:</span> <span class="string">"*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"</span></span><br><span class="line">      <span class="comment">#是否启用StatViewServlet默认值true</span></span><br><span class="line"><span class="attr">      stat-view-servlet:</span></span><br><span class="line">        <span class="comment"># 自定义监控页面路径</span></span><br><span class="line"><span class="attr">        url-pattern:</span> <span class="string">/druid/*</span></span><br><span class="line">        <span class="comment"># 是否开启重置按钮功能</span></span><br><span class="line"><span class="attr">        reset-enable:</span> <span class="literal">false</span></span><br><span class="line">        <span class="comment"># 登录账号</span></span><br><span class="line"><span class="attr">        login-username:</span> <span class="string">admin</span></span><br><span class="line">        <span class="comment"># 登录密码</span></span><br><span class="line"><span class="attr">        login-password:</span> <span class="number">123</span></span><br><span class="line">        <span class="comment"># 设置白名单 默认允许所有访问</span></span><br><span class="line"><span class="attr">        allow:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">        <span class="comment"># 设置黑名单</span></span><br><span class="line"><span class="attr">        deny:</span> <span class="number">169.254</span><span class="number">.248</span><span class="number">.180</span></span><br></pre></td></tr></table></figure>
+<p>更多配置移步<a href="https://github.com/alibaba/druid/wiki/%E9%A6%96%E9%A1%B5" target="_blank" rel="noopener">alibaba/druid/Wiki首页</a></p>
+<h1 id="文档">文档</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性(Parameter)</th>
+<th style="text-align:center">默认值(Default)</th>
+<th style="text-align:left">描述(Description)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">username</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">连接数据库的用户名</td>
+</tr>
+<tr>
+<td style="text-align:center">password</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">连接数据库的密码</td>
+</tr>
+<tr>
+<td style="text-align:center">jdbcUrl</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">同DBCP中的jdbcUrl属性</td>
+</tr>
+<tr>
+<td style="text-align:center">driverClassName</td>
+<td style="text-align:center">根据url自动识别</td>
+<td style="text-align:left">这一项可配可不配，如果不配置druid会根据url自动识别dbType，然后选择相应的driverClassName</td>
+</tr>
+<tr>
+<td style="text-align:center">initialSize</td>
+<td style="text-align:center">0</td>
+<td style="text-align:left">初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时 初始化连接:连接池启动时创建的初始化连接数量</td>
+</tr>
+<tr>
+<td style="text-align:center">maxActive</td>
+<td style="text-align:center">8</td>
+<td style="text-align:left">最大连接池数量(Maximum number of Connections a pool will maintain at any given time.) *参见DBCP中的maxTotal属性</td>
+</tr>
+<tr>
+<td style="text-align:center">maxIdle</td>
+<td style="text-align:center">8</td>
+<td style="text-align:left">已经不再使用，配置了也没效果 *参见DBCP中的maxIdle属性</td>
+</tr>
+<tr>
+<td style="text-align:center">minIdle</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">最小连接池数量</td>
+</tr>
+<tr>
+<td style="text-align:center">maxWait</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。</td>
+</tr>
+<tr>
+<td style="text-align:center">poolPreparedState- ments</td>
+<td style="text-align:center">false</td>
+<td style="text-align:left">是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。</td>
+</tr>
+<tr>
+<td style="text-align:center">maxOpenPrepared- Statements</td>
+<td style="text-align:center">-1</td>
+<td style="text-align:left">要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。 在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100</td>
+</tr>
+<tr>
+<td style="text-align:center">testOnBorrow</td>
+<td style="text-align:center">true</td>
+<td style="text-align:left">申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。</td>
+</tr>
+<tr>
+<td style="text-align:center">testOnReturn</td>
+<td style="text-align:center">false</td>
+<td style="text-align:left">归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能</td>
+</tr>
+<tr>
+<td style="text-align:center">testWhileIdle</td>
+<td style="text-align:center">false</td>
+<td style="text-align:left">建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。</td>
+</tr>
+<tr>
+<td style="text-align:center">validationQuery</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、 testWhileIdle都不会其作用。在mysql中通常为select ‘x’，在oracle中通常为select 1 from dual</td>
+</tr>
+<tr>
+<td style="text-align:center">timeBetweenEviction-RunsMillis</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">1) Destroy线程会检测连接的间隔时间 2) testWhileIdle的判断依据</td>
+</tr>
+<tr>
+<td style="text-align:center">minEvictableIdle- TimeMillis</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Destory线程中如果检测到当前连接的最后活跃时间和当前时间的差值大于minEvictableIdleTimeMillis，则关闭当前连接。</td>
+</tr>
+<tr>
+<td style="text-align:center">removeAbandoned</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">对于建立时间超过removeAbandonedTimeout的连接强制关闭</td>
+</tr>
+<tr>
+<td style="text-align:center">removeAbandoned-Timeout</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">指定连接建立多长时间就需要被强制关闭</td>
+</tr>
+<tr>
+<td style="text-align:center">logAbandoned</td>
+<td style="text-align:center">false</td>
+<td style="text-align:left">指定发生removeabandoned的时候，是否记录当前线程的堆栈信息到日志中</td>
+</tr>
+<tr>
+<td style="text-align:center">filters</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有： 1）监控统计用的filter:stat 2）日志用的filter:log4j 3）防御sql注入的filter:wall</td>
+</tr>
+</tbody>
+</table>
+<h1 id="登录">登录</h1>
+<ul>
+<li>
+<p>配置成功后，启动项目。</p>
+</li>
+<li>
+<p>访问<a href="http://localhost:8080/druid/index.html" target="_blank" rel="noopener">Druid数据源监控</a></p>
+</li>
+<li>
+<p>输入配置的账号、密码即可进到数据源监控</p>
+</li>
+</ul>
+<h1 id="问题">问题</h1>
+<p>1） 在这里我连接我虚拟机里的mysql</p>
+<p>出现报错<code>java.sql.SQLException: Access denied for user ‘’@‘192.168.220.1’ (using password: NO)</code></p>
+<p>原因分析：在基础配置时使用了 <code>data-username: root data-password: 123456</code><br>
+后造成当前用户名与密码未被识别</p>
+<p>改为<code>username: root password: 123456</code>格式即可</p>
 
                 
 
@@ -268,13 +371,9 @@ export const PI = 3.14
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/11/08/SpringBoot笔记之入门与配置/" data-toggle="tooltip" data-placement="top" title="SpringBoot笔记【入门与配置】">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/11/05/【问题日志】全局安装webpack，终端运行webpack指令出现错误……/" data-toggle="tooltip" data-placement="top" title="【问题日志】全局安装webpack，终端运行webpack指令出现错误">Next Post &rarr;</a>
+                            <a href="/2018/11/11/SpringBoot与Swagger整合/" data-toggle="tooltip" data-placement="top" title="SpringBoot与Swagger整合">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -321,7 +420,7 @@ export const PI = 3.14
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象写法"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在对象中的方法的写法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5728;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象的导出写法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x7684;&#x5BFC;&#x51FA;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象的导入"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x7684;&#x5BFC;&#x5165;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#es6中箭头函数的写法"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">es6&#x4E2D;&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x7684;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ecmascript-6-入门"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">ECMAScript 6 &#x5165;&#x95E8;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#druid可以做什么"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Druid&#x53EF;&#x4EE5;&#x505A;&#x4EC0;&#x4E48;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#引入依赖"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5F15;&#x5165;&#x4F9D;&#x8D56;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#配置applicationyml"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;application.yml</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#文档"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x6587;&#x6863;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#登录"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x767B;&#x5F55;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#问题"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x95EE;&#x9898;</span></a></li></ol>
         
         </div>
       </aside>
@@ -341,7 +440,9 @@ export const PI = 3.14
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#ECMAScript 6" title="ECMAScript 6">ECMAScript 6</a>
+                          <a class="tag" href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
+                        
+                          <a class="tag" href="/tags/#Druid" title="Druid">Druid</a>
                         
                     </div>
                 </section>
