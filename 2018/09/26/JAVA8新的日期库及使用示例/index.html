@@ -64,7 +64,7 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
+	
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
@@ -197,8 +197,7 @@
 
 
     <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
-
+    
 <!-- Post Content -->
 <article>
     <div class="container">
@@ -312,7 +311,7 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LocalDate date = LocalDate.now();</span><br><span class="line">LocalDate firstDay = LocalDate.of(date.getYear(),date.getMonth(),<span class="number">1</span>);</span><br><span class="line">LocalDate lastDay = date.with(TemporalAdjusters.lastDayOfMonth());</span><br><span class="line">System.out.println(<span class="string">"本月第一天是："</span> + firstDay);</span><br><span class="line">System.out.println(<span class="string">"本月最后一天是："</span> + lastDay);</span><br><span class="line"><span class="comment">// 本月第一天是：2018-09-01</span></span><br><span class="line"><span class="comment">// 本月最后一天是：2018-09-30</span></span><br></pre></td></tr></table></figure>
 <h3 id="java-8-日期特性">Java 8 日期特性</h3>
-<h4 id="java-8-日期时间api的几个关键点">Java 8 日期/时间API的几个关键点</h4>
+<h4 id="日期时间api的几个关键点">日期/时间API的几个关键点</h4>
 <p>经过上面的例子，我们已经对java8的时间日期有了一定的了解，现在回顾一下</p>
 <ul>
 <li>
@@ -328,7 +327,7 @@
 <p>新的时间与日期API中很重要的一点是它定义清楚了基本的时间与日期的概念，比方说，瞬时时间，持续时间，日期，时间，时区以及时间段。它们都是基于ISO日历体系的。</p>
 </li>
 </ul>
-<h4 id="java-8-日期时间特性">Java 8 日期/时间特性</h4>
+<h4 id="日期时间特性">日期/时间特性</h4>
 <p>Java 8 日期/时间 API 是 JSR-310 的实现，它的实现目标是克服旧的日期时间实现中所有的缺陷，新的日期/时间API 的一些设计原则是：</p>
 <ul>
 <li>
@@ -347,7 +346,7 @@
 <p><code>可扩展性</code>：新的日期/时间 API 是工作在 ISO-8601 日历系统上的，但我们也可以将其应用在非 ISO 的日历上。</p>
 </li>
 </ul>
-<h4 id="java-8-日期时间-api-包解释">Java 8 日期/时间 API 包解释</h4>
+<h4 id="日期时间-api-包解释">日期/时间 API 包解释</h4>
 <ul>
 <li>
 <p><code>java.time 包</code>：这是新的 Java 日期/时间 API 的基础包，所有的主要基础类都是这个包的一部分，如：LocalDate, LocalTime, LocalDateTime, Instant, Period, Duration 等等。所有这些类都是不可变的和线程安全的，在绝大多数情况下，这些类能够有效地处理一些公共的需求。</p>
@@ -365,37 +364,39 @@
 <p><code>java.time.zone 包</code>：这个包包含支持不同时区以及相关规则的类。</p>
 </li>
 </ul>
-<h4 id="每个java开发人员都应该至少了解这套新的api中的这五个类">每个Java开发人员都应该至少了解这套新的API中的这五个类</h4>
+<h4 id="这套新的api中的这五个类">这套新的API中的这五个类</h4>
 <ul>
 <li>
-<p>Instant 它代表的是时间戳，比如2016-04-14T14:20:13.592Z，这可以从java.time.Clock类中获取，像这样： Instant current = Clock.system(ZoneId.of(“Asia/Tokyo”)).instant();</p>
+<p><strong>Instant</strong><br>
+它代表的是时间戳，比如2016-04-14T14:20:13.592Z，这可以从java.time.Clock类中获取，像这样： Instant current = Clock.system(ZoneId.of(“Asia/Tokyo”)).instant();</p>
 </li>
 <li>
-<p>LocalDate 它表示的是不带时间的日期，比如2016-04-14。它可以用来存储生日，周年纪念日，入职日期等。</p>
+<p><strong>LocalDate</strong><br>
+它表示的是不带时间的日期，比如2016-04-14。它可以用来存储生日，周年纪念日，入职日期等。</p>
 </li>
 <li>
-<p>LocalTime - 它表示的是不带日期的时间</p>
+<p><strong>LocalTime</strong><br>
+它表示的是不带日期的时间</p>
 </li>
 <li>
-<p>LocalDateTime - 它包含了时间与日期，不过没有带时区的偏移量</p>
+<p><strong>LocalDateTime</strong><br>
+它包含了时间与日期，不过没有带时区的偏移量</p>
 </li>
 <li>
-<p>ZonedDateTime - 这是一个带时区的完整时间，它根据UTC/格林威治时间来进行时区调整</p>
+<p><strong>ZonedDateTime</strong><br>
+这是一个带时区的完整时间，它根据UTC/格林威治时间来进行时区调整。这个库的主包是java.time，里面包含了代表日期，时间，瞬时以及持续时间的类。它有两个子package，一个是java.time.foramt，这个是什么用途就很明显了，还有一个是java.time.temporal，它能从更低层面对各个字段进行访问。时区指的是地球上共享同一标准时间的地区。每个时区都有一个唯一标识符，同时还有一个地区/城市(Asia/Tokyo)的格式以及从格林威治时间开始的一个偏移时间。比如说，东京的偏移时间就是+09:00。</p>
 </li>
 <li>
-<p>这个库的主包是java.time，里面包含了代表日期，时间，瞬时以及持续时间的类。它有两个子package，一个是java.time.foramt，这个是什么用途就很明显了，还有一个是java.time.temporal，它能从更低层面对各个字段进行访问。</p>
+<p><strong>OffsetDateTime类</strong><br>
+实际上包含了LocalDateTime与ZoneOffset。它用来表示一个包含格林威治时间偏移量（+/-小时：分，比如+06:00或者 -08：00）的完整的日期（年月日）及时间（时分秒，纳秒）。</p>
 </li>
 <li>
-<p>时区指的是地球上共享同一标准时间的地区。每个时区都有一个唯一标识符，同时还有一个地区/城市(Asia/Tokyo)的格式以及从格林威治时间开始的一个偏移时间。比如说，东京的偏移时间就是+09:00。</p>
+<p><strong>DateTimeFormatter类</strong><br>
+用于在Java中进行日期的格式化与解析。与SimpleDateFormat不同，它是不可变且线程安全的，如果需要的话，可以赋值给一个静态变量。DateTimeFormatter类提供了许多预定义的格式器，你也可以自定义自己想要的格式。当然了，根据约定，它还有一个parse()方法是用于将字符串转换成日期的，如果转换期间出现任何错误，它会抛出DateTimeParseException异常。类似的，DateFormatter类也有一个用于格式化日期的format()方法，它出错的话则会抛出DateTimeException异常。</p>
 </li>
 <li>
-<p>OffsetDateTime类实际上包含了LocalDateTime与ZoneOffset。它用来表示一个包含格林威治时间偏移量（+/-小时：分，比如+06:00或者 -08：00）的完整的日期（年月日）及时间（时分秒，纳秒）。</p>
-</li>
-<li>
-<p>DateTimeFormatter类用于在Java中进行日期的格式化与解析。与SimpleDateFormat不同，它是不可变且线程安全的，如果需要的话，可以赋值给一个静态变量。DateTimeFormatter类提供了许多预定义的格式器，你也可以自定义自己想要的格式。当然了，根据约定，它还有一个parse()方法是用于将字符串转换成日期的，如果转换期间出现任何错误，它会抛出DateTimeParseException异常。类似的，DateFormatter类也有一个用于格式化日期的format()方法，它出错的话则会抛出DateTimeException异常。</p>
-</li>
-<li>
-<p>再说一句，“MMM d yyyy”与“MMm dd yyyy”这两个日期格式也略有不同，前者能识别出&quot;Jan 2 2014&quot;与&quot;Jan 14 2014&quot;这两个串，而后者如果传进来的是&quot;Jan 2 2014&quot;则会报错，因为它期望月份处传进来的是两个字符。为了解决这个问题，在天为个位数的情况下，你得在前面补0，比如&quot;Jan 2 2014&quot;应该改为&quot;Jan 02 2014&quot;。</p>
+<p><strong>再说一句。</strong><br>
+“MMM d yyyy”与“MMm dd yyyy”这两个日期格式也略有不同，前者能识别出&quot;Jan 2 2014&quot;与&quot;Jan 14 2014&quot;这两个串，而后者如果传进来的是&quot;Jan 2 2014&quot;则会报错，因为它期望月份处传进来的是两个字符。为了解决这个问题，在天为个位数的情况下，你得在前面补0，比如&quot;Jan 2 2014&quot;应该改为&quot;Jan 02 2014&quot;。</p>
 </li>
 </ul>
 <h4 id="javatime-包下的方法概览">java.time 包下的方法概览</h4>
@@ -528,7 +529,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#javatime下的关键类"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">java.time&#x4E0B;&#x7684;&#x5173;&#x952E;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java8是如何处理时间及日期的"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">java8&#x662F;&#x5982;&#x4F55;&#x5904;&#x7406;&#x65F6;&#x95F4;&#x53CA;&#x65E5;&#x671F;&#x7684;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java-8-日期特性"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;&#x7279;&#x6027;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#java-8-日期时间api的几个关键点"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;/&#x65F6;&#x95F4;API&#x7684;&#x51E0;&#x4E2A;&#x5173;&#x952E;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#java-8-日期时间特性"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;/&#x65F6;&#x95F4;&#x7279;&#x6027;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#java-8-日期时间-api-包解释"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;/&#x65F6;&#x95F4; API &#x5305;&#x89E3;&#x91CA;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#每个java开发人员都应该至少了解这套新的api中的这五个类"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">&#x6BCF;&#x4E2A;Java&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x90FD;&#x5E94;&#x8BE5;&#x81F3;&#x5C11;&#x4E86;&#x89E3;&#x8FD9;&#x5957;&#x65B0;&#x7684;API&#x4E2D;&#x7684;&#x8FD9;&#x4E94;&#x4E2A;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#javatime-包下的方法概览"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">java.time &#x5305;&#x4E0B;&#x7684;&#x65B9;&#x6CD5;&#x6982;&#x89C8;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x603B;&#x7ED3;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#javatime下的关键类"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">java.time&#x4E0B;&#x7684;&#x5173;&#x952E;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java8是如何处理时间及日期的"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">java8&#x662F;&#x5982;&#x4F55;&#x5904;&#x7406;&#x65F6;&#x95F4;&#x53CA;&#x65E5;&#x671F;&#x7684;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java-8-日期特性"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Java 8 &#x65E5;&#x671F;&#x7279;&#x6027;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#日期时间api的几个关键点"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x65E5;&#x671F;/&#x65F6;&#x95F4;API&#x7684;&#x51E0;&#x4E2A;&#x5173;&#x952E;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#日期时间特性"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">&#x65E5;&#x671F;/&#x65F6;&#x95F4;&#x7279;&#x6027;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#日期时间-api-包解释"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">&#x65E5;&#x671F;/&#x65F6;&#x95F4; API &#x5305;&#x89E3;&#x91CA;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#这套新的api中的这五个类"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">&#x8FD9;&#x5957;&#x65B0;&#x7684;API&#x4E2D;&#x7684;&#x8FD9;&#x4E94;&#x4E2A;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#javatime-包下的方法概览"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">java.time &#x5305;&#x4E0B;&#x7684;&#x65B9;&#x6CD5;&#x6982;&#x89C8;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x603B;&#x7ED3;</span></a></li></ol>
         
         </div>
       </aside>

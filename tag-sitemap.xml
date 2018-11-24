@@ -135,13 +135,6 @@
     </url>
 
     <url>
-        <loc>http://immertry.top/tags/JAVA/</loc>
-        <lastmod>2018-11-01T10:07:36.789Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://immertry.top/tags/Sublime-Text3/</loc>
         <lastmod>2018-11-03T15:58:16.974Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -186,6 +179,13 @@
     <url>
         <loc>http://immertry.top/tags/Druid/</loc>
         <lastmod>2018-11-15T14:04:10.234Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://immertry.top/tags/JAVA/</loc>
+        <lastmod>2018-11-24T14:54:01.764Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
