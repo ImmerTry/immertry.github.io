@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          项目中使用的ECMAScript 6 语法总结 - Immer | Try
+          JWT在JAVA项目中的简单实际应用 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/2018/11/06/项目中使用的ECMAScript-6-语法总结/">
+    <link rel="canonical" href="http://immertry.top/2018/11/27/JWT在JAVA项目中的简单实际应用/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,7 +69,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('http://image.immertry.top/20181106ariel.jpg')
+            background-image: url('undefined')
             /*post*/
         
     }
@@ -86,14 +86,12 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#ECMAScript 6" title="ECMAScript 6">ECMAScript 6</a>
-                            
                         </div>
-                        <h1>项目中使用的ECMAScript 6 语法总结</h1>
-                        <h2 class="subheading">ECMAScript 6（简称ES6）是JavaScript语言的下一代标准，于2015年6月正式发布，也称ECMAScript 2015。</h2>
+                        <h1>JWT在JAVA项目中的简单实际应用</h1>
+                        <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by L_UO on
-                            2018-11-06
+                            2018-11-27
                         </span>
                     </div>
                 
@@ -209,71 +207,16 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="对象写法">对象写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5中对象：{add:add,substrict:substrict}  
-es6中对象：{add,substrict}注意这种写法的属性名称和值变量是同一个名称才可以简写，否则要像es5那种写法
-</pre>
-<h3 id="在对象中的方法的写法">在对象中的方法的写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5中对象：{add:function(){},substrict:function(){}}  
-es6中对象：{add(){},substrict(){}}
-</pre>
-<h3 id="对象的导出写法">对象的导出写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5两种形式：  
-1. moduel.exprots = function() {};   
-2. exprots.add = function() {};  
-
-es6中写法：  
-1. export default {  
-    add  
-}  
-2. export function add() {} 相当于将add方法当做一个属性挂载到exports对象
-</pre>
-<h3 id="对象的导入">对象的导入</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5：var add = require('./calc.js');  
-es6：  
-如果导出的是：export default {add() {}}   
-那么可以通过 import addObj from './calc.js'  
-
-如果导出的是：  
-export function add() {}  
-export function substrict() {}  
-export const PI = 3.14  
-
-那么可以通过按需加载 import [add,substrict,PI] from './calc.js'
-</pre>
-<h3 id="es6中箭头函数的写法">es6中箭头函数的写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-箭头的演变过程：  
-//需求：利用函数实现倒序排列  
-[2,1,3].sort(function(x,y) {return y - x;});
-
-//用箭头函数实现 => 读 goes to  
-[2,1,3].sort((x,y) =>{return y - x;});  
-[2,1,3].sort((x,y) =>{x++;y++; y - x;});  
-[2,1,3].forEach(x =>{console.log(x);});
-</pre>
-<hr>
-<h3 id="ecmascript-6-入门">ECMAScript 6 入门</h3>
-<p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">《ECMAScript 6 入门》是一本开源的 JavaScript 语言教程，全面介绍 ECMAScript 6 新引入的语法特性<br>
-</a></p>
-
+                
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/11/08/SpringBoot笔记之入门与配置/" data-toggle="tooltip" data-placement="top" title="SpringBoot笔记【入门与配置】">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/11/05/【问题日志】全局安装webpack，终端运行webpack指令出现错误……/" data-toggle="tooltip" data-placement="top" title="【问题日志】全局安装webpack，终端运行webpack指令出现错误">Next Post &rarr;</a>
+                            <a href="/2018/11/15/解决SpringBoot2-1整合Druid遇到问题/" data-toggle="tooltip" data-placement="top" title="解决SpringBoot2.1整合Druid遇到问题">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -320,7 +263,7 @@ export const PI = 3.14
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象写法"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在对象中的方法的写法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5728;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象的导出写法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x7684;&#x5BFC;&#x51FA;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象的导入"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x7684;&#x5BFC;&#x5165;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#es6中箭头函数的写法"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">es6&#x4E2D;&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x7684;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ecmascript-6-入门"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">ECMAScript 6 &#x5165;&#x95E8;</span></a></li></ol>
+          <ol class="nav">none</ol>
         
         </div>
       </aside>
@@ -340,8 +283,6 @@ export const PI = 3.14
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#ECMAScript 6" title="ECMAScript 6">ECMAScript 6</a>
-                        
                     </div>
                 </section>
                 
