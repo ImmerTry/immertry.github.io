@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误 - Immer | Try
+          Spring注解@Resource和@Autowired区别对比 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/2018/11/05/【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误……/">
+    <link rel="canonical" href="http://immertry.top/2018/11/29/Spring注解-Resource和-Autowired区别对比/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,7 +69,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('http://image.immertry.top/20181105shifaaz.jpg')
+            background-image: url('http://image.immertry.top/20181109lucas.jpg')
             /*post*/
         
     }
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#问题日志" title="问题日志">问题日志</a>
+                              <a class="tag" href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
                             
                         </div>
-                        <h1>【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误</h1>
-                        <h2 class="subheading">错误代码如下</h2>
+                        <h1>Spring注解@Resource和@Autowired区别对比</h1>
+                        <h2 class="subheading">在Spring中常用的注解有那么些个。但具体其中的区别你知道吗</h2>
                         <span class="meta">
                             Posted by L_UO on
-                            2018-11-05
+                            2018-11-29
                         </span>
                     </div>
                 
@@ -209,36 +209,44 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="原因分析">原因分析</h3>
-<p><strong>由于我是直接在本地创建文件夹并且初始化仓库，进而再去GitHub下创建仓库。并在本地仓库下关联远程仓库。</strong></p>
-<p>基于以上操作</p>
-<p>遇到问题代码如下：</p>
-<pre style="background-color: #F5F5F5;color: black">
-To git@https://github.com/DoyoudoLove/vuetest.git
- ! [rejected]        master -> master (fetch first)
-error: failed to push some refs to 'git@https://github.com/DoyoudoLove/vuetest.git'
-hint: Updates were rejected because the remote contains work that you do
-hint: not have locally. This is usually caused by another repository pushin
-hint: to the same ref. You may want to first merge the remote changes (e.g.
-hint: 'git pull') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-</pre>
-<p>使用 <code>git push -f</code>无果</p>
-<p>其次<br>
-    <code>git pull</code><br>
-    <code>git branch --set-upstream-to=origin/&lt;branch&gt; master</code><br>
-  将本地的分支和远程分支进行关联</p>
-<p>出现报错 <b style="color: #f30213">fatal: refusing to merge unrelated histories</b><br>
-使用<br>
-    <code>git pull origin master --allow-unrelated-histories</code><br>
-  把两段不相干的 分支进行强行合并。</p>
-<h3 id="总结">总结</h3>
-<p>以后还是乖乖的先在 GitHub 上建立好仓库，再在本地上克隆下来提交吧。</p>
-<hr>
-<h3 id="参考文章">参考文章</h3>
-<p><a href="https://blog.csdn.net/jeffasd/article/details/49911847" target="_blank" rel="noopener">git Updates were rejected because the remote contains work that you do 解决办法</a><br>
-<a href="https://www.centos.bz/2018/03/git-%E5%87%BA%E7%8E%B0-fatal-refusing-to-merge-unrelated-histories-%E9%94%99%E8%AF%AF/" target="_blank" rel="noopener">git 出现 fatal: refusing to merge unrelated histories 错误</a><br>
-<a href="https://www.cnblogs.com/jeremylee/p/5552048.html" target="_blank" rel="noopener">git提交远程报错[rejected] master -&gt; master (fetch first)</a></p>
+                <p>@Resource和@Autowired都是做bean的注入时使用，其实@Resource并不是Spring的注解，它的包是javax.annotation.Resource，需要导入，但是Spring支持该注解的注入。</p>
+<h1 id="1-共同点">1、共同点</h1>
+<p>两者都可以写在字段和setter方法上。两者如果都写在字段上，那么就不需要再写setter方法。</p>
+<h1 id="2-不同点">2、不同点</h1>
+<p>（1）@Autowired</p>
+<p>@Autowired为Spring提供的注解，需要导入包org.springframework.beans.factory.annotation.Autowired;只按照byType注入。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestServiceImpl</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 下面两种@Autowired只要使用一种即可</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao; <span class="comment">// 用于字段上</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserDao</span><span class="params">(UserDao userDao)</span> </span>&#123; <span class="comment">// 用于属性的方法上</span></span><br><span class="line">        <span class="keyword">this</span>.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@Autowired注解是按照类型（byType）装配依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，可以设置它的required属性为false。如果我们想使用按照名称（byName）来装配，可以结合@Qualifier注解一起使用。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestServiceImpl</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Qualifier</span>(<span class="string">"userDao"</span>)</span><br><span class="line">    <span class="keyword">private</span> UserDao userDao; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2）@Resource</p>
+<p>@Resource默认按照ByName自动注入，由J2EE提供，需要导入包javax.annotation.Resource。@Resource有两个重要的属性：name和type，而Spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以，如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不制定name也不制定type属性，这时将通过反射机制使用byName自动注入策略。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestServiceImpl</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 下面两种@Resource只要使用一种即可</span></span><br><span class="line">    <span class="meta">@Resource</span>(name=<span class="string">"userDao"</span>)</span><br><span class="line">    <span class="keyword">private</span> UserDao userDao; <span class="comment">// 用于字段上</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Resource</span>(name=<span class="string">"userDao"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserDao</span><span class="params">(UserDao userDao)</span> </span>&#123; <span class="comment">// 用于属性的setter方法上</span></span><br><span class="line">        <span class="keyword">this</span>.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：最好是将@Resource放在setter方法上，因为这样更符合面向对象的思想，通过set、get去操作属性，而不是直接去操作属性。</p>
+<p>@Resource装配顺序：</p>
+<p>①如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常。</p>
+<p>②如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常。</p>
+<p>③如果指定了type，则从上下文中找到类似匹配的唯一bean进行装配，找不到或是找到多个，都会抛出异常。</p>
+<p>④如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配。</p>
+<p>@Resource的作用相当于@Autowired，只不过@Autowired按照byType自动注入。</p>
+<h1 id="spring常用注解汇总">Spring常用注解汇总</h1>
+<p>@Configuration把一个类作为一个IoC容器，它的某个方法头上如果注册了@Bean，就会作为这个Spring容器中的Bean。<br>
+@Scope注解 作用域<br>
+@Lazy(true) 表示延迟初始化<br>
+<code>@Service用于标注业务层组件、</code><br>
+<code>@Controller用于标注控制层组件（如struts中的action）</code><br>
+<code>@Repository用于标注数据访问组件，即DAO组件。</code><br>
+<code>@Component泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。</code><br>
+@Scope用于指定scope作用域的（用在类上）<br>
+@PostConstruct用于指定初始化方法（用在方法上）<br>
+@PreDestory用于指定销毁方法（用在方法上）<br>
+@DependsOn：定义Bean初始化及销毁时的顺序<br>
+@Primary：自动装配时当出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常<br>
+<code>@Autowired 默认按类型装配，如果我们想使用按名称装配，可以结合@Qualifier注解一起使用。如下：</code><br>
+<code>@Autowired @Qualifier(&quot;personDaoBean&quot;) 存在多个实例配合使用</code><br>
+<code>@Resource默认按名称装配，当找不到与名称匹配的bean才会按类型装配。</code><br>
+@PostConstruct 初始化注解<br>
+@PreDestroy 摧毁注解 默认 单例  启动就加载<br>
+@Async异步方法调用</p>
 
                 
 
@@ -246,13 +254,9 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/11/05/【问题日志】全局安装webpack，终端运行webpack指令出现错误……/" data-toggle="tooltip" data-placement="top" title="【问题日志】全局安装webpack，终端运行webpack指令出现错误">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/11/02/使用Sublime-Text3编写html页面/" data-toggle="tooltip" data-placement="top" title="使用Sublime Text3 快速新建一个 html 页面">Next Post &rarr;</a>
+                            <a href="/2018/11/27/JWT在JAVA项目中的简单实际应用/" data-toggle="tooltip" data-placement="top" title="JWT在JAVA项目中的简单实际应用">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -299,7 +303,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#原因分析"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x539F;&#x56E0;&#x5206;&#x6790;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x603B;&#x7ED3;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#参考文章"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x53C2;&#x8003;&#x6587;&#x7AE0;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#1-共同点"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1&#x3001;&#x5171;&#x540C;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#2-不同点"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2&#x3001;&#x4E0D;&#x540C;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring常用注解汇总"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Spring&#x5E38;&#x7528;&#x6CE8;&#x89E3;&#x6C47;&#x603B;</span></a></li></ol>
         
         </div>
       </aside>
@@ -319,7 +323,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#问题日志" title="问题日志">问题日志</a>
+                          <a class="tag" href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
                         
                     </div>
                 </section>
