@@ -139,14 +139,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -206,6 +206,44 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2018/11/30/Docker容器进入的4种方式/">
+        <h2 class="post-title">
+            Docker容器进入的4种方式
+        </h2>
+        <h3 class="post-subtitle">
+            在使用Docker创建了容器之后，大家比较关心的就是如何进入该容器了，其实进入Docker容器有好几多种方式，这里我们就讲一下常用的几种进入Docker容器的方法。
+        </h3>
+        <div class="post-content-preview">
+            进入Docker容器比较常见的几种做法如下：
+
+使用docker attach
+使用SSH
+使用nsenter
+使用exec
+
+一、使用docker attach进入Docker容器
+Docker提供了attach命令来进入Docker容器。
+接下来我们创建一个守护态的Docker容器，然后使用docker attach命令进入该容器。
+1$ sudo docker run -itd ubu......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-11-30
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#docker" title="docker">docker</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -522,41 +560,6 @@ Error: Cannot find module 'webpack'
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/11/05/【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误……/">
-        <h2 class="post-title">
-            【问题日志】本地初始化git仓库，设置远程仓库地址，提交代码出现错误
-        </h2>
-        <h3 class="post-subtitle">
-            错误代码如下
-        </h3>
-        <div class="post-content-preview">
-            原因分析
-由于我是直接在本地创建文件夹并且初始化仓库，进而再去GitHub下创建仓库。并在本地仓库下关联远程仓库。
-基于以上操作
-遇到问题代码如下：
-
-To git@https://github.com/DoyoudoLove/vuetest.git
- ! [rejected]        master -> master (fetch first)
-error: failed to pu......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by L_UO on
-            2018-11-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#问题日志" title="问题日志">问题日志</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -623,7 +626,11 @@ error: failed to pu......
             
         
             
+        
+            
              <a href="/tags/#笔记" title="笔记" rel="3">笔记</a>
+            
+        
             
         
             
@@ -638,8 +645,6 @@ error: failed to pu......
         
             
              <a href="/tags/#问题日志" title="问题日志" rel="2">问题日志</a>
-            
-        
             
         
             
@@ -740,6 +745,10 @@ error: failed to pu......
     <ul>
       
         <li>
+          <a href="/2018/11/30/Docker容器进入的4种方式/">Docker容器进入的4种方式</a>
+        </li>
+      
+        <li>
           <a href="/2018/11/29/Spring注解-Resource和-Autowired区别对比/">Spring注解@Resource和@Autowired区别对比</a>
         </li>
       
@@ -753,10 +762,6 @@ error: failed to pu......
       
         <li>
           <a href="/2018/11/11/SpringBoot与Swagger整合/">SpringBoot与Swagger整合</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/10/SpringBoot笔记之数据访问与启动配置/">SpringBoot笔记【数据访问与启动配置】</a>
         </li>
       
     </ul>

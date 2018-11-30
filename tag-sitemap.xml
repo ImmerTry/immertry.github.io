@@ -191,8 +191,15 @@
     </url>
 
     <url>
+        <loc>http://immertry.top/tags/docker/</loc>
+        <lastmod>2018-11-30T11:58:27.523Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://immertry.top/tags/SpringBoot/</loc>
-        <lastmod>2018-11-29T14:37:24.648Z</lastmod>
+        <lastmod>2018-11-30T11:59:31.255Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

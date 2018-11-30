@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          项目中使用的ECMAScript 6 语法总结 - Immer | Try
+          Docker容器进入的4种方式 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/2018/11/06/项目中使用的ECMAScript-6-语法总结/">
+    <link rel="canonical" href="http://immertry.top/2018/11/30/Docker容器进入的4种方式/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,7 +69,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('http://image.immertry.top/20181106ariel.jpg')
+            background-image: url('http://image.immertry.top/20181109lucas.jpg')
             /*post*/
         
     }
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#ECMAScript 6" title="ECMAScript 6">ECMAScript 6</a>
+                              <a class="tag" href="/tags/#docker" title="docker">docker</a>
                             
                         </div>
-                        <h1>项目中使用的ECMAScript 6 语法总结</h1>
-                        <h2 class="subheading">ECMAScript 6（简称ES6）是JavaScript语言的下一代标准，于2015年6月正式发布，也称ECMAScript 2015。</h2>
+                        <h1>Docker容器进入的4种方式</h1>
+                        <h2 class="subheading">在使用Docker创建了容器之后，大家比较关心的就是如何进入该容器了，其实进入Docker容器有好几多种方式，这里我们就讲一下常用的几种进入Docker容器的方法。</h2>
                         <span class="meta">
                             Posted by L_UO on
-                            2018-11-06
+                            2018-11-30
                         </span>
                     </div>
                 
@@ -209,57 +209,64 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="对象写法">对象写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5中对象：{add:add,substrict:substrict}  
-es6中对象：{add,substrict}注意这种写法的属性名称和值变量是同一个名称才可以简写，否则要像es5那种写法
-</pre>
-<h3 id="在对象中的方法的写法">在对象中的方法的写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5中对象：{add:function(){},substrict:function(){}}  
-es6中对象：{add(){},substrict(){}}
-</pre>
-<h3 id="对象的导出写法">对象的导出写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5两种形式：  
-1. moduel.exprots = function() {};   
-2. exprots.add = function() {};  
-
-es6中写法：  
-1. export default {  
-    add  
-}  
-2. export function add() {} 相当于将add方法当做一个属性挂载到exports对象
-</pre>
-<h3 id="对象的导入">对象的导入</h3>
-<pre style="background-color: #F5F5F5;color: black">
-es5：var add = require('./calc.js');  
-es6：  
-如果导出的是：export default {add() {}}   
-那么可以通过 import addObj from './calc.js'  
-
-如果导出的是：  
-export function add() {}  
-export function substrict() {}  
-export const PI = 3.14  
-
-那么可以通过按需加载 import [add,substrict,PI] from './calc.js'
-</pre>
-<h3 id="es6中箭头函数的写法">es6中箭头函数的写法</h3>
-<pre style="background-color: #F5F5F5;color: black">
-箭头的演变过程：  
-//需求：利用函数实现倒序排列  
-[2,1,3].sort(function(x,y) {return y - x;});
-
-//用箭头函数实现 => 读 goes to  
-[2,1,3].sort((x,y) =>{return y - x;});  
-[2,1,3].sort((x,y) =>{x++;y++; y - x;});  
-[2,1,3].forEach(x =>{console.log(x);});
-</pre>
+                <p>进入Docker容器比较常见的几种做法如下：</p>
+<ul>
+<li><strong>使用docker attach</strong></li>
+<li><strong>使用SSH</strong></li>
+<li><strong>使用nsenter</strong></li>
+<li><strong>使用exec</strong></li>
+</ul>
+<h1 id="一-使用docker-attach进入docker容器">一、使用docker attach进入Docker容器</h1>
+<p>Docker提供了attach命令来进入Docker容器。</p>
+<p>接下来我们创建一个守护态的Docker容器，然后使用docker attach命令进入该容器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker run -itd ubuntu:14.04 /bin/bash</span><br></pre></td></tr></table></figure>
+<p>然后我们使用docker ps查看到该容器信息，接下来就使用docker attach进入该容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker attach 44fc0f0582d9</span><br></pre></td></tr></table></figure>
+<p>可以看到我们已经进入到该容器中了。</p>
+<p>但在，使用该命令有一个问题。当多个窗口同时使用该命令进入该容器时，所有的窗口都会同步显示。如果有一个窗口阻塞了，那么其他窗口也无法再进行操作。</p>
+<p>因为这个原因，所以docker attach命令不太适合于生产环境，平时自己开发应用时可以使用该命令。</p>
+<h1 id="二-使用ssh进入docker容器">二、使用SSH进入Docker容器</h1>
+<p>在生产环境中排除了使用docker attach命令进入容器之后，相信大家第一个想到的就是ssh。在镜像（或容器）中安装SSH Server，这样就能保证多人进入</p>
+<p>容器且相互之间不受干扰了，相信大家在当前的生产环境中（没有使用Docker的情况）也是这样做的。但是使用了Docker容器之后不建议使用ssh进入到Docker容</p>
+<p>器内。关于为什么不建议使用，请参考如下文章：</p>
+<p><a href="http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp" target="_blank" rel="noopener">为什么不需要在 Docker 容器中运行 sshd</a></p>
+<h1 id="三-使用nsenter进入docker容器">三、使用nsenter进入Docker容器</h1>
+<p>在上面两种方式都不适合的情况下，还有一种比较方便的方法，即使用nsenter进入Docker容器。关于什么是nsenter请参考如下文章：</p>
+<p><a href="https://github.com/jpetazzo/nsenter" target="_blank" rel="noopener">https://github.com/jpetazzo/nsenter</a></p>
+<p>在了解了什么是nsenter之后，系统默认将我们需要的nsenter安装到主机中</p>
+<p>如果没有安装的话，按下面步骤安装即可（注意是主机而非容器或镜像）</p>
+<p>具体的安装命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> wget https://www.kernel.org/pub/linux/utils/util-linux/v2.24/util-linux-2.24.tar.gz  </span><br><span class="line"><span class="meta">$</span> tar -xzvf util-linux-2.24.tar.gz  </span><br><span class="line"><span class="meta">$</span> cd util-linux-2.24/  </span><br><span class="line"><span class="meta">$</span> ./configure --without-ncurses  </span><br><span class="line"><span class="meta">$</span> make nsenter  </span><br><span class="line"><span class="meta">$</span> sudo cp nsenter /usr/local/bin</span><br></pre></td></tr></table></figure>
+<p>安装好nsenter之后可以查看一下该命令的使用。</p>
+<p><img src="nsenter.png" alt=""></p>
+<p>nsenter可以访问另一个进程的名称空间。所以为了连接到某个容器我们还需要获取该容器的第一个进程的PID。可以使用docker inspect命令来拿到该PID。</p>
+<p>docker inspect命令使用如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker inspect --help</span><br></pre></td></tr></table></figure>
+<p>inspect命令可以分层级显示一个镜像或容器的信息。比如我们当前有一个正在运行的容器</p>
+<p><img src="inspect.png" alt=""></p>
+<p>可以使用docker inspect来查看该容器的详细信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker inspect 44fc0f0582d9</span><br></pre></td></tr></table></figure>
+<p><img src="dockerinspect.png" alt=""></p>
+<p>由其该信息非常多，此处只截取了其中一部分进行展示。如果要显示该容器第一个进行的PID可以使用如下方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker inspect -f &#123;&#123;.State.Pid&#125;&#125; 44fc0f0582d9</span><br></pre></td></tr></table></figure>
+<p><img src="inspect-f.png" alt=""></p>
+<p>在拿到该进程PID之后我们就可以使用nsenter命令访问该容器了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo nsenter --target 3326 --mount --uts --ipc --net --pid</span><br></pre></td></tr></table></figure>
+<p>其中的3326即刚才拿到的进程的PID</p>
+<p>当然，如果你认为每次都输入那么多参数太麻烦的话，网上也有许多做好的脚本供大家使用。</p>
+<p>地址如下：</p>
+<p><a href="http://yeasy.gitbooks.io/docker_practice/content/container/enter.html" target="_blank" rel="noopener">http://yeasy.gitbooks.io/docker_practice/content/container/enter.html</a></p>
+<p><a href="http://www.tuicool.com/articles/eYnUBrR" target="_blank" rel="noopener">http://www.tuicool.com/articles/eYnUBrR</a></p>
+<h1 id="四-使用docker-exec进入docker容器">四、使用docker exec进入Docker容器</h1>
+<p>除了上面几种做法之外，docker在1.3.X版本之后还提供了一个新的命令exec用于进入容器，这种方式相对更简单一些，下面我们来看一下该命令的使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker exec --help</span><br></pre></td></tr></table></figure>
+<p><img src="dockerexec.png" alt=""></p>
+<p>接下来我们使用该命令进入一个已经在运行的容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker ps  </span><br><span class="line"><span class="meta">$</span> sudo docker exec -it 775c7c9ee1e1 /bin/bash</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="ecmascript-6-入门">ECMAScript 6 入门</h3>
-<p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">《ECMAScript 6 入门》是一本开源的 JavaScript 语言教程，全面介绍 ECMAScript 6 新引入的语法特性<br>
-</a></p>
+<blockquote>
+<p>文章转载自https://www.cnblogs.com/xhyan/p/6593075.html</p>
+</blockquote>
 
                 
 
@@ -267,13 +274,9 @@ export const PI = 3.14
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/11/08/SpringBoot笔记之入门与配置/" data-toggle="tooltip" data-placement="top" title="SpringBoot笔记【入门与配置】">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/11/05/【问题日志】全局安装webpack，终端运行webpack指令出现错误……/" data-toggle="tooltip" data-placement="top" title="【问题日志】全局安装webpack，终端运行webpack指令出现错误">Next Post &rarr;</a>
+                            <a href="/2018/11/29/Spring注解-Resource和-Autowired区别对比/" data-toggle="tooltip" data-placement="top" title="Spring注解@Resource和@Autowired区别对比">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -320,7 +323,7 @@ export const PI = 3.14
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象写法"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在对象中的方法的写法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5728;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象的导出写法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x7684;&#x5BFC;&#x51FA;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象的导入"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x5BF9;&#x8C61;&#x7684;&#x5BFC;&#x5165;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#es6中箭头函数的写法"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">es6&#x4E2D;&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x7684;&#x5199;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ecmascript-6-入门"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">ECMAScript 6 &#x5165;&#x95E8;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#一-使用docker-attach进入docker容器"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x4F7F;&#x7528;docker attach&#x8FDB;&#x5165;Docker&#x5BB9;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#二-使用ssh进入docker容器"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x4F7F;&#x7528;SSH&#x8FDB;&#x5165;Docker&#x5BB9;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#三-使用nsenter进入docker容器"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x4F7F;&#x7528;nsenter&#x8FDB;&#x5165;Docker&#x5BB9;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#四-使用docker-exec进入docker容器"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;&#x4F7F;&#x7528;docker exec&#x8FDB;&#x5165;Docker&#x5BB9;&#x5668;</span></a></li></ol>
         
         </div>
       </aside>
@@ -340,7 +343,7 @@ export const PI = 3.14
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#ECMAScript 6" title="ECMAScript 6">ECMAScript 6</a>
+                          <a class="tag" href="/tags/#docker" title="docker">docker</a>
                         
                     </div>
                 </section>
