@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          About - Immer | Try
+          Docker下安装MySQL数据库时区为UTC的解决方法 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/about/">
+    <link rel="canonical" href="http://immertry.top/2018/12/01/Docker下安装MySQL数据库时区为UTC的解决方法/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('http://image.immertry.top/bg20181009about-bg.jpg')
-            /*page*/
+            background-image: url('http://image.immertry.top/20181109lucas.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Wish for the Best, Prepare for the Worst</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#docker" title="docker">docker</a>
+                            
+                        </div>
+                        <h1>Docker下安装MySQL数据库时区为UTC的解决方法</h1>
+                        <h2 class="subheading">docker下默认时区为UTC,它的时区与我们当前时区相差8个小时。</h2>
+                        <span class="meta">
+                            Posted by L_UO on
+                            2018-12-01
+                        </span>
                     </div>
                 
 
@@ -189,292 +197,198 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3 id="about-me">About Me</h3>
-<p>正如你所见，我是一名<code>程序员</code>;<br>
-在IT行业里，是一位新人。<code>初级程序员</code>这个称谓，至少目前来说适合我。</p>
-<h4 id="开博客原因">开博客原因</h4>
-<p>我的一个朋友，给我发了他<code>带IP地址的博客</code>。<br>
-当时的我比较<code>好奇</code>，也想搞个玩一玩。<br>
-他来了句<code>你又不会Linux</code>。话语间透露出绝对的<code>嘲讽</code>。<br>
-于是各种百度，查资料。<br>
-第一天：选择搭建方式：<br>
-<code>Jekyll + Github Pages</code> |<code>Hexo + Github Pages</code> |<code>VuePress + Github Pages</code><br>
-第二天：确定好搭建方式与主题。<br>
-喏~~就是你现在看到的这个样子。它并不是很完美。</p>
-<h4 id="学习态度">学习态度</h4>
-<p>就像这段话所讲：</p>
-<blockquote>
-<p>勤学如春起之苗，不见其增，日有所长；<br>
-辍学如磨刀之石，不见其损，日有所亏。</p>
-</blockquote>
-<p>勤于学习就像春天的禾苗一样，看不到它增高，实际上它每天在长高。<br>
-放下学习好比磨刀的石头，看不到它变薄，其实石头每天都在变薄。<br>
-激励我们学习不能松懈，只要坚持，知识就会增长。</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <h1 id="一-安装mysql数据库">一、安装mysql数据库</h1>
+<ul>
+<li>docker search mysql</li>
+<li>docker pull mysql/mysql:tag</li>
+</ul>
+<h1 id="二-运行mysql数据库">二、运行mysql数据库</h1>
+<p><code>docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e TZ=&quot;Asia/Shanghai&quot; -d mysql --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci</code></p>
+<p><strong>执行以上命令。当前所打开的容器时区已经设置为北京时间</strong></p>
+<p>验证容器时区是否正确，执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec [容器id/别名]  date</span><br></pre></td></tr></table></figure>
+<h2 id="在已经运行的容器中修改时区">在已经运行的容器中修改时区</h2>
+<p>进入容器里面</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it [容器id/别名] /bin/bash</span><br></pre></td></tr></table></figure>
+<p>找到通用时区文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/zoneinfo/Asia</span><br></pre></td></tr></table></figure>
+<p>复制当前文件夹下<code>Shanghai</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+<p>重启容器即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart [容器id/别名]</span><br></pre></td></tr></table></figure>
+<h2 id="数据库连接时插入数据日期时间还是不对">数据库连接时，插入数据日期时间还是不对</h2>
+<p>出现以上问题时，请检查数据库连接URL是否正确。添加如下字段：</p>
+<p><code>useUnicode=true&amp;characterEncoding=UTF8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai</code></p>
 
-                <!-- 如果开启评论功能 -->
                 
-                    <hr>
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
                     
-
-                    <!-- 来必力City版安装代码 -->
                     
-                        <div class="comment">
-                            <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
-                        </div>
+                        <li class="next">
+                            <a href="/2018/11/30/Docker容器进入的4种方式/" data-toggle="tooltip" data-placement="top" title="Docker容器进入的4种方式">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#一-安装mysql数据库"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x5B89;&#x88C5;mysql&#x6570;&#x636E;&#x5E93;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#二-运行mysql数据库"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x8FD0;&#x884C;mysql&#x6570;&#x636E;&#x5E93;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#在已经运行的容器中修改时区"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x5728;&#x5DF2;&#x7ECF;&#x8FD0;&#x884C;&#x7684;&#x5BB9;&#x5668;&#x4E2D;&#x4FEE;&#x6539;&#x65F6;&#x533A;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据库连接时插入数据日期时间还是不对"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x65F6;&#xFF0C;&#x63D2;&#x5165;&#x6570;&#x636E;&#x65E5;&#x671F;&#x65F6;&#x95F4;&#x8FD8;&#x662F;&#x4E0D;&#x5BF9;</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#docker" title="docker">docker</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
 
                     
-
-
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
                     
-                    <script type="text/javascript">
-                       (function(d, s) {
-                           var j, e = d.getElementsByTagName(s)[0];
-
-                           if (typeof LivereTower === 'function') { return; }
-
-                           j = d.createElement(s);
-                           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                           j.async = true;
-
-                           e.parentNode.insertBefore(j, e);
-                       })(document, 'script');
-                    </script>
-
-                    <!-- City版安装代码已完成 -->
-                     
-
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags featured-tags-->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#SpringBoot" title="SpringBoot" rel="8">SpringBoot</a>
-            
-        
-            
-             <a href="/tags/#docker" title="docker" rel="2">docker</a>
-            
-        
-            
-        
-            
-             <a href="/tags/#JAVA" title="JAVA" rel="4">JAVA</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#笔记" title="笔记" rel="3">笔记</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#MySQL" title="MySQL" rel="3">MySQL</a>
-            
-        
-            
-             <a href="/tags/#问题日志" title="问题日志" rel="2">问题日志</a>
-            
-        
-            
-             <a href="/tags/#例题" title="例题" rel="2">例题</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <!--<hr>-->
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
-
-        
-            <img id = "avatar_pic" src="/img/my.jpg" />
-        
-
-        
-            <p>Made to be counted on.</p>
-        
-
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
-                <li>
-                    <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank" href="http://weibo.com/5092233560">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank" href="https://www.facebook.com/100010009245988">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/DoyoudoLove">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-<hr>
-        <!--<hr>-->
+           if (typeof LivereTower === 'function') { return; }
     
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2018/12/01/Docker下安装MySQL数据库时区为UTC的解决方法/">Docker下安装MySQL数据库时区为UTC的解决方法</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/30/Docker容器进入的4种方式/">Docker容器进入的4种方式</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/29/Spring注解-Resource和-Autowired区别对比/">Spring注解@Resource和@Autowired区别对比</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/27/JWT在JAVA项目中的简单实际应用/">JWT在JAVA项目中的简单实际应用</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/15/解决SpringBoot2-1整合Druid遇到问题/">解决SpringBoot2.1整合Druid遇到问题</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <!--<hr>-->
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-        <!-- Friends Blog -->
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
 
-<hr>
-<h5>FRIENDS</h5>
-<ul class="list-inline">
 
-    
-        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
-    
-        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
-    
-</ul>
 
-        <!--<hr>-->
-    
-</div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
