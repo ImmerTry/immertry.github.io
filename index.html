@@ -209,6 +209,44 @@
 
 <div class="post-preview">
 
+    <a href="/2018/12/15/centos7时间同步和时区设置/">
+        <h2 class="post-title">
+            centos7时间同步和时区设置
+        </h2>
+        <h3 class="post-subtitle">
+            时区问题之前因为用docker的时候,发现容器中的时区与当前时区不符。那会儿没注意到系统时区。今天遇到了。拿来记录一下
+        </h3>
+        <div class="post-content-preview">
+            安装ntp服务的软件包
+yum install ntp
+将ntp服务设置为缺省启动
+systemctl enable ntpd
+修改启动参数
+增加-g -x参数，允许ntp服务在系统时间误差较大时也能正常工作
+vi /etc/sysconfig/ntpd
+启动ntp服务
+service ntpd restart
+将系统时区改为上海时间 (亦即CST时区)
+ln -sf /usr/share/......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-12-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#CentOS7" title="CentOS7">CentOS7</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/12/10/var、let、const三者的区别/">
         <h2 class="post-title">
             var、let、const三者的区别
@@ -506,41 +544,6 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/11/09/SpringBoot笔记之日志与Web开发/">
-        <h2 class="post-title">
-            SpringBoot笔记【日志与Web开发】
-        </h2>
-        <h3 class="post-subtitle">
-            介绍SpringBoot中如何使用日志框架与进行Web开发
-        </h3>
-        <div class="post-content-preview">
-            三、日志
-1、日志框架
-小张；开发一个大型系统；
-​       1、System.out.println(&quot;&quot;)；将关键数据打印在控制台；去掉？写在一个文件？
-​       2、框架来记录系统的一些运行时信息；日志框架 ；  zhanglogging.jar；
-​       3、高大上的几个功能？异步模式？自动归档？xxxx？  zhanglogging-good.......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by L_UO on
-            2018-11-09
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
-            
-              <a href="/tags/#笔记" title="笔记">笔记</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -585,13 +588,15 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
             
         
             
+        
+            
              <a href="/tags/#SpringBoot" title="SpringBoot" rel="8">SpringBoot</a>
             
         
             
-        
-            
              <a href="/tags/#JAVA" title="JAVA" rel="4">JAVA</a>
+            
+        
             
         
             
@@ -619,9 +624,9 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
             
         
             
-             <a href="/tags/#ECMAScript 6" title="ECMAScript 6" rel="2">ECMAScript 6</a>
-            
         
+            
+             <a href="/tags/#ECMAScript 6" title="ECMAScript 6" rel="2">ECMAScript 6</a>
             
         
             
@@ -732,6 +737,10 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
     <ul>
       
         <li>
+          <a href="/2018/12/15/centos7时间同步和时区设置/">centos7时间同步和时区设置</a>
+        </li>
+      
+        <li>
           <a href="/2018/12/10/var、let、const三者的区别/">var、let、const三者的区别</a>
         </li>
       
@@ -745,10 +754,6 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
       
         <li>
           <a href="/2018/11/30/Docker容器进入的4种方式/">Docker容器进入的4种方式</a>
-        </li>
-      
-        <li>
-          <a href="/2018/11/29/Spring注解-Resource和-Autowired区别对比/">Spring注解@Resource和@Autowired区别对比</a>
         </li>
       
     </ul>
