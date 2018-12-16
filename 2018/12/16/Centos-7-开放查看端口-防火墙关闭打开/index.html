@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          About - Immer | Try
+          Centos 7 开放查看端口 防火墙关闭打开 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/about/">
+    <link rel="canonical" href="http://immertry.top/2018/12/16/Centos-7-开放查看端口-防火墙关闭打开/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('http://image.immertry.top/bg20181009about-bg.jpg')
-            /*page*/
+            background-image: url('http://image.immertry.top/20181109lucas.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Wish for the Best, Prepare for the Worst</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#CentOS7" title="CentOS7">CentOS7</a>
+                            
+                        </div>
+                        <h1>Centos 7 开放查看端口 防火墙关闭打开</h1>
+                        <h2 class="subheading">这俩天搭建FastDFS图片服务器用到这些命令。故此。记录一下</h2>
+                        <span class="meta">
+                            Posted by L_UO on
+                            2018-12-16
+                        </span>
                     </div>
                 
 
@@ -189,300 +197,222 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3 id="about-me">About Me</h3>
-<p>正如你所见，我是一名<code>程序员</code>;<br>
-在IT行业里，是一位新人。<code>初级程序员</code>这个称谓，至少目前来说适合我。</p>
-<h4 id="开博客原因">开博客原因</h4>
-<p>我的一个朋友，给我发了他<code>带IP地址的博客</code>。<br>
-当时的我比较<code>好奇</code>，也想搞个玩一玩。<br>
-他来了句<code>你又不会Linux</code>。话语间透露出绝对的<code>嘲讽</code>。<br>
-于是各种百度，查资料。<br>
-第一天：选择搭建方式：<br>
-<code>Jekyll + Github Pages</code> |<code>Hexo + Github Pages</code> |<code>VuePress + Github Pages</code><br>
-第二天：确定好搭建方式与主题。<br>
-喏~~就是你现在看到的这个样子。它并不是很完美。</p>
-<h4 id="学习态度">学习态度</h4>
-<p>就像这段话所讲：</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="centos-7-firewall-命令">Centos 7 firewall 命令：</h1>
+<h2 id="开启防火墙">开启防火墙：</h2>
+<p><code>systemctl start firewalld.service</code></p>
+<h2 id="查看防火墙状态">查看防火墙状态：</h2>
+<p>查看默认防火墙状态（关闭后显示notrunning，开启后显示running）</p>
+<p><code>firewall-cmd --state</code></p>
+<h2 id="查看已经开放的端口">查看已经开放的端口：</h2>
+<p><strong>查看防火墙所有信息</strong></p>
+<p><code>firewall-cmd --list-all</code></p>
+<p><strong>查看防火墙开放的端口信息</strong></p>
+<p><code>firewall-cmd --list-ports</code></p>
+<h2 id="开启端口">开启端口</h2>
+<p><code>firewall-cmd --zone=public --add-port=80/tcp --permanent</code></p>
+<p>命令含义：</p>
+<p>–zone #作用域</p>
+<p>–add-port=80/tcp #添加端口，格式为：端口/通讯协议</p>
+<p>–permanent #永久生效，没有此参数重启后失效</p>
+<h2 id="删除端口">删除端口</h2>
+<p><code>firewall-cmd --zone=public --remove-port=80/tcp --permanent</code></p>
+<h2 id="重启防火墙">重启防火墙</h2>
+<p>firewall-cmd --reload <code>#重启firewall</code><br>
+systemctl stop firewalld.service <code>#停止firewall</code><br>
+systemctl disable firewalld.service <code>#禁止firewall开机启动</code></p>
+<h1 id="centos-7-以下版本-iptables-命令">CentOS 7 以下版本 iptables 命令</h1>
+<p>如要开放80，22，8080 端口，输入以下命令即可</p>
+<p>/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT<br>
+/sbin/iptables -I INPUT -p tcp --dport 22 -j ACCEPT<br>
+/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT</p>
+<p>然后保存：</p>
+<p><code>/etc/rc.d/init.d/iptables save</code></p>
+<p>查看打开的端口：</p>
+<p><code>/etc/init.d/iptables status</code></p>
+<h1 id="关闭防火墙">关闭防火墙</h1>
+<p>1） 永久性生效，重启后不会复原</p>
+<p>开启： <code>chkconfig iptables on</code></p>
+<p>关闭： <code>chkconfig iptables off</code></p>
+<p>2） 即时生效，重启后复原</p>
+<p>开启： <code>service iptables start</code></p>
+<p>关闭： <code>service iptables stop</code></p>
+<ul>
+<li><strong>注意:新增/删除操作需要重启防火墙服务</strong></li>
+</ul>
+<hr>
 <blockquote>
-<p>勤学如春起之苗，不见其增，日有所长；<br>
-辍学如磨刀之石，不见其损，日有所亏。</p>
+<p><a href="https://www.cnblogs.com/yucongblog/p/6705733.html" target="_blank" rel="noopener">Centos 7 开放查看端口 防火墙关闭打开</a></p>
 </blockquote>
-<p>勤于学习就像春天的禾苗一样，看不到它增高，实际上它每天在长高。<br>
-放下学习好比磨刀的石头，看不到它变薄，其实石头每天都在变薄。<br>
-激励我们学习不能松懈，只要坚持，知识就会增长。</p>
 
-
-                <!-- 如果开启评论功能 -->
                 
-                    <hr>
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
                     
-
-                    <!-- 来必力City版安装代码 -->
                     
-                        <div class="comment">
-                            <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
-                        </div>
+                        <li class="next">
+                            <a href="/2018/12/15/centos7时间同步和时区设置/" data-toggle="tooltip" data-placement="top" title="centos7时间同步和时区设置">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#centos-7-firewall-命令"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Centos 7 firewall &#x547D;&#x4EE4;&#xFF1A;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#开启防火墙"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x5F00;&#x542F;&#x9632;&#x706B;&#x5899;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看防火墙状态"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x9632;&#x706B;&#x5899;&#x72B6;&#x6001;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看已经开放的端口"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x5DF2;&#x7ECF;&#x5F00;&#x653E;&#x7684;&#x7AEF;&#x53E3;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#开启端口"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x5F00;&#x542F;&#x7AEF;&#x53E3;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#删除端口"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">&#x5220;&#x9664;&#x7AEF;&#x53E3;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#重启防火墙"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">&#x91CD;&#x542F;&#x9632;&#x706B;&#x5899;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#centos-7-以下版本-iptables-命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">CentOS 7 &#x4EE5;&#x4E0B;&#x7248;&#x672C; iptables &#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#关闭防火墙"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5173;&#x95ED;&#x9632;&#x706B;&#x5899;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#CentOS7" title="CentOS7">CentOS7</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
 
                     
-
-
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
                     
-                    <script type="text/javascript">
-                       (function(d, s) {
-                           var j, e = d.getElementsByTagName(s)[0];
-
-                           if (typeof LivereTower === 'function') { return; }
-
-                           j = d.createElement(s);
-                           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                           j.async = true;
-
-                           e.parentNode.insertBefore(j, e);
-                       })(document, 'script');
-                    </script>
-
-                    <!-- City版安装代码已完成 -->
-                     
-
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags featured-tags-->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-             <a href="/tags/#CentOS7" title="CentOS7" rel="2">CentOS7</a>
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#docker" title="docker" rel="2">docker</a>
-            
-        
-            
-             <a href="/tags/#SpringBoot" title="SpringBoot" rel="8">SpringBoot</a>
-            
-        
-            
-        
-            
-             <a href="/tags/#JAVA" title="JAVA" rel="4">JAVA</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#笔记" title="笔记" rel="3">笔记</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#MySQL" title="MySQL" rel="3">MySQL</a>
-            
-        
-            
-             <a href="/tags/#ECMAScript 6" title="ECMAScript 6" rel="2">ECMAScript 6</a>
-            
-        
-            
-             <a href="/tags/#问题日志" title="问题日志" rel="2">问题日志</a>
-            
-        
-            
-             <a href="/tags/#例题" title="例题" rel="2">例题</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <!--<hr>-->
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
-
-        
-            <img id = "avatar_pic" src="/img/my.jpg" />
-        
-
-        
-            <p>Made to be counted on.</p>
-        
-
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
-                <li>
-                    <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank" href="http://weibo.com/5092233560">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank" href="https://www.facebook.com/100010009245988">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/DoyoudoLove">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-<hr>
-        <!--<hr>-->
+           if (typeof LivereTower === 'function') { return; }
     
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2018/12/16/Centos-7-开放查看端口-防火墙关闭打开/">Centos 7 开放查看端口 防火墙关闭打开</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/15/centos7时间同步和时区设置/">centos7时间同步和时区设置</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/10/var、let、const三者的区别/">var、let、const三者的区别</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/02/SpringMVC常用的注解/">SpringMVC常用的注解</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/01/Docker下安装MySQL数据库时区为UTC的解决方法/">Docker下安装MySQL数据库时区为UTC的解决方法</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <!--<hr>-->
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-        <!-- Friends Blog -->
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
 
-<hr>
-<h5>FRIENDS</h5>
-<ul class="list-inline">
 
-    
-        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
-    
-        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
-    
-</ul>
 
-        <!--<hr>-->
-    
-</div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
