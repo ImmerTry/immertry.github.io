@@ -139,14 +139,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -206,6 +206,85 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2018/12/18/Html5中的LocalStorage/">
+        <h2 class="post-title">
+            Untitled
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+
+
+
+body {
+  max-width: 980px;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 45px;
+}
+
+@font-face {
+  font-family: fontawesome-mini......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-12-18
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/12/18/Html5中的LocalStorage/">
+        <h2 class="post-title">
+            Html5中的LocalStorage
+        </h2>
+        <h3 class="post-subtitle">
+            在HTML5中，新加入了一个localStorage特性，这个特性主要是用来作为本地存储来使用的，解决了cookie存储空间不足的问题(cookie中每条cookie的存储空间为4k)，localStorage中一般浏览器支持的是5M大小，这个在不同的浏览器中localStorage会有所不同。
+        </h3>
+        <div class="post-content-preview">
+            JS对象
+读取形式：
+1localStorage.name
+添加/修改
+1localStorage.name = "SugarMan"
+其中&quot;SugarMan&quot;只能是字符串形式（目前为止只支持字符串）。所以存储时是JSON对象时需要执行下JSON.stringify，所以获取时需要执行下JSON.parse
+删除
+1detele localStorage.name
+API......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by L_UO on
+            2018-12-18
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#LocalStorage" title="LocalStorage">LocalStorage</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -482,74 +561,6 @@ Authorization (授权) : 这是使用JWT的......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/11/15/解决SpringBoot2-1整合Druid遇到问题/">
-        <h2 class="post-title">
-            解决SpringBoot2.1整合Druid遇到问题
-        </h2>
-        <h3 class="post-subtitle">
-            Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。
-        </h3>
-        <div class="post-content-preview">
-            Druid可以做什么
-
-可以监控数据库访问性能，Druid内置提供了一个功能强大的StatFilter插件，能够详细统计SQL的执行性能，这对于线上分析数据库访问性能有帮助。
-替换DBCP和C3P0。Druid提供了一个高效、功能强大、可扩展性好的数据库连接池。
-数据库密码加密。直接把数据库密码写在配置文件中，这是不好的行为，容易导致安全问题。DruidDruiver和DruidDataSo......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by L_UO on
-            2018-11-15
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
-            
-              <a href="/tags/#Druid" title="Druid">Druid</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/11/11/SpringBoot与Swagger整合/">
-        <h2 class="post-title">
-            SpringBoot与Swagger整合
-        </h2>
-        <h3 class="post-subtitle">
-            swagger是一个流行的API开发框架，这个框架以“开放API声明”（OpenAPI Specification，OAS）为基础， 对整个API的开发周期都提供了相应的解决方案，是一个非常庞大的项目（包括设计、编码和测试，几乎支持所有语言）。
-        </h3>
-        <div class="post-content-preview">
-            Swagger使用
-Swagger有什么用?
-swagger是一个流行的API开发框架，这个框架以“开放API声明”（OpenAPI Specification，OAS）为基础，
-对整个API的开发周期都提供了相应的解决方案，是一个非常庞大的项目（包括设计、编码和测试，几乎支持所有语言）。
-Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by L_UO on
-            2018-11-11
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
-            
-              <a href="/tags/#Swagger" title="Swagger">Swagger</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -586,15 +597,17 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
     <div class="tags">
         
             
+        
+            
+        
+            
              <a href="/tags/#CentOS7" title="CentOS7" rel="2">CentOS7</a>
             
         
             
-        
-            
-        
-            
              <a href="/tags/#docker" title="docker" rel="2">docker</a>
+            
+        
             
         
             
@@ -634,15 +647,15 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
             
         
             
+             <a href="/tags/#ECMAScript 6" title="ECMAScript 6" rel="2">ECMAScript 6</a>
+            
+        
+            
         
             
         
             
              <a href="/tags/#MySQL" title="MySQL" rel="3">MySQL</a>
-            
-        
-            
-             <a href="/tags/#ECMAScript 6" title="ECMAScript 6" rel="2">ECMAScript 6</a>
             
         
             
@@ -745,6 +758,14 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
     <ul>
       
         <li>
+          <a href="/2018/12/18/Html5中的LocalStorage/">(no title)</a>
+        </li>
+      
+        <li>
+          <a href="/2018/12/18/Html5中的LocalStorage/">Html5中的LocalStorage</a>
+        </li>
+      
+        <li>
           <a href="/2018/12/16/Centos-7-开放查看端口-防火墙关闭打开/">Centos 7 开放查看端口 防火墙关闭打开</a>
         </li>
       
@@ -754,14 +775,6 @@ Swagger 是一个规范和完整的框架，用于生成、描述、调用和可
       
         <li>
           <a href="/2018/12/10/var、let、const三者的区别/">var、let、const三者的区别</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/02/SpringMVC常用的注解/">SpringMVC常用的注解</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/01/Docker下安装MySQL数据库时区为UTC的解决方法/">Docker下安装MySQL数据库时区为UTC的解决方法</a>
         </li>
       
     </ul>

@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          centos7时间同步和时区设置 - Immer | Try
+          Html5中的LocalStorage - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/2018/12/15/centos7时间同步和时区设置/">
+    <link rel="canonical" href="http://immertry.top/2018/12/18/Html5中的LocalStorage/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#CentOS7" title="CentOS7">CentOS7</a>
+                              <a class="tag" href="/tags/#LocalStorage" title="LocalStorage">LocalStorage</a>
                             
                         </div>
-                        <h1>centos7时间同步和时区设置</h1>
-                        <h2 class="subheading">时区问题之前因为用docker的时候,发现容器中的时区与当前时区不符。那会儿没注意到系统时区。今天遇到了。拿来记录一下</h2>
+                        <h1>Html5中的LocalStorage</h1>
+                        <h2 class="subheading">在HTML5中，新加入了一个localStorage特性，这个特性主要是用来作为本地存储来使用的，解决了cookie存储空间不足的问题(cookie中每条cookie的存储空间为4k)，localStorage中一般浏览器支持的是5M大小，这个在不同的浏览器中localStorage会有所不同。</h2>
                         <span class="meta">
                             Posted by L_UO on
-                            2018-12-15
+                            2018-12-18
                         </span>
                     </div>
                 
@@ -209,25 +209,29 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="安装ntp服务的软件包">安装ntp服务的软件包</h1>
-<p><code>yum install ntp</code></p>
-<h1 id="将ntp服务设置为缺省启动">将ntp服务设置为缺省启动</h1>
-<p><code>systemctl enable ntpd</code></p>
-<h1 id="修改启动参数">修改启动参数</h1>
-<p>增加-g -x参数，允许ntp服务在系统时间误差较大时也能正常工作</p>
-<p><code>vi /etc/sysconfig/ntpd</code></p>
-<h1 id="启动ntp服务">启动ntp服务</h1>
-<p><code>service ntpd restart</code></p>
-<h1 id="将系统时区改为上海时间-亦即cst时区">将系统时区改为上海时间 (亦即CST时区)</h1>
-<p><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></p>
-<h1 id="查看时间是否正确">查看时间是否正确</h1>
-<p>执行<code>date</code> 命令即可。</p>
-<p><strong>注：特殊情况下，3-5分钟生效，可重启系统立即生效</strong></p>
-<p><code>这里因为我是阿里云服务器。所以在控制台重启之后才生效</code></p>
-<hr>
-<blockquote>
-<p><a href="https://www.cnblogs.com/fanlinglong/p/6363031.html" target="_blank" rel="noopener">原文参考链接</a></p>
-</blockquote>
+                <h1 id="js对象">JS对象</h1>
+<p><strong>读取形式：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.name</span><br></pre></td></tr></table></figure>
+<p><strong>添加/修改</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.name = <span class="string">"SugarMan"</span></span><br></pre></td></tr></table></figure>
+<p>其中&quot;SugarMan&quot;只能是字符串形式（目前为止只支持字符串）。所以存储时是JSON对象时需要执行下JSON.stringify，所以获取时需要执行下JSON.parse</p>
+<p><strong>删除</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">detele localStorage.name</span><br></pre></td></tr></table></figure>
+<h1 id="api">API</h1>
+<p><strong>获取键值对数量</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.length</span><br></pre></td></tr></table></figure>
+<p><strong>读取</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.getItem(<span class="string">'name'</span>), localStorage.key(i)</span><br></pre></td></tr></table></figure>
+<p><strong>添加/修改</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(<span class="string">'name'</span>,<span class="string">'SugarMan'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>删除对应键值</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.removeItem(<span class="string">'name'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>删除所有数据</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.clear()</span><br></pre></td></tr></table></figure>
+<p>顺便说下，LocalStorage有效期是永久的。一般的浏览器能存储的是5MB左右。SessionStorage api与LocalStorage相同。<br>
+SessionStorage默认的有效期是浏览器的会话时间（也就是说标签页关闭后就消失了）。<br>
+LocalStorage作用域是协议、主机名、端口。（理论上，不人为的删除，一直存在设备中）<br>
+SessionStorage作用域是窗口、协议、主机名、端口。</p>
 
                 
 
@@ -236,12 +240,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/12/16/Centos-7-开放查看端口-防火墙关闭打开/" data-toggle="tooltip" data-placement="top" title="Centos 7 开放查看端口 防火墙关闭打开">&larr; Previous Post</a>
+                            <a href="/2018/12/18/Html5中的LocalStorage/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2018/12/10/var、let、const三者的区别/" data-toggle="tooltip" data-placement="top" title="var、let、const三者的区别">Next Post &rarr;</a>
+                            <a href="/2018/12/16/Centos-7-开放查看端口-防火墙关闭打开/" data-toggle="tooltip" data-placement="top" title="Centos 7 开放查看端口 防火墙关闭打开">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -288,7 +292,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#安装ntp服务的软件包"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5B89;&#x88C5;ntp&#x670D;&#x52A1;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#将ntp服务设置为缺省启动"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5C06;ntp&#x670D;&#x52A1;&#x8BBE;&#x7F6E;&#x4E3A;&#x7F3A;&#x7701;&#x542F;&#x52A8;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#修改启动参数"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4FEE;&#x6539;&#x542F;&#x52A8;&#x53C2;&#x6570;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#启动ntp服务"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x542F;&#x52A8;ntp&#x670D;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#将系统时区改为上海时间-亦即cst时区"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x5C06;&#x7CFB;&#x7EDF;&#x65F6;&#x533A;&#x6539;&#x4E3A;&#x4E0A;&#x6D77;&#x65F6;&#x95F4; (&#x4EA6;&#x5373;CST&#x65F6;&#x533A;)</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#查看时间是否正确"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x65F6;&#x95F4;&#x662F;&#x5426;&#x6B63;&#x786E;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#js对象"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">JS&#x5BF9;&#x8C61;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#api"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">API</span></a></li></ol>
         
         </div>
       </aside>
@@ -308,7 +312,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#CentOS7" title="CentOS7">CentOS7</a>
+                          <a class="tag" href="/tags/#LocalStorage" title="LocalStorage">LocalStorage</a>
                         
                     </div>
                 </section>
