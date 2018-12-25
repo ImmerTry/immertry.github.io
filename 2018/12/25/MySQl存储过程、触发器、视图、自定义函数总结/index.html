@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Html5中的LocalStorage - Immer | Try
+          MySQl存储过程、触发器、视图、自定义函数总结 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/2018/12/18/Html5中的LocalStorage/">
+    <link rel="canonical" href="http://immertry.top/2018/12/25/MySQl存储过程、触发器、视图、自定义函数总结/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,14 +86,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#LocalStorage" title="LocalStorage">LocalStorage</a>
+                              <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
                             
                         </div>
-                        <h1>Html5中的LocalStorage</h1>
-                        <h2 class="subheading">在HTML5中，新加入了一个localStorage特性，这个特性主要是用来作为本地存储来使用的，解决了cookie存储空间不足的问题(cookie中每条cookie的存储空间为4k)，localStorage中一般浏览器支持的是5M大小，这个在不同的浏览器中localStorage会有所不同。</h2>
+                        <h1>MySQl存储过程、触发器、视图、自定义函数总结</h1>
+                        <h2 class="subheading">查漏补缺</h2>
                         <span class="meta">
                             Posted by L_UO on
-                            2018-12-18
+                            2018-12-25
                         </span>
                     </div>
                 
@@ -209,43 +209,36 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="js对象">JS对象</h1>
-<p><strong>读取形式：</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.name</span><br></pre></td></tr></table></figure>
-<p><strong>添加/修改</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.name = <span class="string">"SugarMan"</span></span><br></pre></td></tr></table></figure>
-<p>其中&quot;SugarMan&quot;只能是字符串形式（目前为止只支持字符串）。所以存储时是JSON对象时需要执行下JSON.stringify，所以获取时需要执行下JSON.parse</p>
-<p><strong>删除</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">detele localStorage.name</span><br></pre></td></tr></table></figure>
-<h1 id="api">API</h1>
-<p><strong>获取键值对数量</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.length</span><br></pre></td></tr></table></figure>
-<p><strong>读取</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.getItem(<span class="string">'name'</span>), localStorage.key(i)</span><br></pre></td></tr></table></figure>
-<p><strong>添加/修改</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(<span class="string">'name'</span>,<span class="string">'SugarMan'</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>删除对应键值</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.removeItem(<span class="string">'name'</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>删除所有数据</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.clear()</span><br></pre></td></tr></table></figure>
-<p>顺便说下，LocalStorage有效期是永久的。一般的浏览器能存储的是5MB左右。SessionStorage api与LocalStorage相同。<br>
-SessionStorage默认的有效期是浏览器的会话时间（也就是说标签页关闭后就消失了）。<br>
-LocalStorage作用域是协议、主机名、端口。（理论上，不人为的删除，一直存在设备中）<br>
-SessionStorage作用域是窗口、协议、主机名、端口。</p>
-
+                <h1 id="mysql存储过程与函数的区别">MySQL存储过程与函数的区别</h1>
+<h2 id="创建一个无参的存储过程">创建一个无参的存储过程</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">delimiter//</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> showTime() //创建一个无参的存储过程</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">SELECT</span> <span class="keyword">NOW</span>();</span><br><span class="line"><span class="keyword">END</span>//</span><br><span class="line">delimiter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CALL</span> showTime();</span><br></pre></td></tr></table></figure>
+<h2 id="创建一个只有in参数的存储过程">创建一个只有IN参数的存储过程</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">delimiter//</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> selectById(<span class="keyword">IN</span> uid <span class="built_in">SMALLINT</span> <span class="keyword">UNSIGNED</span>)//创建一个只有<span class="keyword">IN</span>参数的存储过程</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> course <span class="keyword">WHERE</span> cid = uid;</span><br><span class="line"><span class="keyword">END</span>//</span><br><span class="line">delimiter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CALL</span> selectById(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="包含in参数和out参数">包含IN参数和OUT参数</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">delimiter//</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> deleteById(<span class="keyword">IN</span> uid <span class="built_in">SMALLINT</span> ,<span class="keyword">OUT</span> <span class="keyword">num</span> <span class="built_in">SMALLINT</span> <span class="keyword">UNSIGNED</span>)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> course <span class="keyword">WHERE</span> Cid = uid;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROW_COUNT</span>() <span class="keyword">INTO</span> <span class="keyword">num</span>;</span><br><span class="line"><span class="keyword">END</span>//</span><br><span class="line">delimiter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CALL</span> deleteById(<span class="number">2</span>,@changeLine);</span><br><span class="line"><span class="keyword">SELECT</span> @changeLine;</span><br></pre></td></tr></table></figure>
+<h2 id="查看已有存储过程">查看已有存储过程</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">PROCEDURE</span> <span class="keyword">STATUS</span>;//查看已有存储过程</span><br></pre></td></tr></table></figure>
+<h2 id="存储过程与自定义函数的区别">存储过程与自定义函数的区别:</h2>
+<p>1、'存储过程实现较为复杂，自定义函数针对性强’<br>
+2、'存储过程允许有多个返回值，而自定义函数只有一个返回值’<br>
+3、‘存储过程一般独立的来执行，自定义函数是往往与其他SQL语句的一部分来使用’</p>
+<h2 id="存储过程的好处">存储过程的好处</h2>
+<p>‘存储过程就是把经常使用的SQL语句或业务逻辑封装起来，预编译保存在数据库中，<br>
+当需要的时候从数据库中直接调用，省去了编译过程，进而提高了运行速度。同时降低<br>
+网络数据的传输量’</p>
+<h2 id="查看存储过程创建的代码">查看存储过程创建的代码</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> showTime; // 查看存储过程创建的代码</span><br></pre></td></tr></table></figure>
+<h2 id="存储过程">存储过程</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">'deleteById'</span> <span class="keyword">FROM</span> mysql.proc <span class="keyword">WHERE</span> db = <span class="string">'test'</span> <span class="keyword">AND</span> <span class="string">'type'</span> = <span class="string">'PROCEDURE'</span>;//存储过程</span><br></pre></td></tr></table></figure>
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/12/25/MySQl存储过程、触发器、视图、自定义函数总结/" data-toggle="tooltip" data-placement="top" title="MySQl存储过程、触发器、视图、自定义函数总结">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/12/16/Centos-7-开放查看端口-防火墙关闭打开/" data-toggle="tooltip" data-placement="top" title="Centos 7 开放查看端口 防火墙关闭打开">Next Post &rarr;</a>
+                            <a href="/2018/12/18/Html5中的LocalStorage/" data-toggle="tooltip" data-placement="top" title="Html5中的LocalStorage">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -292,7 +285,7 @@ SessionStorage作用域是窗口、协议、主机名、端口。</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#js对象"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">JS&#x5BF9;&#x8C61;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#api"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">API</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#mysql存储过程与函数的区别"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">MySQL&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x4E0E;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建一个无参的存储过程"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65E0;&#x53C2;&#x7684;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建一个只有in参数的存储过程"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53EA;&#x6709;IN&#x53C2;&#x6570;&#x7684;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#包含in参数和out参数"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x5305;&#x542B;IN&#x53C2;&#x6570;&#x548C;OUT&#x53C2;&#x6570;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看已有存储过程"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x5DF2;&#x6709;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程与自定义函数的区别"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x4E0E;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;:</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程的好处"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x7684;&#x597D;&#x5904;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看存储过程创建的代码"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x521B;&#x5EFA;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -312,7 +305,7 @@ SessionStorage作用域是窗口、协议、主机名、端口。</p>
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#LocalStorage" title="LocalStorage">LocalStorage</a>
+                          <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
                         
                     </div>
                 </section>

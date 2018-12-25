@@ -79,13 +79,6 @@
     </url>
 
     <url>
-        <loc>http://immertry.top/tags/MySQL/</loc>
-        <lastmod>2018-10-19T14:51:03.054Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://immertry.top/tags/%E4%BE%8B%E9%A2%98/</loc>
         <lastmod>2018-10-19T14:51:03.054Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -221,6 +214,13 @@
     <url>
         <loc>http://immertry.top/tags/LocalStorage/</loc>
         <lastmod>2018-12-18T14:49:40.640Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://immertry.top/tags/MySQL/</loc>
+        <lastmod>2018-12-25T14:00:52.184Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
