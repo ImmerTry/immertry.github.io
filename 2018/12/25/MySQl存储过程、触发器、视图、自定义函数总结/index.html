@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          MySQl存储过程、触发器、视图、自定义函数总结 - Immer | Try
+          MySQl存储过程、触发器、视图、自定义函数、索引总结 - Immer | Try
         
     </title>
 
@@ -89,7 +89,7 @@
                               <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
                             
                         </div>
-                        <h1>MySQl存储过程、触发器、视图、自定义函数总结</h1>
+                        <h1>MySQl存储过程、触发器、视图、自定义函数、索引总结</h1>
                         <h2 class="subheading">查漏补缺</h2>
                         <span class="meta">
                             Posted by L_UO on
@@ -230,6 +230,75 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> showTime; // 查看存储过程创建的代码</span><br></pre></td></tr></table></figure>
 <h2 id="存储过程">存储过程</h2>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">'deleteById'</span> <span class="keyword">FROM</span> mysql.proc <span class="keyword">WHERE</span> db = <span class="string">'test'</span> <span class="keyword">AND</span> <span class="string">'type'</span> = <span class="string">'PROCEDURE'</span>;//存储过程</span><br></pre></td></tr></table></figure>
+<h1 id="创建视图">创建视图</h1>
+<h2 id="语法">语法</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">OR</span> <span class="keyword">REPLACE</span>]</span><br><span class="line">   [ALGORITHM = &#123;<span class="keyword">MERGE</span>  | TEMPTABLE | UNDEFINED&#125;]</span><br><span class="line"><span class="keyword">VIEW</span>  [db_name.]view_name[(column_list)</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line">[<span class="keyword">SELECT</span>  <span class="keyword">statement</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="语法介绍">语法介绍</h2>
+<p><code>[or replace]</code>：若给定了[or replace]，则表示当已具有同名的视图时，将覆盖原视图。</p>
+<p><code>[SELECT statement]</code>：select_statement是一个查询语句，这个查询语句可从表或其它的视图中查询。视图属于数据库，因此需要指定数据库的名称，若未指定时，表示在当前的数据库创建新视图。</p>
+<p><code>ALGORITHM</code>：算法属性允许您控制MySQL在创建视图时使用的机制，MySQL提供了三种算法：<code>MERGE</code>，<code>TEMPTABLE</code>和<code>UNDEFINED</code>。</p>
+<ul>
+<li>
+<p>使用<strong>MEGRE</strong>算法，MySQL首先将输入查询与定义视图中的<strong>SELECT语句</strong>组合成单个查询，然后MySQL执行组合查询并返回结果集。如果SELECT语句包含集合函数（如：MIN | MAX | SUM | COUNT | AVG 等）或DiSTINCT、GROUP BY、HAVING、LIMIT、UNION、UNION ALL、子查询，则不允许使用<strong>MEGRE</strong></p>
+</li>
+<li>
+<p>使用<strong>TEMPTABLE</strong>算法，MySQL首先根据定义视图的SELECT语句创建一个临时表，然后针对该临时表执行输入查询。因为MySQL必须创建临时表来存储结果集并将数据从基表移动到临时表，所以TEMPTABLE算法要比MEGRE算法效率要低。另外TEMPTABLE算法的视图是<code>不可更新</code>的。</p>
+</li>
+<li>
+<p>当创建视图而不指定显示算法时，<strong>UNDEFUNED</strong>是默认算法。<strong>UNDEFINED</strong>算法使MySQL可以选择使用<code>MEGRE</code>或<code>TEMPTABLE</code>算法。MySQL优先使用<code>MEGRE</code>算法。</p>
+</li>
+</ul>
+<h2 id="查看名称">查看名称</h2>
+<p>在数据库中，视图和表共享相同的命名空间，因此视图和表不能具有相同的名称。 另外，视图的名称必须遵循表的命名规则。</p>
+<h2 id="创建修改示例">创建/修改示例</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> test_detail  <span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">SELECT</span>  </span><br><span class="line">    student.sid <span class="keyword">AS</span> <span class="keyword">sid</span>,</span><br><span class="line">    student.Sname <span class="keyword">AS</span> sName,</span><br><span class="line">    sc.score <span class="keyword">AS</span> score</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">    student s,sc sc</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    s.Sid = sc.Sid;</span><br><span class="line"></span><br><span class="line"><span class="comment">-----------修改视图----------------</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">VIEW</span> test_detail <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    s.Sid <span class="keyword">AS</span> <span class="keyword">sid</span>,</span><br><span class="line">    sc.score <span class="keyword">AS</span> score</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">    student s,sc sc</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    s.Sid = sc.Sid;</span><br></pre></td></tr></table></figure>
+<h3 id="查看视图命令">查看视图命令</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">FULL</span> <span class="keyword">TABLES</span>; //查看视图命令</span><br></pre></td></tr></table></figure>
+<h3 id="使用视图">使用视图</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> test_detail; //使用视图</span><br></pre></td></tr></table></figure>
+<h2 id="创建视图注意事项">创建视图注意事项</h2>
+<p>1）运行创建视图的语句需要用户具有创建视图（create view）的权限，若加了[OR REPLACEREPLACE]时，还需要用户具有删除视图（drop view）的权限。</p>
+<p>2）select 语句不能包含from子句中的子查询</p>
+<p>3）select 语句不能引用系统或用户变量</p>
+<p>4）select 语句不能引用预处理语句参数</p>
+<p>5）在存储子程序内，定义不能引用子程序参数或局部变量</p>
+<p>6）在定义中引用的表或视图必须存在。但是，创建了MySQL视图后，能够舍弃定义引用的表或视图。要<br>
+想检查视图定义是否存在这类问题，可使用check table语句；</p>
+<p>7）在定义中不能引用temporary表，不能创建temporary视图；</p>
+<p>8）在视图定义中命名的表必须已存在；</p>
+<p>9）不能讲触发程序与视图关联在一起；</p>
+<p>10）在视图定义中允许使用order by,但是，如果从特定视图进行了选择，而该视图使用了具有自己order by语句，它将被忽略。</p>
+<hr>
+<blockquote>
+<p><a href="https://www.cnblogs.com/stephenykk/p/4584528.html" target="_blank" rel="noopener">视图</a></p>
+</blockquote>
+<h1 id="触发器">触发器</h1>
+<h2 id="创建触发器">创建触发器</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> trigger_name</span><br><span class="line">trigger_time</span><br><span class="line">trigger_event <span class="keyword">ON</span> tbl_name</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span></span><br><span class="line">trigger_stmt</span><br></pre></td></tr></table></figure>
+<p><strong>trigger_name</strong>：标识触发器名称，用户自行指定；<br>
+<strong>trigger_time</strong>：标识触发时机，取值为<code>BEFORE</code>或<code>AFTER</code>；<br>
+<strong>trigger_event</strong>：标识触发事件，取值为INSERT、UPDATE、DELETE；<br>
+<strong>tbl_name</strong>：标识建立触发器的表名，即在哪张表上建立触发器；<br>
+<strong>trigger_stmt</strong>：触发器程序体，可以是一句SQL语句，或者BEGIN或END包含的多条语句。</p>
+<p>由此可见，可以建立6种触发器，即：</p>
+<p>BEFORE INSERT、BEFORE UPDATE、BEFORE DELETE、</p>
+<p>AFTER INSERT、AFTER UPDATE、AFTER DELETE。</p>
+<p>另外有一个限制是不能同时在一个表上建立2个相同类型的触发器，因此在一个表上最多建立6个触发器。</p>
+<hr>
+<blockquote>
+<p><a href="https://www.cnblogs.com/CraryPrimitiveMan/p/4206942.html" target="_blank" rel="noopener">触发器</a></p>
+</blockquote>
+<h3 id="查看触发器">查看触发器</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TRIGGERS</span>;//查看触发器</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.triggers;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.triggers <span class="keyword">WHERE</span> trigger_name=<span class="string">'tri_test'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="删除触发器">删除触发器</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> [<span class="keyword">IF</span> <span class="keyword">EXISTS</span>] [schema_name.]trigger_name</span><br></pre></td></tr></table></figure>
+<h2 id="触发器的执行顺序">触发器的执行顺序</h2>
+<p>我们建立的数据库一般都是 InnoDB 数据库，其上建立的表是事务性表，也就是事务安全的。这时，若SQL语句或触发器执行失败，MySQL 会回滚事务，有：</p>
+<p>①如果 BEFORE 触发器执行失败，SQL 无法正确执行。<br>
+②SQL 执行失败时，AFTER 型触发器不会触发。<br>
+③AFTER 类型的触发器执行失败，SQL 会回滚。</p>
+<h1 id="索引">索引</h1>
+
                 
 
                 <hr>
@@ -285,7 +354,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#mysql存储过程与函数的区别"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">MySQL&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x4E0E;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建一个无参的存储过程"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65E0;&#x53C2;&#x7684;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建一个只有in参数的存储过程"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53EA;&#x6709;IN&#x53C2;&#x6570;&#x7684;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#包含in参数和out参数"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x5305;&#x542B;IN&#x53C2;&#x6570;&#x548C;OUT&#x53C2;&#x6570;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看已有存储过程"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x5DF2;&#x6709;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程与自定义函数的区别"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x4E0E;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;:</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程的好处"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x7684;&#x597D;&#x5904;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看存储过程创建的代码"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x521B;&#x5EFA;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#mysql存储过程与函数的区别"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">MySQL&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x4E0E;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建一个无参的存储过程"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65E0;&#x53C2;&#x7684;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建一个只有in参数的存储过程"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53EA;&#x6709;IN&#x53C2;&#x6570;&#x7684;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#包含in参数和out参数"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x5305;&#x542B;IN&#x53C2;&#x6570;&#x548C;OUT&#x53C2;&#x6570;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看已有存储过程"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x5DF2;&#x6709;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程与自定义函数的区别"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x4E0E;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;:</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程的好处"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x7684;&#x597D;&#x5904;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看存储过程创建的代码"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x521B;&#x5EFA;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储过程"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#创建视图"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x89C6;&#x56FE;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#语法"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x8BED;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#语法介绍"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">&#x8BED;&#x6CD5;&#x4ECB;&#x7ECD;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看名称"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x540D;&#x79F0;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建修改示例"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;/&#x4FEE;&#x6539;&#x793A;&#x4F8B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看视图命令"><span class="toc-nav-number">2.4.1.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x89C6;&#x56FE;&#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用视图"><span class="toc-nav-number">2.4.2.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;&#x89C6;&#x56FE;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建视图注意事项"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x89C6;&#x56FE;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#触发器"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x89E6;&#x53D1;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建触发器"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x89E6;&#x53D1;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看触发器"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x89E6;&#x53D1;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#删除触发器"><span class="toc-nav-number">3.1.2.</span> <span class="toc-nav-text">&#x5220;&#x9664;&#x89E6;&#x53D1;&#x5668;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#触发器的执行顺序"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">&#x89E6;&#x53D1;&#x5668;&#x7684;&#x6267;&#x884C;&#x987A;&#x5E8F;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#索引"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x7D22;&#x5F15;</span></a></li></ol>
         
         </div>
       </aside>
