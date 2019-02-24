@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          About - Immer | Try
+          关于HomeBrew一些常用的操作命令 - Immer | Try
         
     </title>
 
-    <link rel="canonical" href="http://immertry.top/about/">
+    <link rel="canonical" href="http://immertry.top/2019/02/24/关于HomeBrew一些常用的操作命令/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('http://image.immertry.top/bg20181009about-bg.jpg')
-            /*page*/
+            background-image: url('http://image.immertry.top/justin-kauffman.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">Wish for the Best, Prepare for the Worst</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#HomeBrew" title="HomeBrew">HomeBrew</a>
+                            
+                        </div>
+                        <h1>关于HomeBrew一些常用的操作命令</h1>
+                        <h2 class="subheading">Mac OS平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。</h2>
+                        <span class="meta">
+                            Posted by L_UO on
+                            2019-02-24
+                        </span>
                     </div>
                 
 
@@ -189,304 +197,184 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3 id="about-me">About Me</h3>
-<p>正如你所见，我是一名<code>程序员</code>;<br>
-在IT行业里，是一位新人。<code>初级程序员</code>这个称谓，至少目前来说适合我。</p>
-<h4 id="开博客原因">开博客原因</h4>
-<p>我的一个朋友，给我发了他<code>带IP地址的博客</code>。<br>
-当时的我比较<code>好奇</code>，也想搞个玩一玩。<br>
-他来了句<code>你又不会Linux</code>。话语间透露出绝对的<code>嘲讽</code>。<br>
-于是各种百度，查资料。<br>
-第一天：选择搭建方式：<br>
-<code>Jekyll + Github Pages</code> |<code>Hexo + Github Pages</code> |<code>VuePress + Github Pages</code><br>
-第二天：确定好搭建方式与主题。<br>
-喏~~就是你现在看到的这个样子。它并不是很完美。</p>
-<h4 id="学习态度">学习态度</h4>
-<p>就像这段话所讲：</p>
-<blockquote>
-<p>勤学如春起之苗，不见其增，日有所长；<br>
-辍学如磨刀之石，不见其损，日有所亏。</p>
-</blockquote>
-<p>勤于学习就像春天的禾苗一样，看不到它增高，实际上它每天在长高。<br>
-放下学习好比磨刀的石头，看不到它变薄，其实石头每天都在变薄。<br>
-激励我们学习不能松懈，只要坚持，知识就会增长。</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <h2 id="homebrew安装">Homebrew安装</h2>
+<p><a href="https://brew.sh/index_zh-cn" target="_blank" rel="noopener">Homebre官网中文版</a> 按照网页上提示内容安装</p>
+<h2 id="常用命令">常用命令</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> brew --help #简洁命令帮助</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> man brew #完整命令帮助</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew install git #安装软件包(这里是示例安装的Git版本控制)</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew uninstall git #卸载软件包</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew search git #搜索软件包</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew list #显示已经安装的所有软件包</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew update #同步远程最新更新情况，对本机已经安装并有更新的软件用*标明</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew outdated #查看已安装的哪些软件包需要更新</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew upgrade git #更新单个软件包</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew info git #查看软件包信息</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew home git #访问软件包官方站</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew cleanup #清理所有已安装软件包的历史老版本</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew cleanup git #清理单个已安装软件包的历史版本</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brewsearch 软件名 #搜索软件</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew list #查看已安装软件列表</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew cleanup 软件名 #删除软件</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew outdated #查看需要更新的软件</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew upgrade 软件名 #更新软件</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> brew update #更新 Homebrew</span><br></pre></td></tr></table></figure>
+<h3 id="卸载-homebrew">卸载 Homebrew</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rm -rf Cellar </span><br><span class="line"></span><br><span class="line">brew prune</span><br><span class="line"></span><br><span class="line">rm `git ls-files`</span><br><span class="line"></span><br><span class="line">rm -r Library/Homebrew Library/Aliases Library/Formula Library/Contributions</span><br><span class="line"></span><br><span class="line">rm -rf .git</span><br><span class="line"></span><br><span class="line">rm -rf ~/Library/Caches/Homebrew</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-bin #用于存放所安装程序的启动链接（相当于快捷方式）</span><br><span class="line"></span><br><span class="line">-Cellar #所有brew安装的程序，都将以[程序名/版本号]存放于本目录下</span><br><span class="line"></span><br><span class="line">-etc #brew安装程序的配置文件默认存放路径</span><br><span class="line"></span><br><span class="line">-Library #Homebrew 系统自身文件夹</span><br><span class="line"></span><br><span class="line">+–Formula #程序的下载路径和编译参数及安装路径等配置文件存放地</span><br><span class="line"></span><br><span class="line">+–Homebrew #brew程序自身命令集</span><br></pre></td></tr></table></figure>
 
-                <!-- 如果开启评论功能 -->
                 
-                    <hr>
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
                     
-
-                    <!-- 来必力City版安装代码 -->
                     
-                        <div class="comment">
-                            <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
-                        </div>
+                        <li class="next">
+                            <a href="/2018/12/25/MySQl存储过程、触发器、视图、自定义函数总结/" data-toggle="tooltip" data-placement="top" title="MySQl存储过程、触发器、视图、自定义函数、索引总结">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5MC8xNjQxNw"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#homebrew安装"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Homebrew&#x5B89;&#x88C5;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#常用命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5E38;&#x7528;&#x547D;&#x4EE4;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#卸载-homebrew"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x5378;&#x8F7D; Homebrew</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#HomeBrew" title="HomeBrew">HomeBrew</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
 
                     
-
-
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
                     
-                    <script type="text/javascript">
-                       (function(d, s) {
-                           var j, e = d.getElementsByTagName(s)[0];
-
-                           if (typeof LivereTower === 'function') { return; }
-
-                           j = d.createElement(s);
-                           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                           j.async = true;
-
-                           e.parentNode.insertBefore(j, e);
-                       })(document, 'script');
-                    </script>
-
-                    <!-- City版安装代码已完成 -->
-                     
-
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags featured-tags-->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#CentOS7" title="CentOS7" rel="2">CentOS7</a>
-            
-        
-            
-             <a href="/tags/#docker" title="docker" rel="2">docker</a>
-            
-        
-            
-        
-            
-             <a href="/tags/#SpringBoot" title="SpringBoot" rel="8">SpringBoot</a>
-            
-        
-            
-        
-            
-             <a href="/tags/#JAVA" title="JAVA" rel="4">JAVA</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#MySQL" title="MySQL" rel="4">MySQL</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#笔记" title="笔记" rel="3">笔记</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#ECMAScript 6" title="ECMAScript 6" rel="2">ECMAScript 6</a>
-            
-        
-            
-             <a href="/tags/#问题日志" title="问题日志" rel="2">问题日志</a>
-            
-        
-            
-        
-            
-        
-            
-             <a href="/tags/#例题" title="例题" rel="2">例题</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <!--<hr>-->
+
+
+
+
+
+    <!-- 来必力City版公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
-
-        
-            <img id = "avatar_pic" src="/img/my.jpg" />
-        
-
-        
-            <p>Made to be counted on.</p>
-        
-
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
-                <li>
-                    <a target="_blank" href="https://www.zhihu.com/people/liu-lei-62-41">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank" href="http://weibo.com/5092233560">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank" href="https://www.facebook.com/100010009245988">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/DoyoudoLove">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
-<hr>
-        <!--<hr>-->
+           if (typeof LivereTower === 'function') { return; }
     
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2019/02/24/关于HomeBrew一些常用的操作命令/">关于HomeBrew一些常用的操作命令</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/25/MySQl存储过程、触发器、视图、自定义函数总结/">MySQl存储过程、触发器、视图、自定义函数、索引总结</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/18/Html5中的LocalStorage/">Html5中的LocalStorage</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/16/Centos-7-开放查看端口-防火墙关闭打开/">Centos 7 开放查看端口 防火墙关闭打开</a>
-        </li>
-      
-        <li>
-          <a href="/2018/12/15/centos7时间同步和时区设置/">centos7时间同步和时区设置</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <!--<hr>-->
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-        <!-- Friends Blog -->
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    <!-- 来必力City版 公共JS代码 end -->
 
-<hr>
-<h5>FRIENDS</h5>
-<ul class="list-inline">
 
-    
-        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
-    
-        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
-    
-</ul>
 
-        <!--<hr>-->
-    
-</div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
